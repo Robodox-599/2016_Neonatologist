@@ -9,6 +9,8 @@ public:
 	Intake();
 	~Intake();
 private:
+	Talon* leftIntakeMotor;
+	Talon* rightIntakeMotor;
 
 };
 
