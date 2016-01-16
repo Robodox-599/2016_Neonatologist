@@ -13,12 +13,16 @@ private:
 	const std::string autoNameCustom = "My Auto";
 	std::string autoSelected;
 
+	Joystick* joystick;
+
 	void RobotInit()
 	{
 		chooser = new SendableChooser();
 		chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
 		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
 		SmartDashboard::PutData("Auto Modes", chooser);
+
+		joystick = new Joystick(JOYSTICK_PORT);
 	}
 
 
