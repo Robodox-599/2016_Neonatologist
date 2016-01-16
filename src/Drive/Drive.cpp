@@ -1,10 +1,3 @@
-/*
- * Drive.cpp
- *
- *  Created on: Jan 9, 2016
- *      Author: Admin
- */
-
 #include "Drive.h"
 
 Drive::Drive()
@@ -13,7 +6,7 @@ Drive::Drive()
 	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
 	rearLeftDrive = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
 
-	//right drive
+	//right drive REVERSED MOTORS
 	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);
 	rearRightDrive = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
 
@@ -41,10 +34,6 @@ Drive::~Drive()
 
 }
 
-/*
-
-*/
-
 void Drive::setForwardSpeed(float rawY)
 {
 	if(rawY > DEADZONE || rawY < -DEADZONE)
@@ -69,8 +58,8 @@ void Drive::updateLeftMotors(float speed)
 
 void Drive::updateRightMotors(float speed)
 {
-	frontRightDrive->Set(speed);
-	rearRightDrive->Set(speed);
+	frontRightDrive->Set(-speed);
+	rearRightDrive->Set(-speed);
 }
 
 void Drive::drive(float X, float Y)
