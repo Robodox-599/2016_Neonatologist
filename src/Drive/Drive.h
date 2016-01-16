@@ -1,18 +1,42 @@
-#ifndef DRIVE_H_
-#define DRIVE_H_
+/*
+ * Drive.h
+ *
+ *  Created on: Jan 9, 2016
+ *      Author: Admin
+ */
+#ifndef SRC_DRIVE_H_
+#define SRC_DRIVE_H_
 
-#include "..\Macros.h"
+#include "Macros.h"
+#include "Drive.h"
 
 class Drive
 {
 public:
 	Drive();
 	~Drive();
+
+	void setForwardSpeed(float rawY);
+	void setTurnSpeed(float rawX);
+
+	void updateLeftMotors(float speed);
+	void updateRightMotors(float speed);
+
+	void drive(float X, float Y);
+
 private:
-	Talon* frontLeftMotor;
-	Talon* frontRightMotor;
-	Talon* backLeftMotor;
-	Talon* backRightMotor;
+	//left drive
+	CANTalon* frontLeftDrive;
+	CANTalon* rearLeftDrive;
+
+	//right drive
+	CANTalon* frontRightDrive;
+	CANTalon* rearRightDrive;
+
+	int forwardSpeed;
+	int turnSpeed;
 };
 
-#endif
+
+
+#endif /* SRC_DRIVE_H_ */
