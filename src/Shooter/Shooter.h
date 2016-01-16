@@ -8,8 +8,11 @@ class Shooter
 public:
 	Shooter();
 	~Shooter();
+	void shoot(Joystick* joystick);
 private:
 	 CANTalon* shooterMotor;
+
+	 float speed;
 
 };
 
