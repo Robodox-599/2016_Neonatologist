@@ -9,6 +9,7 @@ public:
 	Shooter();
 	~Shooter();
 private:
+	 CANTalon* shooterMotor;
 
 };
 
