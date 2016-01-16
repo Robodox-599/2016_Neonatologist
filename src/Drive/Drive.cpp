@@ -4,11 +4,11 @@ Drive::Drive()
 {
 	//left drive
 	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
-	rearLeftDrive = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
+	backLeftDrive = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
 
 	//right drive REVERSED MOTORS
 	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);
-	rearRightDrive = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
+	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
 
 	forwardSpeed = 0;
 	turnSpeed = 0;
@@ -18,19 +18,19 @@ Drive::~Drive()
 {
 	//left drive
 	delete frontLeftDrive;
-	delete rearLeftDrive;
+	delete backLeftDrive;
 
 	//right drive
 	delete frontRightDrive;
-	delete rearRightDrive;
+	delete backRightDrive;
 
 	//left drive
 	frontLeftDrive = NULL;
-	rearLeftDrive = NULL;
+	backLeftDrive = NULL;
 
 	//right drive
 	frontRightDrive = NULL;
-	rearRightDrive = NULL;
+	backRightDrive = NULL;
 
 }
 
@@ -53,13 +53,13 @@ void Drive::setTurnSpeed(float rawX)
 void Drive::updateLeftMotors(float speed)
 {
 	frontLeftDrive->Set(speed);
-	rearLeftDrive->Set(speed);
+	backLeftDrive->Set(speed);
 }
 
 void Drive::updateRightMotors(float speed)
 {
 	frontRightDrive->Set(-speed);
-	rearRightDrive->Set(-speed);
+	backRightDrive->Set(-speed);
 }
 
 void Drive::drive(float X, float Y)
