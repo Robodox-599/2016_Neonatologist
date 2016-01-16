@@ -1,9 +1,7 @@
 #include "WPILib.h"
 
-//defines
-
+// drive variables
 #define DEADZONE 	(.15)
-
 
 // TODO: get correct port numbers for the motor channels from the electronics people
 #define FRONT_LEFT_MOTOR_CHANNEL			(1)
