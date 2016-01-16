@@ -8,6 +8,8 @@ class Intake
 public:
 	Intake();
 	~Intake();
+
+	void toggleIntake();
 private:
 	Talon* leftIntakeMotor;
 	Talon* rightIntakeMotor;
