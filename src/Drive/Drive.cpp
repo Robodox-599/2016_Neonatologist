@@ -21,11 +21,11 @@ Drive::~Drive()
 	delete frontRightDrive;
 	delete backRightDrive;
 
-	frontLeftDrive = NULL;
-	backLeftDrive = NULL;
+	frontLeftDrive = nullptr;
+	backLeftDrive = nullptr;
 
-	frontRightDrive = NULL;
-	backRightDrive = NULL;
+	frontRightDrive = nullptr;
+	backRightDrive = nullptr;
 }
 
 void Drive::setForwardSpeed(float rawY)
