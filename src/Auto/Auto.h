@@ -13,6 +13,7 @@ public:
 	void driveUnderBar();
 	void shootBoulder();
 private:
+	Timer* timer;
 };
 
 #endif
