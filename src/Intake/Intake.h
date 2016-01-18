@@ -9,7 +9,7 @@ public:
 	Intake();
 	~Intake();
 
-	void toggleIntake();
+	void toggleIntake(Joystick* joystick);
 private:
 	Talon* leftIntakeMotor;
 	Talon* rightIntakeMotor;
