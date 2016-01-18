@@ -3,6 +3,7 @@
 
 #include "..\Macros.h"
 #include "..\Intake\Intake.h"
+#include "..\Drive\Drive.h"
 
 class Auto
 {
@@ -16,6 +17,7 @@ public:
 	void shootBoulder();
 private:
 	Intake* intake;
+	Drive* drive;
 	Timer* timer;
 };
 

@@ -3,6 +3,7 @@
 Auto::Auto()
 {
 	intake = new Intake();
+	drive = new Drive();
 	timer = new Timer();
 	timer->Start();
 }
@@ -21,12 +22,12 @@ void Auto::moveBoulder()
 
 void Auto::driveUnderBar()
 {
-
+	drive->drive(1,1);
 }
 
 void Auto::shootBoulder()
 {
-
+	
 }
 
 void Auto::runAuto()
