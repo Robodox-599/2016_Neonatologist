@@ -16,8 +16,8 @@ private:
 	void RobotInit()
 	{
 		chooser = new SendableChooser();
-		//chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
-		//chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
+		chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
+		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
 		SmartDashboard::PutData("Auto Modes", chooser);
 	}
 
