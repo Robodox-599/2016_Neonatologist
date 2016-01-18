@@ -17,15 +17,15 @@ Intake::~Intake()
 	rightIntakeMotor = nullptr;
 }
 
-void Intake::toggleIntake(Joystick* joystick)
+void Intake::toggleIntake(bool isPressed)
 {
-	if(joystick->GetRawButton(INTAKE_BUTTON) && !intakeInwards)
+	if(isPressed && !intakeInwards)
 	{
 		leftIntakeMotor->Set(INTAKE_SPEED);
 		rightIntakeMotor->Set(-INTAKE_SPEED);
 		intakeInwards = true;
 	}
-	else if(joystick->GetRawButton(INTAKE_BUTTON) && intakeInwards)
+	else if(isPressed && intakeInwards)
 	{
 		leftIntakeMotor->Set(-INTAKE_SPEED);
 		rightIntakeMotor->Set(INTAKE_SPEED);
