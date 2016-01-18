@@ -1,15 +1,15 @@
 ## Neonatologist: Robodox 2016 FRC Robot 
 
 ####Programming Team:
-Jas  @jastronaut **(Head Programmer)**
+Jas  @[jastronaut](http://github.com/jastronaut) **(Head Programmer)**
 
-Amy  @amycontreras
+Amy  @[amycontreras](http://github.com/amycontreras)
 
-Carleton @tons_of_carls
+Carleton @[Tons-of-Carls](http://github.com/Tons-of-Carls/)
 
-Juyeong @khungryapple
+Juyeong @[khungryapple](http://github.com/khungryapple)
 
-Sam	@supersam6i7
+Sam	@[supersam6i7](http://github.com/supersam6i7)
 
 
 ### Subsystems:
