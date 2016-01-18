@@ -11,6 +11,6 @@ Intake::~Intake()
 	delete leftIntakeMotor;
 	delete rightIntakeMotor;
 
-	leftIntakeMotor = NULL;
-	rightIntakeMotor = NULL;
+	leftIntakeMotor = nullptr;
+	rightIntakeMotor = nullptr;
 }
