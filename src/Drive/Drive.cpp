@@ -2,11 +2,10 @@
 
 Drive::Drive()
 {
-	//left drive
 	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
 	backLeftDrive = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
 
-	//right drive REVERSED MOTORS
+	// these motors are reversed
 	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);
 	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
 
@@ -16,22 +15,17 @@ Drive::Drive()
 
 Drive::~Drive()
 {
-	//left drive
 	delete frontLeftDrive;
 	delete backLeftDrive;
 
-	//right drive
 	delete frontRightDrive;
 	delete backRightDrive;
 
-	//left drive
 	frontLeftDrive = NULL;
 	backLeftDrive = NULL;
 
-	//right drive
 	frontRightDrive = NULL;
 	backRightDrive = NULL;
-
 }
 
 void Drive::setForwardSpeed(float rawY)
@@ -62,11 +56,10 @@ void Drive::updateRightMotors(float speed)
 	backRightDrive->Set(-speed);
 }
 
-void Drive::drive(float X, float Y)
+void Drive::drive(float x, float y)
 {
-	//update motor speeds
-	setForwardSpeed(Y);
-	setTurnSpeed(X);
+	setForwardSpeed(y);
+	setTurnSpeed(x);
 
 	// Add values to avoid constant switch between setting x and y joy stick values to motors
 	updateLeftMotors(forwardSpeed + turnSpeed);
