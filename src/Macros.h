@@ -1,7 +1,6 @@
 #include "WPILib.h"
 
-#define INTAKE_BUTTON_A						(0)
-#define INTAKE_BUTTON_B						(0)
+#define INTAKE_BUTTON						(0)
 
 // TODO: get correct port numbers for the motor channels from the electronics people
 #define FRONT_LEFT_MOTOR_CHANNEL			(1)
