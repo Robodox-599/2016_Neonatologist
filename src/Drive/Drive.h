@@ -9,6 +9,7 @@
 
 #include "Macros.h"
 #include "Drive.h"
+#include "AHRS.h"
 
 class Drive
 {

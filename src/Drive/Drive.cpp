@@ -41,10 +41,6 @@ Drive::~Drive()
 
 }
 
-/*
-
-*/
-
 void Drive::setForwardSpeed(float rawY)
 {
 	if(rawY > DEADZONE || rawY < -DEADZONE)
@@ -83,3 +79,5 @@ void Drive::drive(float X, float Y)
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
 }
+
+
