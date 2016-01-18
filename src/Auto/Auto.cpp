@@ -34,5 +34,5 @@ void Auto::shootBoulder()
 
 void Auto::runAuto()
 {
-
+	// TODO: figure out length of time for each auto step
 }
