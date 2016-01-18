@@ -15,11 +15,7 @@ Shooter::~Shooter()
 
 void Shooter::shoot(Joystick* joystick)
 {
-	if(joystick->GetRawButton(SHOOTER_BUTTON_A))
-	{
-		shooterMotor->Set(speed);
-	}
-	else if(joystick->GetRawButton(SHOOTER_BUTTON_B))
+	if(joystick->GetRawButton(CATAPULT_RESET_BUTTON))
 	{
 		shooterMotor->Set(-speed);
 	}
