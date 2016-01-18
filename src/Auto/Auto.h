@@ -8,6 +8,10 @@ class Auto
 public:
 	Auto();
 	~Auto();
+
+	void runAuto();
+	void driveUnderBar();
+	void shootBoulder();
 private:
 };
 
