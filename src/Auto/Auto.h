@@ -4,6 +4,7 @@
 #include "..\Macros.h"
 #include "..\Intake\Intake.h"
 #include "..\Drive\Drive.h"
+#include "..\Shooter\Shooter.h"
 
 class Auto
 {
@@ -18,6 +19,8 @@ public:
 private:
 	Intake* intake;
 	Drive* drive;
+	Shooter* shooter;
+	
 	Timer* timer;
 };
 
