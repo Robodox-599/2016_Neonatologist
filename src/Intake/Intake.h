@@ -14,6 +14,8 @@ private:
 	Talon* leftIntakeMotor;
 	Talon* rightIntakeMotor;
 
+	bool intakeInwards;
+
 };
 
 #endif

@@ -3,7 +3,9 @@
 Intake::Intake()
 {
 	leftIntakeMotor = new Talon(LEFT_INTAKE_MOTOR_CHANNEL);
-	rightIntakeMotor = new Talon(RIGHT_INTAKE_MOTOR_CHANNEL); 
+	rightIntakeMotor = new Talon(RIGHT_INTAKE_MOTOR_CHANNEL);
+
+	intakeInwards = false;
 }
 
 Intake::~Intake()
@@ -17,15 +19,17 @@ Intake::~Intake()
 
 void Intake::toggleIntake(Joystick* joystick)
 {
-	if(joystick->GetRawButton(INTAKE_BUTTON_A))
+	if(joystick->GetRawButton(INTAKE_BUTTON_A) && !intakeInwards)
 	{
 		leftIntakeMotor->Set(INTAKE_SPEED);
 		rightIntakeMotor->Set(-INTAKE_SPEED);
+		intakeInwards = true;
 	}
-	else if(joystick->GetRawButton(INTAKE_BUTTON_B))
+	else if(joystick->GetRawButton(INTAKE_BUTTON_B) && intakeInwards)
 	{
 		leftIntakeMotor->Set(-INTAKE_SPEED);
 		rightIntakeMotor->Set(INTAKE_SPEED);
+		intakeInwards = false;
 	}
 	else
 	{
