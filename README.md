@@ -1,5 +1,17 @@
-## NEONATOLOGIST 2K16
+## Neonatologist: Robodox 2016 FRC Robot 
 
-DOX ROX??
+####Programming Team:
+Jas  @jastronaut **(Head Programmer)**
+Amy  @amycontreras
+Carleton @tons_of_carls
+Juyeong @khungryapple
+Sam	@supersam6i7
 
-:octocat:
+
+### Subsystems:
+#####Intake: 
+#####Shooter
+#####Lift:
+
+
+
