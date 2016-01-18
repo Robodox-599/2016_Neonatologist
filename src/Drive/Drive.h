@@ -28,11 +28,11 @@ public:
 private:
 	//left drive
 	CANTalon* frontLeftDrive;
-	CANTalon* rearLeftDrive;
+	CANTalon* backLeftDrive;
 
 	//right drive
 	CANTalon* frontRightDrive;
-	CANTalon* rearRightDrive;
+	CANTalon* backRightDrive;
 
 	int forwardSpeed;
 	int turnSpeed;
