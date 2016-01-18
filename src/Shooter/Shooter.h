@@ -8,7 +8,7 @@ class Shooter
 public:
 	Shooter();
 	~Shooter();
-	void shoot(Joystick* joystick);
+	void shoot(bool shoot, bool reset);
 private:
 	 CANTalon* shooterMotor;
 

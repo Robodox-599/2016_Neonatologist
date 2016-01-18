@@ -13,13 +13,13 @@ Shooter::~Shooter()
 	shooterMotor = NULL;
 }
 
-void Shooter::shoot(Joystick* joystick)
+void Shooter::shoot(bool shoot, bool reset)
 {
-	if(joystick->GetRawButton(SHOOTER_BUTTON))
+	if(shoot)
 	{
 		shooterMotor->Set(speed);
 	}
-	else if(joystick->GetRawButton(SHOOTER_RESET_BUTTON))
+	else if(reset)
 	{
 		shooterMotor->Set(-speed);
 	}
