@@ -25,6 +25,8 @@ public:
 
 	void drive(float X, float Y);
 
+	void TestCANTalonEnc();
+
 private:
 	//left drive
 	CANTalon* frontLeftDrive;

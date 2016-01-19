@@ -73,4 +73,12 @@ void Drive::drive(float X, float Y)
 	updateRightMotors(forwardSpeed - turnSpeed);
 }
 
-
+void Drive::TestCANTalonEnc()
+{
+	frontLeftDrive->GetEncPosition();// 0 - 1023 ticks
+	frontLeftDrive->GetEncVel();// ticks / 100ms
+	//TODO: find out wheel radius + thickness of tread
+	//http://robotpy.readthedocs.org/en/latest/wpilib/CANTalon.html
+	//http://www.ctr-electronics.com/Talon%20SRX%20Software%20Reference%20Manual.pdf
+	//http://first.wpi.edu/FRC/roborio/release/docs/cpp/classCANTalon.html#abc68589c199f4e968b7e74c2dc3a110a
+}
