@@ -4,3 +4,7 @@ build.properties
 build.xml
 .cproject
 .project
+README.md
+src/Intake/Intake.cpp
+src/Intake/Intake.h
+
