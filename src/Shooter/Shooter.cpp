@@ -10,7 +10,7 @@ Shooter::~Shooter()
 {
 	delete shooterMotor;
 
-	shooterMotor = NULL;
+	shooterMotor = nullptr;
 }
 
 void Shooter::shoot(bool shoot, bool reset)
