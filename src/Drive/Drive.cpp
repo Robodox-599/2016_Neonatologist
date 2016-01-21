@@ -76,6 +76,8 @@ void Drive::drive(float X, float Y)
 	updateRightMotors(forwardSpeed - turnSpeed);
 }
 
+//Took out 'TestCANTalonEnc' function because it did not do any thing
+
 float Drive::getCANTalonEncPosition()
 {
 	//Returns the tick the encoder is currently at (0 - 1023)
