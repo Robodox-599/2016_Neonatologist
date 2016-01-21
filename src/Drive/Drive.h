@@ -25,7 +25,8 @@ public:
 
 	void drive(float X, float Y);
 
-	void TestCANTalonEnc();
+	float getCANTalonEncPosition();
+	float getCANTalonEncVelocity();
 
 private:
 	//left drive
@@ -36,8 +37,11 @@ private:
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
-	int forwardSpeed;
-	int turnSpeed;
+	float forwardSpeed;
+	float turnSpeed;
+
+	float encPosition;
+	float encVelocity;
 };
 
 
