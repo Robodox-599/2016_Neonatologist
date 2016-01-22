@@ -6,6 +6,8 @@ Intake::Intake()
 	rightIntakeMotor = new CANTalon(RIGHT_INTAKE_MOTOR_CHANNEL);
 	pivotMotor = new CANTalon(PIVOT_MOTOR_CHANNEL);
 
+	angleChecker = new Encoder(PIVOT_ENCODER_CHANNEL_A, PIVOT_ENCODER_CHANNEL_B);
+
 	intakeInwards = false;
 }
 
@@ -14,10 +16,12 @@ Intake::~Intake()
 	delete leftIntakeMotor;
 	delete rightIntakeMotor;
 	delete pivotMotor;
+	delete angleChecker;
 
 	leftIntakeMotor = nullptr;
 	rightIntakeMotor = nullptr;
 	pivotMotor = nullptr;
+	angleChecker = nullptr;
 }
 
 void Intake::toggleIntake(bool isPressed)
@@ -55,4 +59,13 @@ void Intake::pivotIntake(Joystick* joystick)
 	}
 	else
 		pivotMotor->Set(0);
+}
+
+void Intake::set45Deg(Joystick* joystick)
+{
+	/*
+	* TODO: write function that pivots the intake
+	* to a 45 degree angle when a joystick button
+	* is pressed
+	*/
 }
