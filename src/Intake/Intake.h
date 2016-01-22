@@ -10,9 +10,11 @@ public:
 	~Intake();
 
 	void toggleIntake(bool isPressed);
+	void pivotIntake(Joystick* joystick);
 private:
-	Talon* leftIntakeMotor;
-	Talon* rightIntakeMotor;
+	CANTalon* leftIntakeMotor;
+	CANTalon* rightIntakeMotor;
+	CANTalon* pivotMotor;
 
 	bool intakeInwards;
 
