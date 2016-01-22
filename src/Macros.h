@@ -17,3 +17,5 @@
 
 #define INTAKE_SPEED						(1.0)
 #define PIVOT_SPEED							(2)
+
+#define LOCK_PIVOT_BUTTON					(0)
