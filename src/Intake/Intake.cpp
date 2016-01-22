@@ -63,10 +63,15 @@ void Intake::pivotIntake(Joystick* joystick)
 
 void Intake::set45Deg(Joystick* joystick)
 {
-	if(angleChecker->Get() > 0 &&  anglechecker->Get() < 1000 && joystick->GetRawButton())
+	if(angleChecker->Get() > 0 &&  anglechecker->Get() < 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
 	{
 		while(angleChecker->Get() < 1000) // TODO: get enc value when intake pivots to 45 deg
 			pivotMotor->Set(PIVOT_SPEED);
+	}
+	else if(angleChecker->Get() > 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
+	{
+		while(angleChecker->Get() > 1000)
+			pivotMotor->Set(-PIVOT_SPEED);
 	}
 	angleChecker->Reset();
 }
