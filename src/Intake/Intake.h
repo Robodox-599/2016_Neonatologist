@@ -11,13 +11,15 @@ public:
 
 	void toggleIntake(bool isPressed);
 	void pivotIntake(Joystick* joystick);
+	void set45Deg(Joystick* joystick);
 private:
 	CANTalon* leftIntakeMotor;
 	CANTalon* rightIntakeMotor;
 	CANTalon* pivotMotor;
 
-	bool intakeInwards;
+	Encoder* angleChecker;
 
+	bool intakeInwards;
 };
 
 #endif
