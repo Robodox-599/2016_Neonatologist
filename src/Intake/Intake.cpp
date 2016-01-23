@@ -47,18 +47,11 @@ void Intake::toggleIntake(bool isPressed)
 
 void Intake::pivotIntake(Joystick* joystick)
 {
-	if(joystick->GetPOV() == 0) // POV is the d-pad on the xbox controller
-	{
-		while(joystick->GetPOV() == 0)
+	while(joystick->GetPOV() == 0) // POV is the d-pad on the xbox controller
 			pivotMotor->Set(PIVOT_SPEED);
-	}
-	else if (joystick->GetPOV() == 180)
-	{
-		while(joystick->GetPOV() == 180)
+	while(joystick->GetPOV() == 180)
 			pivotMotor->Set(-PIVOT_SPEED);
-	}
-	else
-		pivotMotor->Set(0);
+	pivotMotor->Set(0);
 }
 
 void Intake::set45Deg(Joystick* joystick)
