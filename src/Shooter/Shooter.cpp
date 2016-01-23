@@ -18,7 +18,7 @@ Shooter::~Shooter()
 
 void Shooter::shoot(bool shoot, bool reset)
 {
-	if(shoot)
+	if(shoot && shooterEncoder->Get() < 2000) // TODO: get actual encoder value
 	{
 		shooterMotor->Set(speed);
 	}
