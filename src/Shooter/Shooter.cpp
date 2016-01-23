@@ -3,14 +3,17 @@
 Shooter::Shooter()
 {
 	shooterMotor = new CANTalon(SHOOTER_MOTOR_CHANNEL);
+	shooterEncoder = new Encoder(SHOOTER_ENCODER_CHANNEL_A, SHOOTER_ENCODER_CHANNEL_B);
 	speed = 0;
 }
 
 Shooter::~Shooter()
 {
 	delete shooterMotor;
+	delete shooterEncoder;
 
-	shooterMotor = NULL;
+	shooterMotor = nullptr;
+	shooterEncoder = nullptr;
 }
 
 void Shooter::shoot(bool shoot, bool reset)
