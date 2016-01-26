@@ -11,6 +11,7 @@ public:
 	void shoot(bool shoot, bool reset);
 private:
 	 CANTalon* shooterMotor;
+	 Encoder* shooterEncoder;
 
 	 float speed;
 
