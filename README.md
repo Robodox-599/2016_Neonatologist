@@ -13,17 +13,21 @@ Juyeong @[khungryapple](http://github.com/khungryapple)
 Sam	@[supersam6i7](http://github.com/supersam6i7)
 
 
-### Subsystems (as of 1/23/16):
+### Subsystems (as of 1/25/16):
 ####Intake:
          - The intake requires 3 motors, two on the base in order to pivot the system and one 
            on the roller to physically intake the ball.
          - Two encoders are used in order to lock the system at 45 degrees when driving around
            the field. 
 ####Shooter:
-         - The shooter uses only one motor that takes a forward and reverse command, triggered
-           by two different buttons. 
-         - An encoder will be added in order to measure the distance taken upon pulling the 
-           system backwards.
+         - The shooter is activated by two buttons, one to shoot and one to reset the subsystem.
+           The shoot button engages a piston then resets an encoder. The reset button activates
+           a sequence as follows: spin motor forward, engage piston, then reset the encoder. The
+           piston is used to switch gears on the gearbox. 
+         - An encoder is used in order to measure the distance taken upon pulling the system
+           backwards. It will reset after every shot taken. 
+         - In the future, this code may be condensed down into one button that activates a 
+           sequence with an automatic reset. 
 ####Lift:
 **Lifting the Portcullis:**
 
