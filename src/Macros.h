@@ -8,5 +8,8 @@
 #define SHOOTER_ENCODER_CHANNEL_A		(1)
 #define SHOOTER_ENCODER_CHANNEL_B		(1)
 
+#define GEAR_PISTON_CHANNEL_A			(1)
+#define GEAR_PISTON_CHANNEL_B			(1)
+
 //oi
 #define JOYSTICK_PORT					(2)

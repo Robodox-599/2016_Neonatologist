@@ -12,6 +12,7 @@ public:
 private:
 	 CANTalon* shooterMotor;
 	 Encoder* shooterEncoder;
+	 DoubleSolenoid* gearPiston;
 
 	 float speed;
 

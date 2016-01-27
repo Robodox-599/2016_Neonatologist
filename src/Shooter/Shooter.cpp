@@ -4,6 +4,8 @@ Shooter::Shooter()
 {
 	shooterMotor = new CANTalon(SHOOTER_MOTOR_CHANNEL);
 	shooterEncoder = new Encoder(SHOOTER_ENCODER_CHANNEL_A, SHOOTER_ENCODER_CHANNEL_B);
+	gearPiston = new DoubleSolenoid(GEAR_PISTON_CHANNEL_A, GEAR_PISTON_CHANNEL_B);
+
 	speed = 0;
 }
 
@@ -11,26 +13,29 @@ Shooter::~Shooter()
 {
 	delete shooterMotor;
 	delete shooterEncoder;
+	delete gearPiston;
 
-	shooterMotor = nullptr;
-<<<<<<< HEAD
-=======
+	shooterMotor = nullptr; 
 	shooterEncoder = nullptr;
->>>>>>> 8c0b0289fbf7358d0722cac93b3a7c679cf66ab7
+	gearPiston = nullptr;
 }
 
 void Shooter::shoot(bool shoot, bool reset)
 {
 	if(shoot && shooterEncoder->Get() < 2000) // TODO: get actual encoder value
 	{
-		shooterMotor->Set(speed);
+		gearPiston->Set(DoubleSolenoid::Value::kForward);
+		shooterEncoder->Reset();
 	}
 	else if(reset)
 	{
-		shooterMotor->Set(-speed);
+		shooterMotor->Set(speed);
+		gearPiston->Set(DoubleSolenoid::Value::kReverse);
+		shooterEncoder->Reset();
 	}
 	else
 	{
+		gearPiston->Set(DoubleSolenoid::Value::kOff);
 		shooterMotor->Set(0);
 	}
 }
