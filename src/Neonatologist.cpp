@@ -69,4 +69,4 @@ private:
 	}
 };
 
-START_ROBOT_CLASS(Neonatologist)
+START_ROBOT_CLASS(Neonatologist);
