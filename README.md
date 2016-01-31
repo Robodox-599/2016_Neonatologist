@@ -31,19 +31,19 @@ Sam	@[supersam6i7](http://github.com/supersam6i7)
 ####Lift:
 **Lifting the Portcullis:**
 
-         - Two buttons, one to open and close the pistons. 
-         - Two pistons are used to lift the gate, both opening and closing simultaneously. One
-           piston opens in order to physically lift the gate while the other activates in order 
-           to kick up a flat, smooth surface to allow the robot to drive under the gate as it 
-           slides down. 
+         - Two buttons, one to open and close the pistons (3). 
+         - Three pistons are used to lift the gate (two programmed solenoids), both opening and 
+           closing simultaneously. One piston opens in order to physically lift the gate while
+           the other two activate in order to kick up a flat, smooth surface to allow the robot 
+           to drive under the gate as it slides down. 
 **Lifting the Robot:**
 
-         - Two buttons, they are held down in order to manually move the tape measures. Yes. 
-           I'm not kidding. I said tape measures. 
-         - Two motors are attached to a winch. The winch guides a hook used to latch on to the 
-           bar on top of the tower. There is one more motor powering two pairs of tape measurers 
-           that guide the the winch / hook system to the bar.
-         - In simpler terms: tape measures -> winch -> bar.
+         - In order to lift the robot, three motors are used in total. Two motors attach to a 
+           a winch/drum while the other attaches to a pair of tape measures. Yes. Tape measures. 
+         - The tape measures are attached to the winch in order to guide it along the stronghold. 
+           The winch then guides a hook up to the bar, latches on, and then the robot ascends to 
+           the heavens. 
+         - In simpler terms (of guiding?): tape measures -> winch -> stronghold bar.
 
 
 
