@@ -29,7 +29,12 @@ Intake::~Intake()
 //automatic button to self set to certain angle
 //intake and outake buttons 
 
-void Intake::toggleIntake(bool intakeButton, bool outtakeButton) // moves to set position
+/**
+ * toggleIntake: change whether the intake is in 'intake' or 'outtake mode'
+ * @param intakeButton is the joystick button to start intake
+ * @param outtakeButton is the joystick button to start outtake
+ */
+void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 {
 	if(intakeButton && !intakeInwards) // if we want to intake something, we have to make sure nothing has already been taken in
 	{
@@ -50,6 +55,10 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton) // moves to set
 	}
 }
 
+/**
+ * pivotIntake: uses the intake motors to change the angle of the intake
+ * @param joystick is the joystick used to get the pivot intake button
+ */
 void Intake::pivotIntake(Joystick* joystick)
 {
 	while(joystick->GetPOV() == 0) // POV is the d-pad on the xbox controller
@@ -59,11 +68,15 @@ void Intake::pivotIntake(Joystick* joystick)
 	pivotMotor->Set(0);
 }
 
-void Intake::set45Deg(Joystick* joystick)
+/**
+ * setAngle: puts the intake at a certain angle
+ * @param joystick is the joystick used to get the angle setting button
+ */
+void Intake::setAngle(Joystick* joystick)
 {
 	if(angleChecker->Get() >= 0 &&  anglechecker->Get() < 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
 	{
-		while(angleChecker->Get() < 1000) // TODO: get enc value when intake pivots to 45 deg
+		while(angleChecker->Get() < 1000) // TODO: get enc value when intake pivots to the desired angle
 			pivotMotor->Set(PIVOT_SPEED);
 	}
 	else if(angleChecker->Get() > 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
