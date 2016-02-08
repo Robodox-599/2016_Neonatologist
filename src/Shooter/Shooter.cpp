@@ -20,6 +20,10 @@ Shooter::~Shooter()
 	gearPiston = nullptr;
 }
 
+//auto reset after a shot 
+//safety button, triggers r1/ r2 is safety and shoot 
+//hold safety button then click trigger to shoot. have to have both pressed
+
 void Shooter::shoot(bool shoot, bool reset)
 {
 	if(shoot && shooterEncoder->Get() < 2000) // TODO: get actual encoder value
