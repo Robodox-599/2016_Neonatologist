@@ -24,7 +24,13 @@ Intake::~Intake()
 	angleChecker = nullptr;
 }
 
+//there has to be a god angle in which it automattically goes there in order to fit under the low goal 
+//toggle manual button
+//automatic button to self set to certain angle
+//intake and outake buttons 
+
 void Intake::toggleIntake(bool isPressed)
+//moves to set postion 
 {
 	if(isPressed && !intakeInwards)
 	{
