@@ -29,22 +29,21 @@ Intake::~Intake()
 //automatic button to self set to certain angle
 //intake and outake buttons 
 
-void Intake::toggleIntake(bool isPressed)
-//moves to set postion 
+void Intake::toggleIntake(bool intakeButton, bool outtakeButton) // moves to set position
 {
-	if(isPressed && !intakeInwards)
+	if(intakeButton && !intakeInwards) // if we want to intake something, we have to make sure nothing has already been taken in
 	{
 		leftIntakeMotor->Set(INTAKE_SPEED);
 		rightIntakeMotor->Set(-INTAKE_SPEED);
 		intakeInwards = true;
 	}
-	else if(isPressed && intakeInwards)
+	else if(outtakeButton && intakeInwards) // but if we want to do the outake thing, we should only do it if something has already been taken in
 	{
 		leftIntakeMotor->Set(-INTAKE_SPEED);
 		rightIntakeMotor->Set(INTAKE_SPEED);
 		intakeInwards = false;
 	}
-	else
+	else // don't do anything if we don't tell the motors anything
 	{
 		leftIntakeMotor->Set(0);
 		rightIntakeMotor->Set(0);
