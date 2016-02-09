@@ -5,8 +5,6 @@
 #define SHOOTER_BUTTON					(1)
 #define SHOOTER_RESET_BUTTON			(1)
 
-#define SAFETY_BUTTON					(9) // right bumper 
-
 #define SHOOTER_ENCODER_CHANNEL_A		(1)
 #define SHOOTER_ENCODER_CHANNEL_B		(1)
 

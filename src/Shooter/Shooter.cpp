@@ -7,6 +7,8 @@ Shooter::Shooter()
 	gearPiston = new DoubleSolenoid(GEAR_PISTON_CHANNEL_A, GEAR_PISTON_CHANNEL_B);
 
 	speed = 0;
+
+	safetyPressed = false;
 }
 
 Shooter::~Shooter()
@@ -28,19 +30,16 @@ Shooter::~Shooter()
 
 void Shooter::shoot(bool shoot, bool reset)
 {
-	while(joystick->GetRawButton(SAFETY_BUTTON))
+	if(shoot && (shooterEncoder->Get() < 2000) && !safetyPressed) // TODO: get actual encoder value
 	{
-		if(shoot && shooterEncoder->Get() < 2000) // TODO: get actual encoder value
-		{
-			gearPiston->Set(DoubleSolenoid::Value::kForward);
-			shooterEncoder->Reset();
-		}
-		else if(reset)
-		{
-			shooterMotor->Set(speed);
-			gearPiston->Set(DoubleSolenoid::Value::kReverse);
-			shooterEncoder->Reset();
-		}
+		gearPiston->Set(DoubleSolenoid::Value::kForward);
+		shooterEncoder->Reset();
+	}
+	else if(reset)
+	{
+		shooterMotor->Set(speed);
+		gearPiston->Set(DoubleSolenoid::Value::kReverse);
+		shooterEncoder->Reset();
 	}
 	else
 	{

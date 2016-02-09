@@ -16,6 +16,8 @@ private:
 
 	 float speed;
 
+	 bool safetyPressed;
+
 };
 
 #endif
