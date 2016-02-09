@@ -10,7 +10,7 @@ public:
 	~Intake();
 
 	void toggleIntake(bool intakeButton, bool outtakeButton);
-	void pivotIntake(Joystick* joystick);
+	void pivotIntake(bool pivotUp, bool pivotDown);
 	void setAngle(Joystick* joystick);
 private:
 	CANTalon* leftIntakeMotor;
