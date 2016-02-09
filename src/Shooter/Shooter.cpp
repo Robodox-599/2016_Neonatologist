@@ -21,21 +21,26 @@ Shooter::~Shooter()
 }
 
 //auto reset after a shot 
-//safety button, triggers r1/ r2 is safety and shoot 
 //hold safety button then click trigger to shoot. have to have both pressed
+
+// right bumper is safety button 
+// right trigger is the shoot button
 
 void Shooter::shoot(bool shoot, bool reset)
 {
-	if(shoot && shooterEncoder->Get() < 2000) // TODO: get actual encoder value
+	while(joystick->GetRawButton(SAFETY_BUTTON))
 	{
-		gearPiston->Set(DoubleSolenoid::Value::kForward);
-		shooterEncoder->Reset();
-	}
-	else if(reset)
-	{
-		shooterMotor->Set(speed);
-		gearPiston->Set(DoubleSolenoid::Value::kReverse);
-		shooterEncoder->Reset();
+		if(shoot && shooterEncoder->Get() < 2000) // TODO: get actual encoder value
+		{
+			gearPiston->Set(DoubleSolenoid::Value::kForward);
+			shooterEncoder->Reset();
+		}
+		else if(reset)
+		{
+			shooterMotor->Set(speed);
+			gearPiston->Set(DoubleSolenoid::Value::kReverse);
+			shooterEncoder->Reset();
+		}
 	}
 	else
 	{
