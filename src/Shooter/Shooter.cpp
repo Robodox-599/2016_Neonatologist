@@ -34,6 +34,7 @@ void Shooter::shoot(bool shoot, bool reset)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kForward);
 		shooterEncoder->Reset();
+		safetyPressed = true;
 	}
 	else if(reset)
 	{
