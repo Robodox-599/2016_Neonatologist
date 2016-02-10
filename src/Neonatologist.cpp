@@ -1,12 +1,14 @@
 #include "Macros.h"
-#include "Drive\Drive.h"
-#include "Intake\Intake.h"
-#include "Lift\Lift.h"
-#include "Shooter\Shooter.h"
+#include "Drive/Drive.h"
+#include "Intake/Intake.h"
+#include "Lift/Lift.h"
+#include "Shooter/Shooter.h"
+#include "Auto/Auto.h"
 
 class Neonatologist: public IterativeRobot
 {
 private:
+	Command* autonomousCommand;
 	LiveWindow *lw = LiveWindow::GetInstance();
 	SendableChooser *chooser;
 	const std::string autoNameDefault = "Default";
@@ -15,9 +17,9 @@ private:
 
 	void RobotInit()
 	{
-		chooser = new SendableChooser();
-		chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
-		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
+
+	//	chooser->AddDefault("Autonomous One", chooser->(void *shootBoulder()));
+	//	chooser->AddObject("Autonomous Two",  chooser->(void* shootBoulder()));
 		SmartDashboard::PutData("Auto Modes", chooser);
 	}
 
@@ -33,6 +35,10 @@ private:
 	 */
 	void AutonomousInit()
 	{
+		autonomousCommand = (Command *) chooser->GetSelected();
+		autonomousCommand->Start();
+
+		/*
 		autoSelected = *((std::string*)chooser->GetSelected());
 		//std::string autoSelected = SmartDashboard::GetString("Auto Selector", autoNameDefault);
 		std::cout << "Auto selected: " << autoSelected << std::endl;
@@ -42,15 +48,19 @@ private:
 		} else {
 			//Default Auto goes here
 		}
+		*/
 	}
 
 	void AutonomousPeriodic()
 	{
+		Scheduler::GetInstance()->Run();
+		/*
 		if(autoSelected == autoNameCustom){
 			//Custom Auto goes here
 		} else {
 			//Default Auto goes here
 		}
+		*/
 	}
 
 	void TeleopInit()
