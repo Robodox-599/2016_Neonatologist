@@ -1,10 +1,10 @@
 #ifndef AUTO_H_
 #define AUTO_H_
 
-#include "..\Macros.h"
-#include "..\Intake\Intake.h"
-#include "..\Drive\Drive.h"
-#include "..\Shooter\Shooter.h"
+#include "../Macros.h"
+#include "../Intake/Intake.h"
+#include "../Drive/Drive.h"
+#include "../Shooter/Shooter.h"
 
 class Auto
 {
