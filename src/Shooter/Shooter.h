@@ -8,7 +8,15 @@ class Shooter
 public:
 	Shooter();
 	~Shooter();
+	void shoot(bool shoot, bool reset);
 private:
+	 CANTalon* shooterMotor;
+	 Encoder* shooterEncoder;
+	 DoubleSolenoid* gearPiston;
+
+	 float speed;
+
+	 bool safetyPressed;
 
 };
 
