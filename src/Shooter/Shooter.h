@@ -9,10 +9,15 @@ public:
 	Shooter();
 	~Shooter();
 	void shoot(bool shoot, bool reset);
+
+	void motorTest();
+	void pistonTest();
 private:
 	 CANTalon* shooterMotor;
 	 Encoder* shooterEncoder;
 	 DoubleSolenoid* gearPiston;
+
+	 Joystick* joy;
 
 	 float speed;
 
