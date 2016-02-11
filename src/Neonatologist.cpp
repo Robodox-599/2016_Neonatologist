@@ -9,15 +9,20 @@ class Neonatologist: public IterativeRobot
 private:
 	LiveWindow *lw = LiveWindow::GetInstance();
 	SendableChooser *chooser;
+	SmartDashboard* dash;
 	const std::string autoNameDefault = "Default";
 	const std::string autoNameCustom = "My Auto";
 	std::string autoSelected;
+
+	Shooter* shooter;
 
 	Joystick* joystick;
 
 	void RobotInit()
 	{
+		shooter = new Shooter();
 		chooser = new SendableChooser();
+		dash = new SmartDashboard();
 		chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
 		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
 		SmartDashboard::PutData("Auto Modes", chooser);
@@ -64,6 +69,11 @@ private:
 
 	void TeleopPeriodic()
 	{
+		shooter->motorTest();
+		shooter->pistonTest();
+
+
+
 
 	}
 
