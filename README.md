@@ -29,6 +29,7 @@ Sam	@[supersam6i7](http://github.com/supersam6i7)
          - In the future, this code may be condensed down into one button that activates a 
            sequence with an automatic reset. 
 ####Lift:
+######This subsystem's code is temporarily on hold because the lift's construction is postponed until after every other subsystem is built. The other subsystems have precedence over this code, so we will probably resume with this towards the end of Build Season.
 **Lifting the Portcullis:**
 
          - Two buttons, one to open and close the pistons (3). 
