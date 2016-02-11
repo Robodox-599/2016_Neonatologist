@@ -12,6 +12,8 @@ public:
 
 	void motorTest();
 	void pistonTest();
+
+	double getMotorSpeed();
 private:
 	 CANTalon* shooterMotor;
 	 Encoder* shooterEncoder;

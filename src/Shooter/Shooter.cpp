@@ -80,3 +80,8 @@ void Shooter::pistonTest()
 		gearPiston->Set(DoubleSolenoid::Value::kOff);
 	}
 }
+
+double Shooter::getMotorSpeed()
+{
+	return shooterMotor->GetSpeed();
+}
