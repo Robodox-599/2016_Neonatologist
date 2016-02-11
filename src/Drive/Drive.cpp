@@ -11,6 +11,9 @@ Drive::Drive()
 
 	forwardSpeed = 0;
 	turnSpeed = 0;
+
+	encPosition = 0;
+	encVelocity = 0;
 }
 
 Drive::~Drive()
@@ -64,4 +67,18 @@ void Drive::drive(float x, float y)
 	// Add values to avoid constant switch between setting x and y joy stick values to motors
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
+}
+
+float Drive::getCANTalonEncPosition()
+{
+	//Returns the tick the encoder is currently at (0 - 1023)
+	encPosition = frontLeftDrive->GetEncPosition();
+	return encPosition;
+}
+
+float Drive::getCANTalonEncVelocity()
+{
+	//Returns the velocity at which the encoder is currently going at
+	encVelocity = frontLeftDrive->GetEncVel();
+	return encVelocity;
 }

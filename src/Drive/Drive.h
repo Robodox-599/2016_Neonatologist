@@ -3,6 +3,7 @@
 
 #include "../Macros.h"
 #include "Drive.h"
+#include "AHRS.h"
 
 class Drive
 {
@@ -18,6 +19,9 @@ public:
 
 	void drive(float X, float Y);
 
+	float getCANTalonEncPosition();
+	float getCANTalonEncVelocity();
+
 private:
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
@@ -25,8 +29,11 @@ private:
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
-	int forwardSpeed;
-	int turnSpeed;
+	float forwardSpeed;
+	float turnSpeed;
+
+	float encPosition;
+	float encVelocity;
 };
 
 
