@@ -19,7 +19,7 @@ Auto::~Auto()
 
 void Auto::moveBoulder()
 {
-	intake->toggleIntake(true);
+	intake->toggleIntake(true, true);
 }
 
 void Auto::driveUnderBar()
