@@ -8,10 +8,10 @@ class Shooter
 public:
 	Shooter();
 	~Shooter();
-	void shoot(bool shoot, bool reset);
+	/*void shoot(bool shoot, bool reset);*/
 
-	void motorTest();
-	void pistonTest();
+	void motorTest(double yAxis);
+	void pistonTest(bool fwdPiston, bool revPiston);
 
 	double getMotorSpeed();
 private:
