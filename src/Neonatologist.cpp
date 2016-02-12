@@ -10,9 +10,9 @@ private:
 	LiveWindow *lw = LiveWindow::GetInstance();
 	SendableChooser *chooser;
 	SmartDashboard* dash;
-	const std::string autoNameDefault = "Default";
+	/*const std::string autoNameDefault = "Default";
 	const std::string autoNameCustom = "My Auto";
-	std::string autoSelected;
+	std::string autoSelected;*/
 
 	Shooter* shooter;
 
@@ -23,9 +23,9 @@ private:
 		shooter = new Shooter();
 		chooser = new SendableChooser();
 		dash = new SmartDashboard();
-		chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
+		/*chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
 		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
-		SmartDashboard::PutData("Auto Modes", chooser);
+		SmartDashboard::PutData("Auto Modes", chooser);*/
 
 		joystick = new Joystick(JOYSTICK_PORT);
 	}
@@ -42,7 +42,7 @@ private:
 	 */
 	void AutonomousInit()
 	{
-		autoSelected = *((std::string*)chooser->GetSelected());
+		/*autoSelected = *((std::string*)chooser->GetSelected());
 		//std::string autoSelected = SmartDashboard::GetString("Auto Selector", autoNameDefault);
 		std::cout << "Auto selected: " << autoSelected << std::endl;
 
@@ -50,16 +50,16 @@ private:
 			//Custom Auto goes here
 		} else {
 			//Default Auto goes here
-		}
+		}*/
 	}
 
 	void AutonomousPeriodic()
-	{
+	{/*
 		if(autoSelected == autoNameCustom){
 			//Custom Auto goes here
 		} else {
 			//Default Auto goes here
-		}
+		}*/
 	}
 
 	void TeleopInit()
@@ -69,8 +69,9 @@ private:
 
 	void TeleopPeriodic()
 	{
-		shooter->motorTest();
-		shooter->pistonTest();
+		shooter->motorTest(joystick->GetRawAxis(5));
+		shooter->pistonTest(joystick->GetRawButton(PISTON_BUTTON), joystick->GetRawButton(REVERSE_PISTON));
+		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
 		dash->PutNumber("Joystick Y: ", shooter->getMotorSpeed());
 
@@ -82,4 +83,4 @@ private:
 	}
 };
 
-START_ROBOT_CLASS(Neonatologist)
+START_ROBOT_CLASS(Neonatologist);
