@@ -1,8 +1,8 @@
 #include "Macros.h"
-#include "Drive\Drive.h"
-#include "Intake\Intake.h"
-#include "Lift\Lift.h"
-#include "Shooter\Shooter.h"
+#include "Drive/Drive.h"
+#include "Intake/Intake.h"
+#include "Lift/Lift.h"
+#include "Shooter/Shooter.h"
 
 class Neonatologist: public IterativeRobot
 {
@@ -72,8 +72,7 @@ private:
 		shooter->motorTest();
 		shooter->pistonTest();
 
-
-
+		dash->PutNumber("Joystick Y: ", shooter->getMotorSpeed());
 
 	}
 
