@@ -2,7 +2,7 @@
 
 //TODO: Get real values. 
 #define SHOOTER_MOTOR_CHANNEL			(10)
-#define SHOOTER_BUTTON					(1)
+#define SHOOTER_BUTTON					(2)
 #define SHOOTER_RESET_BUTTON			(1)
 //ok
 #define PISTON_BUTTON					(2)
