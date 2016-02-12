@@ -6,8 +6,6 @@ Shooter::Shooter()
 	shooterEncoder = new Encoder(SHOOTER_ENCODER_CHANNEL_A, SHOOTER_ENCODER_CHANNEL_B);
 	gearPiston = new DoubleSolenoid(GEAR_PISTON_CHANNEL_A, GEAR_PISTON_CHANNEL_B);
 
-	joy = new Joystick(JOYSTICK_PORT);
-
 	speed = 0;
 
 	safetyPressed = false;
@@ -18,9 +16,7 @@ Shooter::~Shooter()
 	delete shooterMotor;
 	delete shooterEncoder;
 	delete gearPiston;
-	delete joy;
 
-	joy = nullptr;
 	shooterMotor = nullptr; 
 	shooterEncoder = nullptr;
 	gearPiston = nullptr;
@@ -31,7 +27,7 @@ Shooter::~Shooter()
 
 // right bumper is safety button 
 // right trigger is the shoot button
-
+/*
 void Shooter::shoot(bool shoot, bool reset)
 {
 	if(shoot && (shooterEncoder->Get() < 2000) && !safetyPressed) // TODO: get actual encoder value
@@ -52,12 +48,12 @@ void Shooter::shoot(bool shoot, bool reset)
 		shooterMotor->Set(0);
 	}
 }
-
-void Shooter::motorTest()
+*/
+void Shooter::motorTest(double yAxis)
 {
-	if(joy->GetRawAxis(1) > .15 || joy->GetRawAxis(1) < -.15)
+	if(yAxis > .15 || yAxis < -.15)
 	{
-		shooterMotor->Set(speed);
+		shooterMotor->Set(yAxis);
 	}
 	else
 	{
@@ -65,13 +61,13 @@ void Shooter::motorTest()
 	}
 }
 
-void Shooter::pistonTest()
+void Shooter::pistonTest(bool fwdPiston, bool revPiston)
 {
-	if(joy->GetRawButton(PISTON_BUTTON))
+	if(fwdPiston)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kForward);
 	}
-	else if(joy->GetRawButton(REVERSE_PISTON))
+	else if(revPiston)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kReverse);
 	}
@@ -85,3 +81,4 @@ double Shooter::getMotorSpeed()
 {
 	return shooterMotor->GetSpeed();
 }
+
