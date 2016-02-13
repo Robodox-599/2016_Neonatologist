@@ -52,7 +52,7 @@ void Drive::setTurnSpeed(float rawX)
 	}
 }
 
-/**
+/*
  * updateLeftMotors: set left motors to desired speed
  * @param speed is the desired speed input
  */
