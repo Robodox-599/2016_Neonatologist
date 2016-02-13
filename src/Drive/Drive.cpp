@@ -86,6 +86,16 @@ void Drive::driveMotors(float turn, float fwd)
 	updateRightMotors(forwardSpeed - turnSpeed);
 }
 
+float Drive::getForwardSpeed()
+{
+	return forwardSpeed;
+}
+
+float Drive::getTurnSpeed()
+{
+	return turnSpeed;
+}
+
 /**
  * getTalonEncPos: returns current encoder tick
  * @return the encoder tick from 0 - 1023

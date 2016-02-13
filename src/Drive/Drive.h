@@ -18,6 +18,9 @@ public:
 
 	void driveMotors(float turn, float fwd);
 
+	float getForwardSpeed();
+	float getTurnSpeed();
+
 	float getCANTalonEncPos();
 	float getCANTalonEncVel();
 
