@@ -91,6 +91,12 @@ void Drive::driveMotors(float turn, float fwd)
 	updateRightMotors(forwardSpeed - turnSpeed);
 }
 
+/**
+ * shiftGears: switches gears, i guess, and changes a bool to signal current state
+ * @param shiftStateA is a button that switches to the first gear state
+ * @param shiftStateB is a button that switches to the second gear state
+ * TODO: actually understand what this means
+ */
 void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
 {
 	if(shiftStateA)
@@ -120,19 +126,11 @@ bool Drive::getShiftState()
 	return shiftState;
 }
 
-/**
- * getTalonEncPos: returns current encoder tick
- * @return the encoder tick from 0 - 1023
- */
 float Drive::getCANTalonEncPos()
 {
 	return  frontLeftDrive->GetEncPosition();
 }
 
-/**
- * getTalonEncVel: returns the speed of a talon from an encoder
- * @return the speed of the front left talon via encoder
- */
 float Drive::getCANTalonEncVel()
 {
 	return  frontLeftDrive->GetEncVel();
