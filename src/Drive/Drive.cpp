@@ -21,13 +21,17 @@ Drive::~Drive()
 	delete frontRightDrive;
 	delete backRightDrive;
 
-	frontLeftDrive = NULL;
-	backLeftDrive = NULL;
-	frontRightDrive = NULL;
-	backRightDrive = NULL;
+	frontLeftDrive = nullptr;
+	backLeftDrive = nullptr;
+	frontRightDrive = nullptr;
+	backRightDrive = nullptr;
 
 }
 
+/**
+ * setForwardSpeed: update forward speed with joystick input
+ * @param rawY is the joystick y-axis
+ */
 void Drive::setForwardSpeed(float rawY)
 {
 	if(rawY > DEADZONE || rawY < -DEADZONE)
@@ -36,6 +40,10 @@ void Drive::setForwardSpeed(float rawY)
 	}
 }
 
+/**
+ * setTurnSpeed: update turn speed with joystick input
+ * @param rawX is the joystick x-axis
+ */
 void Drive::setTurnSpeed(float rawX)
 {
 	if(rawX > DEADZONE || rawX < -DEADZONE)
@@ -44,43 +52,56 @@ void Drive::setTurnSpeed(float rawX)
 	}
 }
 
+/**
+ * updateLeftMotors: set left motors to desired speed
+ * @param speed is the desired speed input
+ */
 void Drive::updateLeftMotors(float speed)
 {
 	frontLeftDrive->Set(speed);
 	backLeftDrive->Set(speed);
 }
 
+/**
+ * updateRightMotors: set right motors to desired speed
+ * @param speed is the desired speed input
+ */
 void Drive::updateRightMotors(float speed)
 {
 	frontRightDrive->Set(-speed);
 	backRightDrive->Set(-speed);
 }
 
+/**
+ * drive: get desired speed values and assign them to motors
+ * @param x is the turn speed
+ * @param y is the fwd/backward speed
+ */
 void Drive::drive(float X, float Y)
 {
-	//update motor speeds
 	setForwardSpeed(Y);
 	setTurnSpeed(X);
 
-	// Add values to avoid constant switch between setting x and y joy stick values to motors
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
 }
 
+/**
+ * getTalonEncPos: returns current encoder tick
+ * @return the encoder tick from 0 - 1023
+ */
 float Drive::getCANTalonEncPosition()
 {
-	//Returns the tick the encoder is currently at (0 - 1023)
 	encPosition = frontLeftDrive->GetEncPosition();
 	return encPosition;
 }
 
+/**
+ * getTalonEncVel: returns the speed of a talon from an encoder
+ * @return the speed of the front left talon via encoder
+ */
 float Drive::getCANTalonEncVelocity()
 {
 	encVelocity = frontLeftDrive->GetEncVel();
 	return encVelocity;
 }
-
-
-
-
-
