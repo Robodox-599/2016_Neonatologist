@@ -19,7 +19,7 @@ public:
 
 	void shiftGears(bool shiftStateA, bool shiftStateB);
 	
-	char getShiftState();
+	bool getShiftState();
 	float getForwardSpeed();
 	float getTurnSpeed();
 
@@ -41,7 +41,7 @@ private:
 	float encPosition;
 	float encVelocity;
 
-	char shiftState;
+	bool shiftState;
 };
 
 #endif
