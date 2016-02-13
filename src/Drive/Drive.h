@@ -1,14 +1,7 @@
-/*
- * Drive.h
- *
- *  Created on: Jan 9, 2016
- *      Author: Admin
- */
-#ifndef SRC_DRIVE_H_
-#define SRC_DRIVE_H_
+#ifndef DRIVE_H_
+#define DRIVE_H_
 
-#include "Macros.h"
-#include "Drive.h"
+#include "..\Macros.h"
 #include "AHRS.h"
 
 class Drive
@@ -23,17 +16,15 @@ public:
 	void updateLeftMotors(float speed);
 	void updateRightMotors(float speed);
 
-	void drive(float X, float Y);
+	void drive(float turn, float fwd);
 
-	float getCANTalonEncPosition();
-	float getCANTalonEncVelocity();
+	float getCANTalonEncPos();
+	float getCANTalonEncVel();
 
 private:
-	//left drive
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
 
-	//right drive
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
@@ -44,6 +35,4 @@ private:
 	float encVelocity;
 };
 
-
-
-#endif /* SRC_DRIVE_H_ */
+#endif

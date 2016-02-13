@@ -63,7 +63,7 @@ void Drive::updateLeftMotors(float speed)
 }
 
 /**
- * updateRightMotors: set right motors to desired speed
+ * updateRightMotors: set right motors to desired speed; reverses right motors
  * @param speed is the desired speed input
  */
 void Drive::updateRightMotors(float speed)
@@ -74,13 +74,13 @@ void Drive::updateRightMotors(float speed)
 
 /**
  * drive: get desired speed values and assign them to motors
- * @param x is the turn speed
- * @param y is the fwd/backward speed
+ * @param turn is the turn speed
+ * @param fwd is the fwd/backward speed
  */
-void Drive::drive(float X, float Y)
+void Drive::drive(float turn, float fwd)
 {
-	setForwardSpeed(Y);
-	setTurnSpeed(X);
+	setForwardSpeed(fwd);
+	setTurnSpeed(turn);
 
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
@@ -92,8 +92,7 @@ void Drive::drive(float X, float Y)
  */
 float Drive::getCANTalonEncPosition()
 {
-	encPosition = frontLeftDrive->GetEncPosition();
-	return encPosition;
+	return  frontLeftDrive->GetEncPosition();
 }
 
 /**
@@ -102,6 +101,5 @@ float Drive::getCANTalonEncPosition()
  */
 float Drive::getCANTalonEncVelocity()
 {
-	encVelocity = frontLeftDrive->GetEncVel();
-	return encVelocity;
+	return  frontLeftDrive->GetEncVel();
 }
