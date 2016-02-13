@@ -14,6 +14,8 @@ Drive::Drive()
 
 	encPosition = 0;
 	encVelocity = 0;
+
+	shiftState = '';
 }
 
 Drive::~Drive()
@@ -92,9 +94,15 @@ void Drive::driveMotors(float turn, float fwd)
 void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
 {
 	if(shiftStateA)
+	{
 		shifter->Set(DoubleSolenoid::Value::kForward);
+		shiftState = 'A';
+	}
 	else if(shiftStateB)
+	{
 		shifter->Set(DoubleSolenoid::Value::kReverse);
+		shiftState = 'B';
+	}
 }
 
 float Drive::getForwardSpeed()
@@ -105,6 +113,11 @@ float Drive::getForwardSpeed()
 float Drive::getTurnSpeed()
 {
 	return turnSpeed;
+}
+
+char Drive::getShiftState()
+{
+	return shiftState;
 }
 
 /**
