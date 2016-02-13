@@ -7,6 +7,8 @@ Drive::Drive()
 	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_PORT); // right motors are reversed
 	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_PORT);
 
+	shifter = new DoubleSolenoid(SHIFTER_PORT_A, SHIFTER_PORT_B);
+
 	forwardSpeed = 0;
 	turnSpeed = 0;
 
@@ -20,12 +22,13 @@ Drive::~Drive()
 	delete backLeftDrive;
 	delete frontRightDrive;
 	delete backRightDrive;
+	delete shifter;
 
 	frontLeftDrive = nullptr;
 	backLeftDrive = nullptr;
 	frontRightDrive = nullptr;
 	backRightDrive = nullptr;
-
+	shifter = nullptr;
 }
 
 /**
@@ -84,6 +87,14 @@ void Drive::driveMotors(float turn, float fwd)
 
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
+}
+
+void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
+{
+	if(shiftStateA)
+		shifter->Set(DoubleSolenoid::Value::kForward);
+	else if(shiftStateB)
+		shifter->Set(DoubleSolenoid::Value::kReverse);
 }
 
 float Drive::getForwardSpeed()

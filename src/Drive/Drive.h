@@ -17,6 +17,8 @@ public:
 
 	void driveMotors(float turn, float fwd);
 
+	void shiftGears(bool shiftStateA, bool shiftStateB);
+
 	float getForwardSpeed();
 	float getTurnSpeed();
 
@@ -29,6 +31,8 @@ private:
 
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
+
+	DoubleSolenoid* shifter;
 
 	float forwardSpeed;
 	float turnSpeed;
