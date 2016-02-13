@@ -77,7 +77,7 @@ void Drive::updateRightMotors(float speed)
  * @param turn is the turn speed
  * @param fwd is the fwd/backward speed
  */
-void Drive::drive(float turn, float fwd)
+void Drive::driveMotors(float turn, float fwd)
 {
 	setForwardSpeed(fwd);
 	setTurnSpeed(turn);

@@ -16,7 +16,7 @@ public:
 	void updateLeftMotors(float speed);
 	void updateRightMotors(float speed);
 
-	void drive(float turn, float fwd);
+	void driveMotors(float turn, float fwd);
 
 	float getCANTalonEncPos();
 	float getCANTalonEncVel();
