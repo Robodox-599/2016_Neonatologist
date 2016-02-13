@@ -42,8 +42,8 @@ private:
 
 	void PrintToDashboard()
 	{
-		dash->PutNumber("Drive forward speed: ", drive->GetForwardSpeed());
-		dash->PutNumber("Drive turn speed: ", drive->GetTurnSpeed());
+		dash->PutNumber("Drive forward speed: ", drive->getForwardSpeed());
+		dash->PutNumber("Drive turn speed: ", drive->getTurnSpeed());
 	}
 
 	void TestPeriodic()
