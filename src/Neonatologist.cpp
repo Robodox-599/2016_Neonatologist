@@ -44,6 +44,13 @@ private:
 	{
 		dash->PutNumber("Drive forward speed: ", drive->getForwardSpeed());
 		dash->PutNumber("Drive turn speed: ", drive->getTurnSpeed());
+		
+		if(drive->getShiftState())
+			dash->PutString("Shift state: ", "A");
+		else if(drive->getShiftState())
+			dash->PutString("Shift state: ", "B");
+		else
+			dash->PutString("Shift state: ", "error in getting shift state");
 	}
 
 	void TestPeriodic()
