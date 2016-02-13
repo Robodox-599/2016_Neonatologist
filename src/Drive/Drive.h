@@ -1,8 +1,7 @@
 #ifndef DRIVE_H_
 #define DRIVE_H_
 
-#include "..\Macros.h"
-#include "AHRS.h"
+#include "../Macros.h"
 
 class Drive
 {
@@ -16,7 +15,13 @@ public:
 	void updateLeftMotors(float speed);
 	void updateRightMotors(float speed);
 
-	void drive(float turn, float fwd);
+	void driveMotors(float turn, float fwd);
+
+	void shiftGears(bool shiftStateA, bool shiftStateB);
+	
+	bool getShiftState();
+	float getForwardSpeed();
+	float getTurnSpeed();
 
 	float getCANTalonEncPos();
 	float getCANTalonEncVel();
@@ -28,11 +33,15 @@ private:
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
+	DoubleSolenoid* shifter;
+
 	float forwardSpeed;
 	float turnSpeed;
 
 	float encPosition;
 	float encVelocity;
+
+	bool shiftState;
 };
 
 #endif

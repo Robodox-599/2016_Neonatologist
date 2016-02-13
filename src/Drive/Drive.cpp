@@ -7,11 +7,15 @@ Drive::Drive()
 	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_PORT); // right motors are reversed
 	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_PORT);
 
+	shifter = new DoubleSolenoid(SHIFTER_PORT_A, SHIFTER_PORT_B);
+
 	forwardSpeed = 0;
 	turnSpeed = 0;
 
 	encPosition = 0;
 	encVelocity = 0;
+
+	shiftState = true; 
 }
 
 Drive::~Drive()
@@ -20,12 +24,13 @@ Drive::~Drive()
 	delete backLeftDrive;
 	delete frontRightDrive;
 	delete backRightDrive;
+	delete shifter;
 
 	frontLeftDrive = nullptr;
 	backLeftDrive = nullptr;
 	frontRightDrive = nullptr;
 	backRightDrive = nullptr;
-
+	shifter = nullptr;
 }
 
 /**
@@ -77,7 +82,7 @@ void Drive::updateRightMotors(float speed)
  * @param turn is the turn speed
  * @param fwd is the fwd/backward speed
  */
-void Drive::drive(float turn, float fwd)
+void Drive::driveMotors(float turn, float fwd)
 {
 	setForwardSpeed(fwd);
 	setTurnSpeed(turn);
@@ -87,18 +92,45 @@ void Drive::drive(float turn, float fwd)
 }
 
 /**
- * getTalonEncPos: returns current encoder tick
- * @return the encoder tick from 0 - 1023
+ * shiftGears: switches gears, i guess, and changes a bool to signal current state
+ * @param shiftStateA is a button that switches to the first gear state
+ * @param shiftStateB is a button that switches to the second gear state
+ * TODO: actually understand what this means
  */
+void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
+{
+	if(shiftStateA)
+	{
+		shifter->Set(DoubleSolenoid::Value::kForward);
+		shiftState = true;
+	}
+	else if(shiftStateB)
+	{
+		shifter->Set(DoubleSolenoid::Value::kReverse);
+		shiftState = false;
+	}
+}
+
+float Drive::getForwardSpeed()
+{
+	return forwardSpeed;
+}
+
+float Drive::getTurnSpeed()
+{
+	return turnSpeed;
+}
+
+bool Drive::getShiftState()
+{
+	return shiftState;
+}
+
 float Drive::getCANTalonEncPos()
 {
 	return  frontLeftDrive->GetEncPosition();
 }
 
-/**
- * getTalonEncVel: returns the speed of a talon from an encoder
- * @return the speed of the front left talon via encoder
- */
 float Drive::getCANTalonEncVel()
 {
 	return  frontLeftDrive->GetEncVel();
