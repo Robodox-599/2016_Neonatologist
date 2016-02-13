@@ -2,13 +2,10 @@
 
 Drive::Drive()
 {
-	//left drive
-	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
-	backLeftDrive = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
-
-	//right drive REVERSED MOTORS
-	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);
-	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
+	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_PORT);
+	backLeftDrive = new CANTalon(BACK_LEFT_MOTOR_PORT);
+	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_PORT); // right motors are reversed
+	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_PORT);
 
 	forwardSpeed = 0;
 	turnSpeed = 0;
@@ -19,19 +16,13 @@ Drive::Drive()
 
 Drive::~Drive()
 {
-	//left drive
 	delete frontLeftDrive;
 	delete backLeftDrive;
-
-	//right drive
 	delete frontRightDrive;
 	delete backRightDrive;
 
-	//left drive
 	frontLeftDrive = NULL;
 	backLeftDrive = NULL;
-
-	//right drive
 	frontRightDrive = NULL;
 	backRightDrive = NULL;
 
@@ -76,8 +67,6 @@ void Drive::drive(float X, float Y)
 	updateRightMotors(forwardSpeed - turnSpeed);
 }
 
-//Took out 'TestCANTalonEnc' function because it did not do any thing
-
 float Drive::getCANTalonEncPosition()
 {
 	//Returns the tick the encoder is currently at (0 - 1023)
@@ -87,7 +76,6 @@ float Drive::getCANTalonEncPosition()
 
 float Drive::getCANTalonEncVelocity()
 {
-	//Returns the velocity at which the encoder is currently going at
 	encVelocity = frontLeftDrive->GetEncVel();
 	return encVelocity;
 }
