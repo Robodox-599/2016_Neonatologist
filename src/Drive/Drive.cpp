@@ -90,7 +90,7 @@ void Drive::drive(float turn, float fwd)
  * getTalonEncPos: returns current encoder tick
  * @return the encoder tick from 0 - 1023
  */
-float Drive::getCANTalonEncPosition()
+float Drive::getCANTalonEncPos()
 {
 	return  frontLeftDrive->GetEncPosition();
 }
@@ -99,7 +99,7 @@ float Drive::getCANTalonEncPosition()
  * getTalonEncVel: returns the speed of a talon from an encoder
  * @return the speed of the front left talon via encoder
  */
-float Drive::getCANTalonEncVelocity()
+float Drive::getCANTalonEncVel()
 {
 	return  frontLeftDrive->GetEncVel();
 }
