@@ -1,5 +1,9 @@
 #include "WPILib.h"
 
+// joystick values
+#define R_X_AXIS						(0)
+#define R_Y_AXIS						(1)
+
 // drive variables
 #define DEADZONE 	(.15)
 
