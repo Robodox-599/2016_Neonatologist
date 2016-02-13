@@ -1,7 +1,7 @@
 #ifndef LIFT_H_
 #define LIFT_H_
 
-#include "..\Macros.h"
+#include "../Macros.h"
 
 class Lift
 {
