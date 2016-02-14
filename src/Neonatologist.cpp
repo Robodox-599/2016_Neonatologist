@@ -10,7 +10,7 @@ private:
 	LiveWindow *lw = LiveWindow::GetInstance();
 	
 	Joystick* joy;
-	SmartDashboard* dash;
+	//SmartDashboard* dash;
 	Drive* drive;
 
 	void RobotInit()
@@ -38,19 +38,20 @@ private:
 	{
 		// drive functions
 		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
+		drive->shiftGears(joy->GetRawButton(SHIFTER_BUTTON_A), joy->GetRawButton(SHIFTER_BUTTON_B));
 	}
 
 	void PrintToDashboard()
 	{
-		dash->PutNumber("Drive forward speed: ", drive->getForwardSpeed());
-		dash->PutNumber("Drive turn speed: ", drive->getTurnSpeed());
+		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
+		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
 		
 		if(drive->getShiftState())
-			dash->PutString("Shift state: ", "A");
-		else if(drive->getShiftState())
-			dash->PutString("Shift state: ", "B");
+			SmartDashboard::PutString("Shift state: ", "A");
+		else if(!drive->getShiftState())
+			SmartDashboard::PutString("Shift state: ", "B");
 		else
-			dash->PutString("Shift state: ", "error in getting shift state");
+			SmartDashboard::PutString("Shift state: ", "error in getting shift state");
 	}
 
 	void TestPeriodic()
