@@ -111,6 +111,10 @@ void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
 	}
 }
 
+/**
+ *  accessor functions to get values for the smart dashboard 
+ */
+
 float Drive::getForwardSpeed()
 {
 	return forwardSpeed;

@@ -29,7 +29,6 @@ public:
 private:
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
-
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
