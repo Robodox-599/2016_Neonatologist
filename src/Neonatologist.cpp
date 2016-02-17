@@ -39,6 +39,7 @@ private:
 		// drive functions
 		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
 		drive->shiftGears(joy->GetRawButton(SHIFTER_BUTTON_A), joy->GetRawButton(SHIFTER_BUTTON_B));
+		PrintToDashboard();
 	}
 
 	void PrintToDashboard()
