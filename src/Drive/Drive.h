@@ -17,13 +17,18 @@ public:
 	Drive();
 	~Drive();
 
-	void setForwardSpeed(float rawY);
-	void setTurnSpeed(float rawX);
-
 	void updateLeftMotors(float speed);
 	void updateRightMotors(float speed);
 
-	void drive(float X, float Y);
+	void setForwardSpeed(float rawY);
+	void setTurnSpeed(float rawX);
+
+	void drive(float xAxis, float yAxis, int POV);
+
+	void setReferenceAngle(int angle);
+	void edgeCase();
+	float shortestPath();
+	float linearizeDrive(float driveInput);
 
 	float getCANTalonEncPosition();
 	float getCANTalonEncVelocity();
@@ -37,8 +42,17 @@ private:
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
+	AHRS* navX;
+
 	float forwardSpeed;
 	float turnSpeed;
+
+	float error360;
+	float error180;
+
+	bool autoTurn;
+	float gyroValue;
+	int referenceAngle;
 
 	float encPosition;
 	float encVelocity;

@@ -8,3 +8,7 @@
 #define FRONT_RIGHT_MOTOR_CHANNEL			(1)
 #define BACK_LEFT_MOTOR_CHANNEL				(1)
 #define BACK_RIGHT_MOTOR_CHANNEL			(1)
+
+//PID
+#define SLOPE_ADJUSTMENT						(.9)//TODO: get correct number
+#define KP 										(.09)
