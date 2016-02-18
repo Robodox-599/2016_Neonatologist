@@ -1,15 +1,8 @@
-/*
- * Drive.h
- *
- *  Created on: Jan 9, 2016
- *      Author: Admin
- */
-#ifndef SRC_DRIVE_H_
-#define SRC_DRIVE_H_
+#ifndef DRIVE_H_
+#define DRIVE_H_
 
-#include "Macros.h"
-#include "Drive.h"
-#include "AHRS.h"
+#include "../Macros.h"
+
 
 class Drive
 {
@@ -30,19 +23,28 @@ public:
 	float shortestPath();
 	float linearizeDrive(float driveInput);
 
-	float getCANTalonEncPosition();
-	float getCANTalonEncVelocity();
+	//void driveMotors(float turn, float fwd);
+
+	void shiftGears(bool shiftStateA, bool shiftStateB);
+	
+	bool getShiftState();
+	float getForwardSpeed();
+	float getTurnSpeed();
+
+
+	float getCANTalonEncPos();
+	float getCANTalonEncVel();
 
 private:
-	//left drive
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
-
-	//right drive
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
 	AHRS* navX;
+
+	DoubleSolenoid* shifter;
+
 
 	float forwardSpeed;
 	float turnSpeed;
@@ -56,8 +58,8 @@ private:
 
 	float encPosition;
 	float encVelocity;
+
+	bool shiftState;
 };
 
-
-
-#endif /* SRC_DRIVE_H_ */
+#endif

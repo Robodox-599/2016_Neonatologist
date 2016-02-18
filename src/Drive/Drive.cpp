@@ -3,15 +3,13 @@
 
 Drive::Drive()
 {
-
-
 	//left drive
-	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
-	backLeftDrive = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
+	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_PORT);
+	backLeftDrive = new CANTalon(BACK_LEFT_MOTOR_PORT);
+	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_PORT); // right motors are reversed
+	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_PORT);
 
-	//right drive REVERSED MOTORS
-	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);
-	backRightDrive = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
+	shifter = new DoubleSolenoid(SHIFTER_PORT_A, SHIFTER_PORT_B);
 
 	navX = new AHRS(SPI::Port::kMXP);
 
@@ -27,6 +25,8 @@ Drive::Drive()
 
 	encPosition = 0;
 	encVelocity = 0;
+
+	shiftState = true; 
 }
 
 
@@ -41,38 +41,49 @@ Drive::~Drive()
 	//right drive
 	delete frontRightDrive;
 	delete backRightDrive;
+	delete shifter;
 
-	navX = NULL;
+	navX = nullptr;
 
 	//left drive
-	frontLeftDrive = NULL;
-	backLeftDrive = NULL;
+	frontLeftDrive = nullptr;
+	backLeftDrive = nullptr;
 
 	//right drive
-	frontRightDrive = NULL;
-	backRightDrive = NULL;
+	frontRightDrive = nullptr;
+	backRightDrive = nullptr;
 
+	shifter = nullptr;
 }
 
 
 /*************************************************/
 
 
-//this function updates the left motors
+/**
+ * updateLeftMotors: set left motors to desired speed
+ * @param speed is the desired speed input
+ */
 void Drive::updateLeftMotors(float speed)
 {
 	frontLeftDrive->Set(speed);
 	backLeftDrive->Set(speed);
 }
 
-//this function updates the right motors
+/**
+ * updateRightMotors: set right motors to desired speed; reverses right motors
+ * @param speed is the desired speed input
+ */
 void Drive::updateRightMotors(float speed)
 {
 	frontRightDrive->Set(-speed);
 	backRightDrive->Set(-speed);
 }
 
-//this sets the forward speed
+/**
+ * setForwardSpeed: update forward speed with joystick input
+ * @param speed is the joystick y-axis
+ */
 void Drive::setForwardSpeed(float forward)
 {
 	if(forward >= DEADZONE || forward <= -DEADZONE)
@@ -85,10 +96,12 @@ void Drive::setForwardSpeed(float forward)
 	}
 }
 
-//this sets the turn speed and does PID (straight drive)
+/**
+ * setTurnSpeed: update turn speed with joystick input and does PID (straight drive)
+ * @param turn is the joystick x-axis
+ */
 void Drive::setTurnSpeed(float turn)
 {
-
 	if(turn >= DEADZONE || turn <= -DEADZONE)
 	{
 		turnSpeed = turn;
@@ -112,7 +125,12 @@ void Drive::setTurnSpeed(float turn)
 	}
 }
 
-//this is the main drive function
+/**
+ * drive: get desired speed values and assign them to motors
+ * @param turn is the turn speed
+ * @param fwd is the fwd/backward speed
+ *
+ */
 void Drive::drive(float xAxis, float yAxis, int POV)
 {
 	gyroValue = navX->GetYaw();
@@ -185,16 +203,60 @@ float Drive::linearizeDrive(float driveInput)
 /************************************************************************/
 
 
-//Returns the tick the encoder is currently at (0 - 1023)
-float Drive::getCANTalonEncPosition()
+/*
+void Drive::driveMotors(float turn, float fwd)
 {
-	encPosition = frontLeftDrive->GetEncPosition();
-	return encPosition;
+	setForwardSpeed(fwd);
+	setTurnSpeed(turn);
+
+	updateLeftMotors(forwardSpeed + turnSpeed);
+	updateRightMotors(forwardSpeed - turnSpeed);
+}
+*/
+
+//Returns the tick the encoder is currently at (0 - 1023)
+float Drive::getCANTalonEncPos()
+{
+	return  frontLeftDrive->GetEncPosition();
 }
 
 //Returns the velocity at which the encoder is currently going at
-float Drive::getCANTalonEncVelocity()
+float Drive::getCANTalonEncVel()
 {
-	encVelocity = frontLeftDrive->GetEncVel();
-	return encVelocity;
+	return  frontLeftDrive->GetEncVel();
+}
+
+/**
+ * shiftGears: switches gears, i guess, and changes a bool to signal current state
+ * @param shiftStateA is a button that switches to the first gear state
+ * @param shiftStateB is a button that switches to the second gear state
+ * TODO: actually understand what this means
+ */
+void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
+{
+	if(shiftStateA)
+	{
+		shifter->Set(DoubleSolenoid::Value::kForward);
+		shiftState = true;
+	}
+	else if(shiftStateB)
+	{
+		shifter->Set(DoubleSolenoid::Value::kReverse);
+		shiftState = false;
+	}
+}
+
+float Drive::getForwardSpeed()
+{
+	return forwardSpeed;
+}
+
+float Drive::getTurnSpeed()
+{
+	return turnSpeed;
+}
+
+bool Drive::getShiftState()
+{
+	return shiftState;
 }

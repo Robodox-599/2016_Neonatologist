@@ -1,7 +1,7 @@
 #ifndef SHOOTER_H_
 #define SHOOTER_H_
 
-#include "..\Macros.h"
+#include "../Macros.h"
 
 class Shooter
 {
