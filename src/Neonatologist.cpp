@@ -36,8 +36,11 @@ private:
 
 	void TeleopPeriodic()
 	{
+		joy->SetRumble(Joystick::kLeftRumble, .2);
+		joy->SetRumble(Joystick::kRightRumble, .2);
+
 		// drive functions
-		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
+		drive->drive(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R), joy->GetPOV(0));
 		drive->shiftGears(joy->GetRawButton(SHIFTER_BUTTON_A), joy->GetRawButton(SHIFTER_BUTTON_B));
 	}
 

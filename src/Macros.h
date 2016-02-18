@@ -11,8 +11,8 @@
 #define DEADZONE 	(.15)
 
 //PID
-#define SLOPE_ADJUSTMENT						(.9)//TODO: get correct number
-#define KP 										(.09)
+#define SLOPE_ADJUSTMENT				(.9)//TODO: get correct number
+#define KP 								(.09)
 
 // TODO: fix later if the front/left things are off? otherwise should be good
 #define FRONT_LEFT_MOTOR_PORT			(3)
