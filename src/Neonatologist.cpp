@@ -7,8 +7,9 @@
 class Neonatologist: public IterativeRobot
 {
 private:
+
 	LiveWindow *lw = LiveWindow::GetInstance();
-	
+
 	Joystick* joy;
 	//SmartDashboard* dash;
 	Drive* drive;
