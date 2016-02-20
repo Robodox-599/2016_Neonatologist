@@ -73,10 +73,12 @@ void Intake::pivotIntake(bool pivotUp, bool pivotDown)
 /**
  * setAngle: puts the intake at a certain angle
  * @param joystick is the joystick used to get the angle setting button
+ *
+ * DESIRED ANGLE: 30 degrees
  */
 void Intake::setAngle(Joystick* joystick)
 {
-	if(angleChecker->Get() >= 0 &&  anglechecker->Get() < 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
+	if(angleChecker->Get() >= 0 &&  angleChecker->Get() < 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
 	{
 		while(angleChecker->Get() < 1000) // TODO: get enc value when intake pivots to the desired angle
 			pivotIntake(true, false); // go up
