@@ -13,8 +13,7 @@ public:
 	void pivotIntake(bool pivotUp, bool pivotDown);
 	void setAngle(Joystick* joystick);
 private:
-	CANTalon* leftIntakeMotor;
-	CANTalon* rightIntakeMotor;
+	CANTalon* intakeRollerMotor;
 	CANTalon* pivotMotor;
 
 	Encoder* angleChecker;

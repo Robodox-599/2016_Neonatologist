@@ -2,8 +2,7 @@
 
 Intake::Intake()
 {
-	leftIntakeMotor = new CANTalon(LEFT_INTAKE_MOTOR_CHANNEL);
-	rightIntakeMotor = new CANTalon(RIGHT_INTAKE_MOTOR_CHANNEL);
+	intakeRollerMotor = new CANTalon(INTAKE_ROLLER_MOTOR_CHANNEL);
 	pivotMotor = new CANTalon(PIVOT_MOTOR_CHANNEL);
 
 	angleChecker = new Encoder(PIVOT_ENCODER_CHANNEL_A, PIVOT_ENCODER_CHANNEL_B);
@@ -13,13 +12,11 @@ Intake::Intake()
 
 Intake::~Intake()
 {
-	delete leftIntakeMotor;
-	delete rightIntakeMotor;
+	delete intakeRollerMotor;
 	delete pivotMotor;
 	delete angleChecker;
 
-	leftIntakeMotor = nullptr;
-	rightIntakeMotor = nullptr;
+	intakeRollerMotor = nullptr;
 	pivotMotor = nullptr;
 	angleChecker = nullptr;
 }
@@ -38,20 +35,17 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 {
 	if(intakeButton && !intakeInwards) // if we want to intake something, we have to make sure nothing has already been taken in
 	{
-		leftIntakeMotor->Set(INTAKE_SPEED);
-		rightIntakeMotor->Set(-INTAKE_SPEED);
+		intakeRollerMotor->Set(INTAKE_SPEED);
 		intakeInwards = true;
 	}
 	else if(outtakeButton && intakeInwards) // but if we want to do the outake thing, we should only do it if something has already been taken in
 	{
-		leftIntakeMotor->Set(-INTAKE_SPEED);
-		rightIntakeMotor->Set(INTAKE_SPEED);
+		intakeRollerMotor->Set(-INTAKE_SPEED);
 		intakeInwards = false;
 	}
 	else // don't do anything if we don't tell the motors anything
 	{
-		leftIntakeMotor->Set(0);
-		rightIntakeMotor->Set(0);
+		intakeRollerMotor->Set(0);
 	}
 }
 
