@@ -1,5 +1,5 @@
 #include "WPILib.h"
-#include "AHRS.h"
+//#include "AHRS.h"
 
 // joystick values
 #define X_AXIS_R						(0)

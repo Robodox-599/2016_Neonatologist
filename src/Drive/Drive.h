@@ -41,20 +41,20 @@ private:
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
-	AHRS* navX;
+	//AHRS* navX;
 
 	DoubleSolenoid* shifter;
 
 
 	float forwardSpeed;
 	float turnSpeed;
-
+/*
 	float error360;
 	float error180;
 
 	bool autoTurn;
 	float gyroValue;
-	int referenceAngle;
+	int referenceAngle;*/
 
 	float encPosition;
 	float encVelocity;

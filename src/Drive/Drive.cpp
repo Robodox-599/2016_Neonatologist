@@ -11,18 +11,18 @@ Drive::Drive()
 
 	shifter = new DoubleSolenoid(SHIFTER_PORT_A, SHIFTER_PORT_B);
 
-	navX = new AHRS(SPI::Port::kMXP);
+	//navX = new AHRS(SPI::Port::kMXP);
 
 	forwardSpeed = 0;
 	turnSpeed = 0;
-
+/*
 	error360 = 0;
 	error180 = 0;
 
 	autoTurn = false;
 	gyroValue = navX->GetYaw();
 	referenceAngle = 0;
-
+*/
 	encPosition = 0;
 	encVelocity = 0;
 
@@ -43,7 +43,7 @@ Drive::~Drive()
 	delete backRightDrive;
 	delete shifter;
 
-	navX = nullptr;
+	//navX = nullptr;
 
 	//left drive
 	frontLeftDrive = nullptr;
@@ -106,22 +106,22 @@ void Drive::setTurnSpeed(float turn)
 	{
 		turnSpeed = turn;
 
-		autoTurn = false;
+		//autoTurn = false;
 
-		referenceAngle = 0;
-		navX->ZeroYaw();
+		//referenceAngle = 0;
+		//navX->ZeroYaw();
 	}
-	else if((error360 <= -.5 || error360 >= .5) && (error180 <= -.5 || error180 >= .5))
+	/*else if((error360 <= -.5 || error360 >= .5) && (error180 <= -.5 || error180 >= .5))
 	{
 		turnSpeed = KP * shortestPath();
-	}
-	else if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)
+	}*/
+	else //if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)
 	{
 		turnSpeed = 0;
-		autoTurn = false;
-		navX->ZeroYaw();
-		gyroValue = 0;
-		referenceAngle = 0;
+		//autoTurn = false;
+		//navX->ZeroYaw();
+		//gyroValue = 0;
+		//referenceAngle = 0;
 	}
 }
 
@@ -133,13 +133,13 @@ void Drive::setTurnSpeed(float turn)
  */
 void Drive::drive(float xAxis, float yAxis, int POV)
 {
-	gyroValue = navX->GetYaw();
-	edgeCase();
-	setReferenceAngle(POV);
+	//gyroValue = navX->GetYaw();
+	//edgeCase();
+	//setReferenceAngle(POV);
 	setForwardSpeed(xAxis);
 
-	error360 = referenceAngle - gyroValue;
-	error180 = referenceAngle - navX->GetYaw();
+	//error360 = referenceAngle - gyroValue;
+	//error180 = referenceAngle - navX->GetYaw();
 
 	setTurnSpeed(yAxis);
 
@@ -150,7 +150,7 @@ void Drive::drive(float xAxis, float yAxis, int POV)
 
 /*******************************************************************/
 
-
+/*
 //this function sets the desired angle from the D-Pad
 void Drive::setReferenceAngle(int angle)
 {
@@ -198,7 +198,7 @@ float Drive::linearizeDrive(float driveInput)
 {
 	return driveInput * SLOPE_ADJUSTMENT;
 }
-
+*/
 
 /************************************************************************/
 
