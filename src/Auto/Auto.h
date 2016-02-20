@@ -12,9 +12,9 @@ public:
 	Auto();
 	~Auto();
 
-	void runAuto();
+	void shootBoulderAuto();
+	void driveForwardAuto();
 	void moveBoulder();
-	void driveUnderBar();
 	void shootBoulder();
 private:
 	Intake* intake;
