@@ -1,7 +1,7 @@
 #include "WPILib.h"
 
-//TODO: Get real values. 
-#define SHOOTER_MOTOR_CHANNEL			(10)
+// PORTS ARE BUENISIMO
+#define SHOOTER_MOTOR_CHANNEL			(5)
 #define SHOOTER_BUTTON					(2)
 #define SHOOTER_RESET_BUTTON			(1)
 //ok
