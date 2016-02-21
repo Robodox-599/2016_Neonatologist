@@ -11,7 +11,7 @@
 #define LOCK_PIVOT_BUTTON				(0)		// not implemented yet
 
 // ~~~~~ Drive
-#define DEADZONE						(.25)
+#define DEADZONE						(.20)
 #define GEAR_PISTON_CHANNEL_A			(0)
 #define GEAR_PISTON_CHANNEL_B			(1)
 #define FRONT_LEFT_MOTOR_PORT			(3)
