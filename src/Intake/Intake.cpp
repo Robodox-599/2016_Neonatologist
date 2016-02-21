@@ -68,7 +68,7 @@ void Intake::pivotIntake(float pivotSpeed)
  */
 void Intake::setAngle(bool lockPivot)
 {
-	if(intakeRollerMotor->GetPosition() >= 0 &&  intakeRollerMotor->GetPosition() < 1000 && lockPivot)
+	if(intakeRollerMotor->GetEncPosition() >= 0 &&  intakeRollerMotor->GetEncPosition() < 1000 && lockPivot)
 	{
 		pivotIntake(0.8); // go up
 	}
@@ -76,10 +76,10 @@ void Intake::setAngle(bool lockPivot)
 	{
 		pivotIntake(0.8);
 	}
-	intakeRollerMotor->SetPosition(0);
+	intakeRollerMotor->SetEncPosition(0);
 }
 
-int Intake::getIntakeEncoderValue()
+int Intake::getIntakeEncoderValue ()
 {
-	return intakeRollerMotor->GetPosition();
+	return intakeRollerMotor->GetEncPosition();
 }
