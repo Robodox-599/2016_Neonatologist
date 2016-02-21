@@ -27,7 +27,7 @@
 #define TOGGLE_GEARS					(2)		// B
 
 // drive variables
-#define DEADZONE 	(.15)
+#define DEADZONE 	(.25)
 
 // PORTS ARE GOOD
 #define FRONT_LEFT_MOTOR_PORT			(3)
