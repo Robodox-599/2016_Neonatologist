@@ -64,11 +64,11 @@ private:
 	void TeleopPeriodic()
 	{
 
-		shooter->motorTest(joystick->GetRawAxis(5));
-		shooter->pistonTest(joystick->GetRawButton(PISTON_BUTTON), joystick->GetRawButton(REVERSE_PISTON));
+		shooter->motorTest(joy->GetRawAxis(5));
+		shooter->pistonTest(joy->GetRawButton(PISTON_BUTTON), joy->GetRawButton(REVERSE_PISTON));
 		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
-		dash->PutNumber("Joystick Y: ", shooter->getMotorSpeed());
+		SmartDashboard::PutNumber("Joystick Y: ", shooter->getMotorSpeed());
 
 		// drive functions
 		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
