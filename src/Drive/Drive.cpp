@@ -57,7 +57,7 @@ void Drive::setTurnSpeed(float rawX)
 	{
 		turnSpeed = rawX;
 	}
-	else forwardSpeed = 0;
+	else turnSpeed = 0;
 }
 
 /*
@@ -88,6 +88,7 @@ void Drive::updateRightMotors(float speed)
 void Drive::driveMotors(float turn, float fwd)
 {
 	turn *= 0.75;
+	fwd*=(-1.0); // joystick values for y-axis were reversed?
 	setForwardSpeed(fwd);
 	setTurnSpeed(turn);
 
@@ -130,9 +131,9 @@ bool Drive::getShiftState()
 	return shiftA;
 }
 
-float Drive::getCANTalonEncPos()
+int Drive::getCANTalonEncPos()
 {
-	return  frontLeftDrive->GetEncPosition();
+	return  backRightDrive->GetEncPosition();
 }
 
 float Drive::getCANTalonEncVel()
