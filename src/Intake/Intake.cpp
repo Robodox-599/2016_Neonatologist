@@ -47,12 +47,14 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 	{
 		intakeRollerMotor->Set(0);
 	}*/
-
-	while(intakeButton)
-		intakeRollerMotor->Set(INTAKE_SPEED);
-	while(outtakeButton)
-		intakeRollerMotor->Set(-INTAKE_SPEED);
-	intakeRollerMotor->Set(0);
+	if(intakeButton) {
+		//while(intakeButton)
+			intakeRollerMotor->Set(INTAKE_SPEED);
+	} else if(outtakeButton) {
+		//while(outtakeButton)
+			intakeRollerMotor->Set(-INTAKE_SPEED);
+	} else
+		intakeRollerMotor->Set(0);
 }
 
 /**
