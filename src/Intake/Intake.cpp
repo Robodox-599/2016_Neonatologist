@@ -33,7 +33,7 @@ Intake::~Intake()
  */
 void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 {
-	if(intakeButton && !intakeInwards) // if we want to intake something, we have to make sure nothing has already been taken in
+	/*if(intakeButton && !intakeInwards) // if we want to intake something, we have to make sure nothing has already been taken in
 	{
 		intakeRollerMotor->Set(INTAKE_SPEED);
 		intakeInwards = true;
@@ -46,7 +46,13 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 	else // don't do anything if we don't tell the motors anything
 	{
 		intakeRollerMotor->Set(0);
-	}
+	}*/
+
+	while(intakeButton)
+		intakeRollerMotor->Set(INTAKE_SPEED);
+	while(outtakeButton)
+		intakeRollerMotor->Set(-INTAKE_SPEED);
+	intakeRollerMotor->Set(0);
 }
 
 /**
