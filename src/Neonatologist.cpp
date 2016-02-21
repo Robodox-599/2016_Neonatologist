@@ -119,7 +119,7 @@ private:
 	{
 		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
 		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
-		SmartDashboard::PutNumber("Intake encoder: ", intake->getAngleCheckerValue());
+		SmartDashboard::PutNumber("Intake encoder: ", intake->getIntakeEncoderValue());
 
 		if(drive->getShiftState())
 			SmartDashboard::PutString("Shift state: ", "A");

@@ -12,12 +12,10 @@ public:
 	void toggleIntake(bool intakeButton, bool outtakeButton);
 	void pivotIntake(float pivotSpeed);
 	void setAngle(bool lockPivot);
-	int getAngleCheckerValue();
+	int getIntakeEncoderValue();
 private:
 	CANTalon* intakeRollerMotor;
 	CANTalon* pivotMotor;
-
-	Encoder* angleChecker;
 
 	bool intakeInwards;
 };

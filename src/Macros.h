@@ -26,8 +26,7 @@
 #define PIVOT_MOTOR_CHANNEL				(0)
 #define INTAKE_SPEED					(0.5)
 #define PIVOT_SPEED						(2)
-#define PIVOT_ENCODER_CHANNEL_A			(2)
-#define PIVOT_ENCODER_CHANNEL_B			(2)
+
 
 // ~~~~~ Shooter
 #define SHOOTER_MOTOR_CHANNEL			(5)

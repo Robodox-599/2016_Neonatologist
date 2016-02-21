@@ -5,8 +5,6 @@ Intake::Intake()
 	intakeRollerMotor = new CANTalon(INTAKE_ROLLER_MOTOR_CHANNEL);
 	pivotMotor = new CANTalon(PIVOT_MOTOR_CHANNEL);
 
-	angleChecker = new Encoder(PIVOT_ENCODER_CHANNEL_A, PIVOT_ENCODER_CHANNEL_B);
-
 	intakeInwards = false;
 }
 
@@ -14,11 +12,9 @@ Intake::~Intake()
 {
 	delete intakeRollerMotor;
 	delete pivotMotor;
-	delete angleChecker;
 
 	intakeRollerMotor = nullptr;
 	pivotMotor = nullptr;
-	angleChecker = nullptr;
 }
 
 //there has to be a god angle in which it automattically goes there in order to fit under the low goal 
@@ -72,20 +68,18 @@ void Intake::pivotIntake(float pivotSpeed)
  */
 void Intake::setAngle(bool lockPivot)
 {
-	if(angleChecker->Get() >= 0 &&  angleChecker->Get() < 1000 && lockPivot)
+	if(intakeRollerMotor->GetPosition() >= 0 &&  intakeRollerMotor->GetPosition() < 1000 && lockPivot)
 	{
-		while(angleChecker->Get() < 1000) // TODO: get enc value when intake pivots to the desired angle
-			pivotIntake(0.8); // go up
+		pivotIntake(0.8); // go up
 	}
-	else if(angleChecker->Get() > 1000 && lockPivot)
+	else if(intakeRollerMotor->GetPosition() > 1000 && lockPivot)
 	{
-		while(angleChecker->Get() > 1000) // go down
-			pivotIntake(0.8);
+		pivotIntake(0.8);
 	}
-	angleChecker->Reset();
+	intakeRollerMotor->SetPosition(0);
 }
 
-int Intake::getAngleCheckerValue()
+int Intake::getIntakeEncoderValue()
 {
-	return angleChecker->Get();
+	return intakeRollerMotor->GetPosition();
 }
