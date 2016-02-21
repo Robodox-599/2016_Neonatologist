@@ -57,12 +57,10 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 
 /**
  * pivotIntake: uses the intake motors to change the angle of the intake
- * @param pivotUp commands the intake to pivot upwards - used with a joystick button
- * @param pivotDown commands the intake to pivot downwards - used with a joystick button
+ * @param pivotSpeed is the speed that the intake should go up or down, taken from joystick input
  */
 void Intake::pivotIntake(float pivotSpeed)
 {
-	// while statements allow the button to be held down. hopefully.
 	pivotMotor->Set(pivotSpeed*0.75);
 }
 
