@@ -7,16 +7,16 @@
 class Neonatologist: public IterativeRobot
 {
 private:
+
 	LiveWindow *lw = LiveWindow::GetInstance();
 	SendableChooser *chooser;
 	SmartDashboard* dash;
 	/*const std::string autoNameDefault = "Default";
 	const std::string autoNameCustom = "My Auto";
 	std::string autoSelected;*/
-
+	Drive* drive;
 	Shooter* shooter;
-
-	Joystick* joystick;
+	Joystick* joy;
 
 	void RobotInit()
 	{
@@ -27,21 +27,14 @@ private:
 		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
 		SmartDashboard::PutData("Auto Modes", chooser);*/
 
-		joystick = new Joystick(JOYSTICK_PORT);
+		joy = new Joystick(0);
+		drive = new Drive();
+
 	}
 
-
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the GetString line to get the auto name from the text box
-	 * below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional comparisons to the if-else structure below with additional strings.
-	 * If using the SendableChooser make sure to add them to the chooser code above as well.
-	 */
 	void AutonomousInit()
 	{
+
 		/*autoSelected = *((std::string*)chooser->GetSelected());
 		//std::string autoSelected = SmartDashboard::GetString("Auto Selector", autoNameDefault);
 		std::cout << "Auto selected: " << autoSelected << std::endl;
@@ -60,6 +53,7 @@ private:
 		} else {
 			//Default Auto goes here
 		}*/
+		
 	}
 
 	void TeleopInit()
@@ -69,12 +63,31 @@ private:
 
 	void TeleopPeriodic()
 	{
+
 		shooter->motorTest(joystick->GetRawAxis(5));
 		shooter->pistonTest(joystick->GetRawButton(PISTON_BUTTON), joystick->GetRawButton(REVERSE_PISTON));
 		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
 		dash->PutNumber("Joystick Y: ", shooter->getMotorSpeed());
 
+		// drive functions
+		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
+		drive->shiftGears(joy->GetRawButton(SHIFTER_BUTTON_A), joy->GetRawButton(SHIFTER_BUTTON_B));
+		PrintToDashboard();
+	}
+
+
+	void PrintToDashboard()
+	{
+		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
+		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
+		
+		if(drive->getShiftState())
+			SmartDashboard::PutString("Shift state: ", "A");
+		else if(!drive->getShiftState())
+			SmartDashboard::PutString("Shift state: ", "B");
+		else
+			SmartDashboard::PutString("Shift state: ", "error in getting shift state");
 	}
 
 	void TestPeriodic()
