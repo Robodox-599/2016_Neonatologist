@@ -23,7 +23,7 @@ public:
 	float getForwardSpeed();
 	float getTurnSpeed();
 
-	float getCANTalonEncPos();
+	int getCANTalonEncPos();
 	float getCANTalonEncVel();
 
 private:
