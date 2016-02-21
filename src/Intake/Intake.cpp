@@ -54,31 +54,32 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
  * @param pivotUp commands the intake to pivot upwards - used with a joystick button
  * @param pivotDown commands the intake to pivot downwards - used with a joystick button
  */
-void Intake::pivotIntake(bool pivotUp, bool pivotDown)
+void Intake::pivotIntake(float pivotSpeed)
 {
 	// while statements allow the button to be held down. hopefully.
-	while(pivotUp)
-			pivotMotor->Set(PIVOT_SPEED);
-	while(pivotDown)
-			pivotMotor->Set(-PIVOT_SPEED);
-	pivotMotor->Set(0);
+	pivotMotor->Set(pivotSpeed*0.75);
 }
 
 /**
  * setAngle: puts the intake at a certain angle
  * @param joystick is the joystick used to get the angle setting button
  */
-void Intake::setAngle(Joystick* joystick)
+void Intake::setAngle(bool lockPivot)
 {
-	if(angleChecker->Get() >= 0 &&  anglechecker->Get() < 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
+	if(angleChecker->Get() >= 0 &&  angleChecker->Get() < 1000 && lockPivot)
 	{
 		while(angleChecker->Get() < 1000) // TODO: get enc value when intake pivots to the desired angle
-			pivotIntake(true, false); // go up
+			pivotIntake(0.8); // go up
 	}
-	else if(angleChecker->Get() > 1000 && joystick->GetRawButton(LOCK_PIVOT_BUTTON))
+	else if(angleChecker->Get() > 1000 && lockPivot)
 	{
 		while(angleChecker->Get() > 1000) // go down
-			pivotIntake(false, true);
+			pivotIntake(0.8);
 	}
 	angleChecker->Reset();
+}
+
+int Intake::getAngleCheckerValue()
+{
+	return angleChecker->Get();
 }

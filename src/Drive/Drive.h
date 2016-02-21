@@ -17,7 +17,7 @@ public:
 
 	void driveMotors(float turn, float fwd);
 
-	void shiftGears(bool shiftStateA, bool shiftStateB);
+	void shiftGears(bool changeShift);
 	
 	bool getShiftState();
 	float getForwardSpeed();
@@ -42,6 +42,8 @@ private:
 	float encVelocity;
 
 	bool shiftState;
+
+	bool shiftA;
 };
 
 #endif

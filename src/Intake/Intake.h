@@ -10,8 +10,9 @@ public:
 	~Intake();
 
 	void toggleIntake(bool intakeButton, bool outtakeButton);
-	void pivotIntake(bool pivotUp, bool pivotDown);
-	void setAngle(Joystick* joystick);
+	void pivotIntake(float pivotSpeed);
+	void setAngle(bool lockPivot);
+	int getAngleCheckerValue();
 private:
 	CANTalon* intakeRollerMotor;
 	CANTalon* pivotMotor;

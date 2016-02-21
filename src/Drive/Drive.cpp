@@ -15,6 +15,7 @@ Drive::Drive()
 	encPosition = 0;
 	encVelocity = 0;
 
+	shiftA = true;
 	shiftState = true; 
 }
 
@@ -85,7 +86,7 @@ void Drive::updateRightMotors(float speed)
 void Drive::driveMotors(float turn, float fwd)
 {
 	setForwardSpeed(fwd);
-	setTurnSpeed(turn);
+	setTurnSpeed(turn*0.75);
 
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
@@ -97,17 +98,17 @@ void Drive::driveMotors(float turn, float fwd)
  * @param shiftStateB is a button that switches to the second gear state
  * TODO: actually understand what this means
  */
-void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
+void Drive::shiftGears(bool changeShift)
 {
-	if(shiftStateA)
-	{
-		shifter->Set(DoubleSolenoid::Value::kForward);
-		shiftState = true;
-	}
-	else if(shiftStateB)
+	if(changeShift && shiftA)
 	{
 		shifter->Set(DoubleSolenoid::Value::kReverse);
-		shiftState = false;
+		shiftA = false;
+	}
+	else if(changeShift && !shiftA)
+	{
+		shifter->Set(DoubleSolenoid::Value::kForward);
+		shiftA = true;
 	}
 }
 
@@ -123,7 +124,7 @@ float Drive::getTurnSpeed()
 
 bool Drive::getShiftState()
 {
-	return shiftState;
+	return shiftA;
 }
 
 float Drive::getCANTalonEncPos()

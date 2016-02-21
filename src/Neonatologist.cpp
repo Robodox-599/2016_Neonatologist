@@ -16,13 +16,14 @@ private:
 	std::string autoSelected;*/
 	Drive* drive;
 	Shooter* shooter;
+	Intake* intake;
 	Joystick* joy;
 
 	void RobotInit()
 	{
 		shooter = new Shooter();
 		chooser = new SendableChooser();
-		dash = new SmartDashboard();
+		intake = new Intake();
 		/*chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
 		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
 		SmartDashboard::PutData("Auto Modes", chooser);*/
@@ -62,15 +63,20 @@ private:
 
 	void TeleopPeriodic()
 	{
+		// shooter
 		shooter->motorTest(joy->GetRawAxis(5));
 		shooter->pistonTest(joy->GetRawButton(PISTON_BUTTON), joy->GetRawButton(REVERSE_PISTON));
 		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
-		SmartDashboard::PutNumber("Joystick Y: ", shooter->getMotorSpeed());
+		// intake
+		intake->toggleIntake(joy->GetRawButton(INTAKE_BUTTON), joy->GetRawButton(OUTTAKE_BUTTON));
+		intake->pivotIntake(joy->GetRawAxis(INTAKE_PIVOT));
 
-		// drive functions
+		// drive
 		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
-		drive->shiftGears(joy->GetRawButton(SHIFTER_BUTTON_A), joy->GetRawButton(SHIFTER_BUTTON_B));
+		drive->shiftGears(joy->GetRawButton(TOGGLE_GEARS));
+
+		// print information
 		PrintToDashboard();
 	}
 
@@ -79,7 +85,8 @@ private:
 	{
 		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
 		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
-		
+		SmartDashboard::PutNumber("Intake encoder: ", intake->getAngleCheckerValue());
+
 		if(drive->getShiftState())
 			SmartDashboard::PutString("Shift state: ", "A");
 		else if(!drive->getShiftState())

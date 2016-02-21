@@ -19,8 +19,6 @@ private:
 	 Encoder* shooterEncoder;
 	 DoubleSolenoid* gearPiston;
 
-	 Joystick* joy;
-
 	 float speed;
 
 	 bool safetyPressed;

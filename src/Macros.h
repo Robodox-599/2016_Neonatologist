@@ -19,10 +19,12 @@
 #define JOYSTICK_PORT					(0)
 
 // joystick values
-#define X_AXIS_R						(0)
-#define Y_AXIS_R						(1)
-#define SHIFTER_BUTTON_A				(2)
-#define SHIFTER_BUTTON_B				(1)
+#define X_AXIS_R						(4)
+#define Y_AXIS_R						(5)
+#define INTAKE_BUTTON					(1)		// a
+#define OUTTAKE_BUTTON					(3)		// x
+#define INTAKE_PIVOT					(1)
+#define TOGGLE_GEARS					(2)		// B
 
 // drive variables
 #define DEADZONE 	(.15)
@@ -36,7 +38,6 @@
 // TODO: get shifter ports hopefully please salgado and corine liSTEN TO ME
 #define SHIFTER_PORT_A					(2)
 #define SHIFTER_PORT_B					(3)
-#define INTAKE_BUTTON						(0)
 
 // PORTS ARE GOOD
 #define INTAKE_ROLLER_MOTOR_CHANNEL			(8)
