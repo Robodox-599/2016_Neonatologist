@@ -53,7 +53,6 @@ private:
 		} else {
 			//Default Auto goes here
 		}*/
-		
 	}
 
 	void TeleopInit()
@@ -63,7 +62,6 @@ private:
 
 	void TeleopPeriodic()
 	{
-
 		shooter->motorTest(joy->GetRawAxis(5));
 		shooter->pistonTest(joy->GetRawButton(PISTON_BUTTON), joy->GetRawButton(REVERSE_PISTON));
 		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
@@ -90,10 +88,6 @@ private:
 			SmartDashboard::PutString("Shift state: ", "error in getting shift state");
 	}
 
-	void TestPeriodic()
-	{
-		lw->Run();
-	}
 };
 
 START_ROBOT_CLASS(Neonatologist);
