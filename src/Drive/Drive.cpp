@@ -44,6 +44,7 @@ void Drive::setForwardSpeed(float rawY)
 	{
 		forwardSpeed = rawY;
 	}
+	else forwardSpeed = 0;
 }
 
 /**
@@ -56,6 +57,7 @@ void Drive::setTurnSpeed(float rawX)
 	{
 		turnSpeed = rawX;
 	}
+	else forwardSpeed = 0;
 }
 
 /*
