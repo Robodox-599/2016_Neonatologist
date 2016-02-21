@@ -87,8 +87,9 @@ void Drive::updateRightMotors(float speed)
  */
 void Drive::driveMotors(float turn, float fwd)
 {
+	turn *= 0.75;
 	setForwardSpeed(fwd);
-	setTurnSpeed(turn*0.75);
+	setTurnSpeed(turn);
 
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
