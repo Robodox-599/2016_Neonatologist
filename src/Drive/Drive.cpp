@@ -40,7 +40,7 @@ Drive::~Drive()
  */
 void Drive::setForwardSpeed(float rawY)
 {
-	if(rawY > DEADZONE || rawY < -DEADZONE)
+	if(rawY >= DEADZONE || rawY <= -DEADZONE)
 	{
 		forwardSpeed = rawY;
 	}
@@ -53,7 +53,7 @@ void Drive::setForwardSpeed(float rawY)
  */
 void Drive::setTurnSpeed(float rawX)
 {
-	if(rawX > DEADZONE || rawX < -DEADZONE)
+	if(rawX >= DEADZONE || rawX <= -DEADZONE)
 	{
 		turnSpeed = rawX;
 	}
