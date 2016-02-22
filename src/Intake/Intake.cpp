@@ -81,5 +81,5 @@ void Intake::setAngle(bool lockPivot)
 
 int Intake::getIntakeEncoderValue ()
 {
-	return intakeRollerMotor->GetEncPosition();
+	return pivotMotor->GetEncPosition();
 }
