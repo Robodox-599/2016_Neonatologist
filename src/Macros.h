@@ -12,14 +12,14 @@
 
 // ~~~~~ Drive
 #define DEADZONE								(.20)
-#define GEAR_PISTON_CHANNEL_A					(0)
-#define GEAR_PISTON_CHANNEL_B					(1)
+#define GEAR_PISTON_CHANNEL_A					(2)
+#define GEAR_PISTON_CHANNEL_B					(3)
 #define FRONT_LEFT_MOTOR_PORT					(3)
 #define FRONT_RIGHT_MOTOR_PORT					(1)
 #define BACK_LEFT_MOTOR_PORT					(4)
 #define BACK_RIGHT_MOTOR_PORT					(2)
-#define SHIFTER_PORT_A							(2)
-#define SHIFTER_PORT_B							(3)
+#define SHIFTER_PORT_A							(0)
+#define SHIFTER_PORT_B							(1)
 
 // ~~~~~ Intake
 #define INTAKE_ROLLER_MOTOR_CHANNEL				(8)

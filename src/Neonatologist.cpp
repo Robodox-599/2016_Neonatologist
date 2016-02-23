@@ -125,6 +125,10 @@ private:
 
 		SmartDashboard::PutNumber("joy ", joy->GetRawAxis(5));
 
+		SmartDashboard::PutNumber("encoder ", shooter->shooterMotor->GetEncPosition());
+		SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
+
+
 		if(drive->getShiftState())
 			SmartDashboard::PutString("Shift state: ", "A");
 		else if(!drive->getShiftState())

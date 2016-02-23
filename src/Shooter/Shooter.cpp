@@ -75,10 +75,10 @@ void Shooter::pistonTest(bool fwdPiston, bool revPiston)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kReverse);
 	}
-	else
+	/*else
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kOff);
-	}
+	}*/
 }
 
 double Shooter::getMotorSpeed()

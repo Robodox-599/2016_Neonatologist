@@ -14,8 +14,10 @@ public:
 	void pistonTest(bool fwdPiston, bool revPiston);
 
 	double getMotorSpeed();
+
+	CANTalon* shooterMotor;
 private:
-	 CANTalon* shooterMotor;
+
 	 Encoder* shooterEncoder;
 	 DoubleSolenoid* gearPiston;
 
