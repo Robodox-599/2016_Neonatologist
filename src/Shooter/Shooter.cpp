@@ -49,9 +49,13 @@ void Shooter::shoot(bool shoot, bool reset)
 	}
 }
 */
-void Shooter::motorTest(double yAxis)
+void Shooter::motorTest(float yAxis)
 {
-	if(yAxis > .15 || yAxis < -.15)
+	if(shooterMotor->GetEncPosition() > 100)
+	{
+		shooterMotor->Set(0);
+	}
+	else if(yAxis > .15)
 	{
 		shooterMotor->Set(yAxis);
 	}

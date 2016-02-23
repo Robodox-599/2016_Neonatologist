@@ -10,7 +10,7 @@ public:
 	~Shooter();
 	/*void shoot(bool shoot, bool reset);*/
 
-	void motorTest(double yAxis);
+	void motorTest(float yAxis);
 	void pistonTest(bool fwdPiston, bool revPiston);
 
 	double getMotorSpeed();

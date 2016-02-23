@@ -81,16 +81,17 @@ private:
 	{
 		// shooter
 		shooter->motorTest(joy->GetRawAxis(5));
+		shooter->pistonTest(joy->GetRawButton(5), joy->GetRawButton(6));
 		//shooter->pistonTest(joy->GetRawButton(PISTON_BUTTON), joy->GetRawButton(REVERSE_PISTON));
 		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
 		// intake
-		intake->toggleIntake(joy->GetRawButton(INTAKE_BUTTON), joy->GetRawButton(OUTTAKE_BUTTON));
-		intake->pivotIntake(joy->GetRawAxis(INTAKE_PIVOT));
+		//intake->toggleIntake(joy->GetRawButton(INTAKE_BUTTON), joy->GetRawButton(OUTTAKE_BUTTON));
+		//intake->pivotIntake(joy->GetRawAxis(INTAKE_PIVOT));
 
 		// drive
-		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
-		drive->shiftGears(joy->GetRawButton(TOGGLE_GEARS));
+		//drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
+		//drive->shiftGears(joy->GetRawButton(TOGGLE_GEARS));
 
 		// print information
 		PrintToDashboard();
@@ -121,6 +122,8 @@ private:
 		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
 		SmartDashboard::PutNumber("Intake encoder: ", intake->getIntakeEncoderValue());
 		SmartDashboard::PutNumber("Drive encoder: ", drive->getCANTalonEncPos());
+
+		SmartDashboard::PutNumber("joy ", joy->GetRawAxis(5));
 
 		if(drive->getShiftState())
 			SmartDashboard::PutString("Shift state: ", "A");
