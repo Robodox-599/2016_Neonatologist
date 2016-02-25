@@ -24,7 +24,7 @@ public:
 	float getTurnSpeed();
 
 	int getCANTalonEncPos();
-	float getCANTalonEncVel();
+	int getCANTalonEncVel();
 
 private:
 	CANTalon* frontLeftDrive;

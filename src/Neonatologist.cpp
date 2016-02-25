@@ -80,18 +80,17 @@ private:
 	void TeleopPeriodic()
 	{
 		// shooter
-		shooter->motorTest(joy->GetRawAxis(5));
+		shooter->motorTest(joy->GetRawAxis(2));
 		shooter->pistonTest(joy->GetRawButton(5), joy->GetRawButton(6));
-		//shooter->pistonTest(joy->GetRawButton(PISTON_BUTTON), joy->GetRawButton(REVERSE_PISTON));
 		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
 		// intake
-		//intake->toggleIntake(joy->GetRawButton(INTAKE_BUTTON), joy->GetRawButton(OUTTAKE_BUTTON));
-		//intake->pivotIntake(joy->GetRawAxis(INTAKE_PIVOT));
+		intake->toggleIntake(joy->GetRawButton(INTAKE_BUTTON), joy->GetRawButton(OUTTAKE_BUTTON));
+		intake->pivotIntake(joy->GetRawAxis(INTAKE_PIVOT));
 
 		// drive
-		//drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
-		//drive->shiftGears(joy->GetRawButton(TOGGLE_GEARS));
+		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
+		drive->shiftGears(joy->GetRawButton(TOGGLE_GEARS));
 
 		// print information
 		PrintToDashboard();
@@ -122,11 +121,12 @@ private:
 		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
 		SmartDashboard::PutNumber("Intake encoder: ", intake->getIntakeEncoderValue());
 		SmartDashboard::PutNumber("Drive encoder: ", drive->getCANTalonEncPos());
+		SmartDashboard::PutNumber("Drive encoder2: ", drive->getCANTalonEncVel());
 
 		SmartDashboard::PutNumber("joy ", joy->GetRawAxis(5));
 
-		SmartDashboard::PutNumber("encoder ", shooter->shooterMotor->GetEncPosition());
-		SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
+		SmartDashboard::PutNumber("shooter encoder: ", shooter->getEncPos());
+		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
 
 
 		if(drive->getShiftState())

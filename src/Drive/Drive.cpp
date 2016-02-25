@@ -16,7 +16,7 @@ Drive::Drive()
 	encVelocity = 0;
 
 	shiftA = true;
-	shiftState = true; 
+	shiftState = true;
 }
 
 Drive::~Drive()
@@ -136,7 +136,7 @@ int Drive::getCANTalonEncPos()
 	return  backRightDrive->GetEncPosition();
 }
 
-float Drive::getCANTalonEncVel()
+int Drive::getCANTalonEncVel()
 {
-	return  frontLeftDrive->GetEncVel();
+	return  backLeftDrive->GetEncPosition();
 }

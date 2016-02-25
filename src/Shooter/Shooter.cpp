@@ -8,6 +8,8 @@ Shooter::Shooter()
 
 	speed = 0;
 
+	shooterMotor->SetEncPosition(0);
+
 	safetyPressed = false;
 }
 
@@ -51,7 +53,7 @@ void Shooter::shoot(bool shoot, bool reset)
 */
 void Shooter::motorTest(float yAxis)
 {
-	if(shooterMotor->GetEncPosition() > 100)
+	if(shooterMotor->GetEncPosition() > 10)
 	{
 		shooterMotor->Set(0);
 	}
@@ -70,6 +72,8 @@ void Shooter::pistonTest(bool fwdPiston, bool revPiston)
 	if(fwdPiston)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kForward);
+		Wait(2);
+		gearPiston->Set(DoubleSolenoid::Value::kReverse);
 	}
 	else if(revPiston)
 	{
@@ -86,3 +90,7 @@ double Shooter::getMotorSpeed()
 	return shooterMotor->GetSpeed();
 }
 
+int Shooter::getEncPos()
+{
+	return shooterMotor->GetEncPosition();
+}

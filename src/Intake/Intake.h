@@ -13,6 +13,7 @@ public:
 	void pivotIntake(float pivotSpeed);
 	void setAngle(bool lockPivot);
 	int getIntakeEncoderValue();
+
 private:
 	CANTalon* intakeRollerMotor;
 	CANTalon* pivotMotor;

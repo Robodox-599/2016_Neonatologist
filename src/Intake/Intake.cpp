@@ -6,6 +6,8 @@ Intake::Intake()
 	pivotMotor = new CANTalon(PIVOT_MOTOR_CHANNEL);
 
 	intakeInwards = false;
+
+	pivotMotor->SetEncPosition(0);
 }
 
 Intake::~Intake()
@@ -43,14 +45,20 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 	{
 		intakeRollerMotor->Set(0);
 	}*/
-	if(intakeButton) {
+	if(intakeButton)
+	{
 		//while(intakeButton)
 			intakeRollerMotor->Set(INTAKE_SPEED);
-	} else if(outtakeButton) {
+	}
+	else if(outtakeButton)
+	{
 		//while(outtakeButton)
 			intakeRollerMotor->Set(-INTAKE_SPEED);
-	} else
+	}
+	else
+	{
 		intakeRollerMotor->Set(0);
+	}
 }
 
 /**
@@ -59,7 +67,14 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
  */
 void Intake::pivotIntake(float pivotSpeed)
 {
-	pivotMotor->Set(pivotSpeed*0.75);
+	if(pivotMotor->GetEncPosition() > -83)
+	{
+		pivotMotor->Set(pivotSpeed*0.75);
+	}
+	else
+	{
+		pivotMotor->Set(0);
+	}
 }
 
 /**
