@@ -136,7 +136,6 @@ private:
 		else
 			SmartDashboard::PutString("Shift state: ", "error in getting shift state");
 	}
-
 };
 
 START_ROBOT_CLASS(Neonatologist);
