@@ -9,7 +9,7 @@
 class Auto
 {
 public:
-	Auto();
+	Auto(float speedY, float speedX, bool useShooter, bool useIntake);
 	~Auto();
 
 	void shootBoulderAuto();
@@ -22,6 +22,11 @@ private:
 	Shooter* shooter;
 	
 	Timer* timer;
+
+	float speedY;
+	float speedX;
+	bool useShooter;
+	bool useIntake;
 };
 
 #endif

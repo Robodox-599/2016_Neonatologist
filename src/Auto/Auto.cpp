@@ -1,6 +1,6 @@
 #include "Auto.h"
 
-Auto::Auto()
+Auto::Auto(float speedY, float speedX, bool useShooter, bool useIntake)
 {
 	intake = new Intake();
 	drive = new Drive();
@@ -8,6 +8,11 @@ Auto::Auto()
 
 	timer = new Timer();
 	timer->Start();
+
+	this->speedY = speedY;
+	this->speedX = speedX;
+	this->useShooter = useShooter;
+	this->useIntake = useIntake;
 }
 
 // low goal, turn, shoot
