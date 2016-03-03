@@ -10,12 +10,14 @@ class Auto
 {
 public:
 	Auto(float speedY, float speedX, bool useShooter, bool useIntake);
+	Auto(string preset);
 	~Auto();
 
 	void shootBoulderAuto();
-	void driveForwardAuto();
+	void driveAuto();
 	void moveBoulder();
 	void shootBoulder();
+	void masterAuto();
 private:
 	Intake* intake;
 	Drive* drive;

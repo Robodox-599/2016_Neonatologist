@@ -1,4 +1,5 @@
 #include "WPILib.h"
+#include "string"
 
 // drive variables
 #define DEADZONE 	(.15)

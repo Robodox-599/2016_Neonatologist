@@ -15,6 +15,11 @@ Auto::Auto(float speedY, float speedX, bool useShooter, bool useIntake)
 	this->useIntake = useIntake;
 }
 
+Auto::Auto(string preset)
+{
+
+}
+
 // low goal, turn, shoot
 // drive over anything
 
@@ -38,7 +43,7 @@ void Auto::shootBoulder()
 void Auto::shootBoulderAuto()
 {
 	// TODO: figure out length of time for each auto step
-
+	/*
 	if(timer->Get() > 0 && timer->Get() < 2)
 	{
 		drive->drive(1.0, 0);	// drive forward
@@ -55,16 +60,30 @@ void Auto::shootBoulderAuto()
 	{
 		drive->drive(0, 0);
 		shootBoulder();	// shoot
-	}
+	}*/
+
+
 }
 
 
-void Auto::driveForwardAuto()
+void Auto::driveAuto()
 {
 	// TODO: figure out length of time for each auto step
-
+/*
 	if(timer->Get() > 0 && timer->Get() < 5)
 		drive->drive(1.0, 0);	// drive forward
 	if(timer->Get() > 5)
-		drive->drive(0,0);		// stop
+		drive->drive(0,0);		// stop*/
+	drive->drive(speedX, speedY);
+}
+
+void Auto::masterAuto()
+{
+	/*
+	 * this is going to be really complicated
+	 * we want the auto to be modular based on whether or not certain parameters were set upon making an instance of this class
+	 * and use lidar/camera vision stuff to modify actions
+	 */
+
+
 }
