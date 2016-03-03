@@ -3,6 +3,7 @@
 #include "Intake/Intake.h"
 #include "Lift/Lift.h"
 #include "Shooter/Shooter.h"
+#include "LogFile/LogFile.h"
 
 class Neonatologist: public IterativeRobot
 {
@@ -18,6 +19,8 @@ private:
 	Shooter* shooter;
 	Intake* intake;
 	Joystick* joy;
+
+	LogFile* logFile;
 
 #if 0
 	IMAQdxSession session;
@@ -36,6 +39,8 @@ private:
 
 		joy = new Joystick(0);
 		drive = new Drive();
+
+		logFile = new LogFile();
 
 #if 0
 		frame = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
@@ -74,15 +79,15 @@ private:
 
 	void TeleopInit()
 	{
-
+		logFile->setStatus();
 	}
 
 	void TeleopPeriodic()
-	{
+	{/*
 		// shooter
 		shooter->motorTest(joy->GetRawAxis(2));
 		shooter->pistonTest(joy->GetRawButton(5), joy->GetRawButton(6));
-		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
+		//shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));
 
 		// intake
 		intake->toggleIntake(joy->GetRawButton(INTAKE_BUTTON), joy->GetRawButton(OUTTAKE_BUTTON));
@@ -94,7 +99,7 @@ private:
 
 		// print information
 		PrintToDashboard();
-		//RunCamera();
+		//RunCamera();*/
 	}
 #if 0
 	void RunCamera()
@@ -120,8 +125,8 @@ private:
 		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
 		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
 		SmartDashboard::PutNumber("Intake encoder: ", intake->getIntakeEncoderValue());
-		SmartDashboard::PutNumber("Drive encoder: ", drive->getCANTalonEncPos());
-		SmartDashboard::PutNumber("Drive encoder2: ", drive->getCANTalonEncVel());
+		SmartDashboard::PutNumber("Drive encoder: ", drive->getCANTalonEncPos(drive->backRightDrive));
+		SmartDashboard::PutNumber("Drive encoder2: ", drive->getCANTalonEncVel(drive->backRightDrive));
 
 		SmartDashboard::PutNumber("joy ", joy->GetRawAxis(5));
 

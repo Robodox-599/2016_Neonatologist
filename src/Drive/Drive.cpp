@@ -131,12 +131,14 @@ bool Drive::getShiftState()
 	return shiftA;
 }
 
-int Drive::getCANTalonEncPos()
+int Drive::getCANTalonEncPos(CANTalon* motorPos)// 2/29
 {
-	return  backRightDrive->GetEncPosition();
+	return  motorPos->GetEncPosition();
+	//return  backRightDrive->GetEncPosition();
 }
 
-int Drive::getCANTalonEncVel()
+int Drive::getCANTalonEncVel(CANTalon* motorVel)// 2/29
 {
-	return  backLeftDrive->GetEncPosition();
+	return  motorVel->GetEncVel();
+	//return  backRightDrive->GetEncVel();
 }

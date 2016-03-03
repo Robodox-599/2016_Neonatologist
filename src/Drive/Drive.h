@@ -23,10 +23,11 @@ public:
 	float getForwardSpeed();
 	float getTurnSpeed();
 
-	int getCANTalonEncPos();
-	int getCANTalonEncVel();
+	int getCANTalonEncPos(CANTalon* motorPos);// 2/29
+	int getCANTalonEncVel(CANTalon* motorVel);// 2/29
 
-private:
+	//moved on 2/29
+
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
 
@@ -35,6 +36,7 @@ private:
 
 	DoubleSolenoid* shifter;
 
+private:
 	float forwardSpeed;
 	float turnSpeed;
 

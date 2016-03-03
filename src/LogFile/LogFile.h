@@ -26,12 +26,23 @@ public:
 	~LogFile();
 
 	void printFile();
+	void setStatus();
 
 private:
 	ofstream myfile;
 	time_t rawtime;
 	struct tm * timeinfo;
 	char buffer [80];
+
+	Drive* driveLF;
+	Intake* intakeLF;
+	Lift* liftLF;
+	Shooter* shooterLF;
+
+	string rightDriveVel;
+	string leftDriveVel;
+
+	string intakeVel;
 };
 
 #endif /* SRC_LOGFILE_LOGFILE_H_ */

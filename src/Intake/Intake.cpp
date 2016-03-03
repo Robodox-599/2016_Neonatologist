@@ -98,3 +98,8 @@ int Intake::getIntakeEncoderValue ()
 {
 	return pivotMotor->GetEncPosition();
 }
+
+int Intake::getIntakeEncoderVel()// 2/29
+{
+	return pivotMotor->GetEncVel();
+}
