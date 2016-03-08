@@ -3,47 +3,68 @@
 
 #include "../Macros.h"
 
+
 class Drive
 {
 public:
 	Drive();
 	~Drive();
 
-	void setForwardSpeed(float rawY);
-	void setTurnSpeed(float rawX);
-
 	void updateLeftMotors(float speed);
 	void updateRightMotors(float speed);
 
-	void driveMotors(float turn, float fwd);
+	void setForwardSpeed(float rawY);
+	void setTurnSpeed(float rawX);
 
-	void shiftGears(bool changeShift);
+	void drive(float xAxis, float yAxis, int POV, bool gyro);
+
+	void setReferenceAngle(int angle);
+	void edgeCase();
+	float shortestPath();
+	float linearizeDrive(float driveInput);
+
+	//void driveMotors(float turn, float fwd);
+
+	void shiftGears(bool shiftStateA, bool shiftStateB);
 	
 	bool getShiftState();
 	float getForwardSpeed();
 	float getTurnSpeed();
 
-	int getCANTalonEncPos();
-	int getCANTalonEncVel();
+
+	float getCANTalonEncPos();
+	float getCANTalonEncVel();
+
+	AHRS* navX;
 
 private:
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
-
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
 
+
+
 	DoubleSolenoid* shifter;
+
 
 	float forwardSpeed;
 	float turnSpeed;
+
+	float error360;
+	float error180;
+
+	bool autoTurn;
+	float gyroValue;
+	int referenceAngle;
 
 	float encPosition;
 	float encVelocity;
 
 	bool shiftState;
 
-	bool shiftA;
+	bool gyroSwitch;
 };
 
 #endif
+
