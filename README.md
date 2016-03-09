@@ -13,7 +13,7 @@ Juyeong @[khungryapple](http://github.com/khungryapple)
 Sam	@[supersam6i7](http://github.com/supersam6i7)
 
 
-### Subsystems (as of 1/25/16):
+### Subsystems (as of 3/09/16):
 ####Intake:
          - The intake requires 3 motors, two on the base in order to pivot the system and one 
            on the roller to physically intake the ball.
@@ -24,8 +24,7 @@ Sam	@[supersam6i7](http://github.com/supersam6i7)
            The shoot button engages a piston then resets an encoder. The reset button activates
            a sequence as follows: spin motor forward, engage piston, then reset the encoder. The
            piston is used to switch gears on the gearbox. 
-         - An encoder is used in order to measure the distance taken upon pulling the system
-           backwards. It will reset after every shot taken. 
+         - A limit switch is used to prevent the shooter from going too far back.
          - In the future, this code may be condensed down into one button that activates a 
            sequence with an automatic reset. 
 ####Lift:
