@@ -32,7 +32,7 @@ Drive::Drive()
 
 Drive::~Drive()
 {
-	delete navX;
+	//delete navX;
 
 	//left drive
 	delete frontLeftDrive;

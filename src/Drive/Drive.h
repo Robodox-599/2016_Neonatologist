@@ -35,11 +35,12 @@ public:
 	float getCANTalonEncPos();
 	float getCANTalonEncVel();
 
-private:
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
+
+private:
 
 	//AHRS* navX;
 
