@@ -2,6 +2,7 @@
 #define DRIVE_H_
 
 #include "../Macros.h"
+#include "AHRS.h"
 
 
 class Drive
@@ -15,8 +16,9 @@ public:
 
 	void setForwardSpeed(float rawY);
 	void setTurnSpeed(float rawX);
+	void setTriggerSpeed(float triggerR, float triggerL);
 
-	void drive(float xAxis, float yAxis, int POV, bool gyro);
+	void drive(float xAxis, float yAxis, int POV);
 
 	void setReferenceAngle(int angle);
 	void edgeCase();
@@ -25,7 +27,8 @@ public:
 
 	//void driveMotors(float turn, float fwd);
 
-	void shiftGears(bool shiftStateA, bool shiftStateB);
+	void shiftGears(bool shiftStateA);//, bool shiftStateB);
+	void toggleGyro(bool gyro);
 	
 	bool getShiftState();
 	float getForwardSpeed();
@@ -64,6 +67,9 @@ private:
 	bool shiftState;
 
 	bool gyroSwitch;
+
+	float triggerDriveR;
+	float triggerDriveL;
 };
 
 #endif

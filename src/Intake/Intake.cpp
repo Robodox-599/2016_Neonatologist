@@ -67,7 +67,7 @@ void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
  */
 void Intake::pivotIntake(float pivotSpeed)
 {
-	if(pivotMotor->GetEncPosition() > -83)
+	if(pivotSpeed > DEADZONE || pivotSpeed < -DEADZONE)//pivotMotor->GetEncPosition() > -83)
 	{
 		pivotMotor->Set(pivotSpeed*0.75);
 	}

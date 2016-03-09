@@ -10,8 +10,8 @@ public:
 	~Shooter();
 	/*void shoot(bool shoot, bool reset);*/
 
-	void motorTest(float yAxis);
-	void pistonTest(bool fwdPiston, bool revPiston);
+	void motorTest(bool reset);
+	void pistonTest(bool fwdPiston, bool safety);
 
 	double getMotorSpeed();
 	int getEncPos();

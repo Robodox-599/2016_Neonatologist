@@ -29,6 +29,9 @@ Drive::Drive()
 	shiftState = true;
 
 	gyroSwitch = false;
+
+	triggerDriveR = 0;
+	triggerDriveL = 0;
 }
 
 
@@ -115,6 +118,7 @@ void Drive::setTurnSpeed(float turn)
 	}
 	else if(std::abs(error360) >= .5 && std::abs(error180 >= .5) && gyroSwitch == true)
 	{
+		autoTurn = true;
 		turnSpeed = KP * shortestPath();
 	}
 	else if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)
@@ -127,23 +131,36 @@ void Drive::setTurnSpeed(float turn)
 	}
 }
 
+void Drive::setTriggerSpeed(float triggerR, float triggerL)
+{
+	if(triggerR > TRIGGER_DEADZONE || triggerR < -TRIGGER_DEADZONE)
+	{
+		triggerDriveR = triggerR;
+	}
+	else
+	{
+		triggerDriveR = 0;
+	}
+
+	if(triggerL > TRIGGER_DEADZONE || triggerL < -TRIGGER_DEADZONE)
+	{
+		triggerDriveL = triggerL;
+	}
+	else
+	{
+		triggerDriveL = 0;
+	}
+
+}
+
 /**
  * drive: get desired speed values and assign them to motors
  * @param turn is the turn speed
  * @param fwd is the fwd/backward speed
  *
  */
-void Drive::drive(float xAxis, float yAxis, int POV, bool gyro)
+void Drive::drive(float xAxis, float yAxis, int POV)
 {
-	if(gyro == true && gyroSwitch == true)
-	{
-		gyroSwitch = false;
-	}
-	else if(gyro == true && gyroSwitch == false)
-	{
-		gyroSwitch = true;
-	}
-
 	gyroValue = navX->GetYaw();
 
 	edgeCase();
@@ -155,8 +172,8 @@ void Drive::drive(float xAxis, float yAxis, int POV, bool gyro)
 	setForwardSpeed(xAxis);
 	setTurnSpeed(yAxis);
 
-	updateLeftMotors(linearizeDrive(forwardSpeed - turnSpeed));
-	updateRightMotors(linearizeDrive(forwardSpeed + turnSpeed));
+	updateLeftMotors(forwardSpeed - linearizeDrive(turnSpeed) + triggerDriveL);
+	updateRightMotors(forwardSpeed + linearizeDrive(turnSpeed) + triggerDriveR);
 }
 
 
@@ -208,7 +225,14 @@ float Drive::shortestPath()
 //This function scales the motor input
 float Drive::linearizeDrive(float driveInput)
 {
-	return driveInput * SLOPE_ADJUSTMENT;
+	if(autoTurn == true)
+	{
+		return driveInput / SLOPE_ADJUSTMENT;
+	}
+	else
+	{
+		return driveInput;
+	}
 }
 
 
@@ -241,20 +265,39 @@ float Drive::getCANTalonEncVel()
 /**
  * shiftGears: switches gears, i guess, and changes a bool to signal current state
  * @param shiftStateA is a button that switches to the first gear state
- * @param shiftStateB is a button that switches to the second gear state
  * TODO: actually understand what this means
  */
-void Drive::shiftGears(bool shiftStateA, bool shiftStateB)
+void Drive::shiftGears(bool shiftStateA)//, bool shiftStateB)
 {
-	if(shiftStateA)
+	if(shiftStateA == true && shiftState == false)
 	{
 		shifter->Set(DoubleSolenoid::Value::kForward);
 		shiftState = true;
+		Wait(.1);
 	}
-	else if(shiftStateB)
+	else if(shiftStateA == true && shiftState == true)//shiftStateB)
 	{
 		shifter->Set(DoubleSolenoid::Value::kReverse);
 		shiftState = false;
+		Wait(.1);
+	}
+}
+
+/**
+ * toggleGyro: turns on or off the use of PID
+ * @param gyro is a button that toggles the use of PID
+ */
+void Drive::toggleGyro(bool gyro)
+{
+	if(gyro == true && gyroSwitch == true)
+	{
+		gyroSwitch = false;
+		Wait(.1);
+	}
+	else if(gyro == true && gyroSwitch == false)
+	{
+		gyroSwitch = true;
+		Wait(.1);
 	}
 }
 

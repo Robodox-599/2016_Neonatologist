@@ -1,4 +1,4 @@
-	#include "Shooter.h"
+#include "Shooter.h"
 
 Shooter::Shooter()
 {
@@ -51,15 +51,15 @@ void Shooter::shoot(bool shoot, bool reset)
 	}
 }
 */
-void Shooter::motorTest(float yAxis)
+void Shooter::motorTest(bool reset)
 {
-	if(shooterMotor->GetEncPosition() > 10)
+	/*if(shooterMotor->GetEncPosition() > 10)
 	{
 		shooterMotor->Set(0);
-	}
-	else if(yAxis > .15)
+	}*/
+	if(reset == true)
 	{
-		shooterMotor->Set(yAxis);
+		shooterMotor->Set(.3); //WARNING: DO NOT MAKE NEGATIVE (and may need to change value)
 	}
 	else
 	{
@@ -67,19 +67,19 @@ void Shooter::motorTest(float yAxis)
 	}
 }
 
-void Shooter::pistonTest(bool fwdPiston, bool revPiston)
+void Shooter::pistonTest(bool fwdPiston, bool safety)
 {
-	if(fwdPiston)
+	if(fwdPiston and safety)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kForward);
 		Wait(2);
 		gearPiston->Set(DoubleSolenoid::Value::kReverse);
 	}
-	else if(revPiston)
+	/*else if(revPiston)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kReverse);
 	}
-	/*else
+	else
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kOff);
 	}*/

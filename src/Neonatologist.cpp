@@ -17,7 +17,11 @@ private:
 	Drive* drive;
 	Shooter* shooter;
 	Intake* intake;
-	Joystick* joy;
+	Joystick* xbox;
+	Joystick* atk3;
+	Servo* servo;
+
+	bool disable;
 
 #if 0
 	IMAQdxSession session;
@@ -34,8 +38,13 @@ private:
 		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
 		SmartDashboard::PutData("Auto Modes", chooser);*/
 
-		joy = new Joystick(0);
+		xbox = new Joystick(0);
+		atk3 = new Joystick(2);
 		drive = new Drive();
+
+		servo = new Servo(0);
+
+		disable = false;
 
 #if 0
 		frame = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
@@ -80,21 +89,43 @@ private:
 	void TeleopPeriodic()
 	{
 		// shooter
-		shooter->motorTest(joy->GetRawAxis(2));
-		shooter->pistonTest(joy->GetRawButton(5), joy->GetRawButton(6));
-		/*shooter->shoot(joystick->GetRawButton(SHOOTER_BUTTON), joystick->GetRawButton(SHOOTER_RESET_BUTTON));*/
+		shooter->motorTest(atk3->GetRawButton(SHOOTER_RESET_BUTTON));
+		shooter->pistonTest(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
+		/*shooter->shoot(xboxstick->GetRawButton(SHOOTER_BUTTON), xboxstick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
 		// intake
-		intake->toggleIntake(joy->GetRawButton(INTAKE_BUTTON), joy->GetRawButton(OUTTAKE_BUTTON));
-		intake->pivotIntake(joy->GetRawAxis(INTAKE_PIVOT));
+		intake->toggleIntake(xbox->GetRawButton(INTAKE_BUTTON), atk3->GetRawButton(OUTTAKE_BUTTON));
+		intake->pivotIntake(xbox->GetRawAxis(INTAKE_PIVOT));
 
 		// drive
-		drive->driveMotors(joy->GetRawAxis(X_AXIS_R), joy->GetRawAxis(Y_AXIS_R));
-		drive->shiftGears(joy->GetRawButton(TOGGLE_GEARS));
+		drive->drive(xbox->GetRawAxis(X_AXIS_L), xbox->GetRawAxis(Y_AXIS_L), xbox->GetPOV(AUTO_TURN_BUTTON));
+		drive->shiftGears(xbox->GetRawButton(TOGGLE_GEARS));
+		drive->toggleGyro(xbox->GetRawButton(GYRO_TOGGLE));
 
 		// print information
 		PrintToDashboard();
+
 		//RunCamera();
+		servoControl();
+
+		if(xbox->GetRawButton(7) == 1)
+		{
+			disable = true;
+			while(disable == true)
+			{
+				drive->updateRightMotors(0);
+				drive->updateLeftMotors(0);
+
+				shooter->motorTest(false);
+
+				SmartDashboard::PutBoolean("Dead Man Switch", true);
+
+				if(xbox->GetRawButton(8) == 1)
+				{
+					disable = false;
+				}
+			}
+		}
 	}
 #if 0
 	void RunCamera()
@@ -115,6 +146,14 @@ private:
 	}
 #endif
 
+	void servoControl()
+	{
+		if(atk3->GetX() > 0.1 || atk3->GetX() < -0.1)
+		{
+			servo->SetAngle(90 *atk3->GetX());
+		}
+	}
+
 	void PrintToDashboard()
 	{
 		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
@@ -123,7 +162,7 @@ private:
 		SmartDashboard::PutNumber("Drive encoder: ", drive->getCANTalonEncPos());
 		SmartDashboard::PutNumber("Drive encoder2: ", drive->getCANTalonEncVel());
 
-		SmartDashboard::PutNumber("joy ", joy->GetRawAxis(5));
+		SmartDashboard::PutNumber("xbox ", xbox->GetRawAxis(5));
 
 		SmartDashboard::PutNumber("shooter encoder: ", shooter->getEncPos());
 		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
