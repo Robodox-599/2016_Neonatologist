@@ -3,6 +3,7 @@
 #include "Intake/Intake.h"
 #include "Lift/Lift.h"
 #include "Shooter/Shooter.h"
+#include "Sensor/Sensor.h"
 
 class Neonatologist: public IterativeRobot
 {
@@ -17,6 +18,8 @@ private:
 	Drive* drive;
 	Shooter* shooter;
 	Intake* intake;
+	Sensor* sensor;
+
 	Joystick* xbox;
 	Joystick* atk3;
 	Servo* servo;
@@ -88,6 +91,10 @@ private:
 
 	void TeleopPeriodic()
 	{
+		//might need to change dont know if you want to continuously update these two functions
+		sensor->RunCamera();
+		sensor->getDistance();
+
 		// shooter
 		shooter->motorTest(atk3->GetRawButton(SHOOTER_RESET_BUTTON));
 		shooter->pistonTest(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
@@ -167,6 +174,8 @@ private:
 		SmartDashboard::PutNumber("shooter encoder: ", shooter->getEncPos());
 		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
 
+		SmartDashboard::PutNumber("to send:", sensor->toSend[0]);
+		SmartDashboard::PutNumber("Lidar lite distance:", sensor->distance);
 
 		if(drive->getShiftState())
 			SmartDashboard::PutString("Shift state: ", "A");
