@@ -3,8 +3,11 @@
 Shooter::Shooter()
 {
 	shooterMotor = new CANTalon(SHOOTER_MOTOR_CHANNEL);
-	shooterEncoder = new Encoder(SHOOTER_ENCODER_CHANNEL_A, SHOOTER_ENCODER_CHANNEL_B);
+	//shooterEncoder = new Encoder(SHOOTER_ENCODER_CHANNEL_A, SHOOTER_ENCODER_CHANNEL_B);
 	gearPiston = new DoubleSolenoid(GEAR_PISTON_CHANNEL_A, GEAR_PISTON_CHANNEL_B);
+
+	ai = new AnalogInput(LIMIT_SWITCH_CHANNEL);
+
 
 	speed = 0;
 
@@ -16,12 +19,14 @@ Shooter::Shooter()
 Shooter::~Shooter()
 {
 	delete shooterMotor;
-	delete shooterEncoder;
+	//delete shooterEncoder;
 	delete gearPiston;
+	delete ai;
 
 	shooterMotor = nullptr; 
-	shooterEncoder = nullptr;
+	//shooterEncoder = nullptr;
 	gearPiston = nullptr;
+	ai = nullptr;
 }
 
 //auto reset after a shot 
@@ -51,6 +56,30 @@ void Shooter::shoot(bool shoot, bool reset)
 	}
 }
 */
+//add into neonatologist and make sure that the joysticks are mapped properly to this function
+void Shooter::shoot(bool shoot, bool reset)
+{
+	if(shoot && (ai->GetVoltage() < 1))
+	{
+		gearPiston->Set(DoubleSolenoid::Value::kForward);
+	}
+	else if(reset)
+	{
+		shooterMotor->Set(speed);
+		gearPiston->Set(DoubleSolenoid::Value::kReverse);
+	}
+	else if(shoot && (ai->GetVoltage() > 4))
+	{
+		gearPiston->Set(DoubleSolenoid::Value::kOff);
+		shooterMotor->Set(0);
+	}
+	else
+	{
+		gearPiston->Set(DoubleSolenoid::Value::kOff);
+		shooterMotor->Set(0);
+	}
+}
+
 void Shooter::motorTest(bool reset)
 {
 	/*if(shooterMotor->GetEncPosition() > 10)
@@ -94,3 +123,4 @@ int Shooter::getEncPos()
 {
 	return shooterMotor->GetEncPosition();
 }
+
