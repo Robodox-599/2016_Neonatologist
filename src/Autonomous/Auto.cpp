@@ -27,7 +27,7 @@ Autonomous::~Autonomous()
 	delete selector2;
 }
 
-void Autonomous::autonomousSelect()
+void Autonomous::autonomousSelect() // TODO: switch on will make the boolean false - need to confirm
 {
 	if (selector0->Get() == true)
 	{
