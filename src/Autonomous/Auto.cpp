@@ -75,3 +75,21 @@ void Autonomous::auto2()
 	}
 
 }
+
+void Autonomous::auto3()
+{
+	if(drive->backLeftDrive->GetEncPosition() < 150) // move approximate distance so that it could go above the defense
+	{
+		drive->setForwardSpeed(1);
+	}
+	//check gyro value
+	//adjust angle using gyro
+	//use pixy camera to ensure that we are on target
+	//check lidar distance
+	//adjust distance using lidar
+	//turn using gyro
+	//go forward until it goes near the castle (adjust lidar distance)
+	//double check the angle with the pixy camera
+	//shoot the ball
+	//yey
+}

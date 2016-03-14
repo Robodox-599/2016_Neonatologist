@@ -20,8 +20,9 @@ public:
 
 	//bool toggleSwitch;
 
-	void auto1();
-	void auto2();
+	void auto1(); // goes straight until certain encoder value
+	void auto2(); // goes straight then turn
+	void auto3();
 	void autonomousSelect();
 
 	Drive* drive;
