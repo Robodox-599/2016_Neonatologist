@@ -1,6 +1,5 @@
 #include "Drive.h"
 
-
 Drive::Drive()
 {
 	//left drive
@@ -13,21 +12,21 @@ Drive::Drive()
 
 	navX = new AHRS(SPI::Port::kMXP);
 
-	forwardSpeed = 0;
-	turnSpeed = 0;
+	forwardSpeed = 0;//
+	turnSpeed = 0;//
 
-	error360 = 0;
-	error180 = 0;
+	error360 = 0;//
+	error180 = 0;//
 
-	navX->ZeroYaw();
-	autoTurn = false;
-	gyroValue = navX->GetYaw();
-	referenceAngle = navX->GetYaw();
+	navX->ZeroYaw();//
+	autoTurn = false;//
+	gyroValue = navX->GetYaw();//
+	referenceAngle = navX->GetYaw();//
 
 
-	shiftState = true;
-	turbo = 1;
-	leftRight = 1;
+	shiftState = true;//
+	turbo = 1;//
+	leftRight = 1;//
 }
 
 
@@ -110,15 +109,15 @@ void Drive::setTurnSpeed(float turn)
 
 		referenceAngle = navX->GetYaw();
 	}
-	else if((error360 <= 1 && error360 >= -1) || (error180 <= 1 && error180 >= -1))
-	{
-		turnSpeed = 0;
-		autoTurn = false;
-	}
-	else
+	else if((error360 >= 1 || error360 <= -1) && (error180 >= 1 || error180 <= -1))
 	{
 		autoTurn = true;
 		turnSpeed = 0.3 * leftRight;
+	}
+	else
+	{
+		turnSpeed = 0;
+		autoTurn = false;
 	}
 }
 
@@ -156,13 +155,13 @@ void Drive::setReferenceAngle(int angle)//make sure angle is on the scale from -
 {
 	switch(angle)
 	{
-		case 270 :
-			referenceAngle = -90;
+		case -1 :
+			break;
+		case angle > 180 :
+			referenceAngle = angle - 360;
 			autoTurn = true;
 			break;
-		case 180 :
-		case 90 :
-		case 0 :
+		case angle <= 180 :
 			referenceAngle = angle;
 			autoTurn = true;
 			break;

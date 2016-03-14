@@ -173,34 +173,27 @@ private:
 
 	void PrintToDashboard()
 	{
-		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
-		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
-		SmartDashboard::PutNumber("Intake encoder: ", intake->getIntakeEncoderValue());
-		//SmartDashboard::PutNumber("Drive encoder: ", drive->getCANTalonEncPos());
-		//SmartDashboard::PutNumber("Drive encoder2: ", drive->getCANTalonEncVel());
+		SmartDashboard::PutNumber("Drive Front Left Input", -(drive->forwardSpeed - drive->turnSpeed));
+		SmartDashboard::PutNumber("Drive Back Left Input", -(drive->forwardSpeed - drive->turnSpeed));
 
-		SmartDashboard::PutNumber("xbox ", xbox->GetRawAxis(5));
+		SmartDashboard::PutNumber("Drive Front Right Input", drive->forwardSpeed + drive->turnSpeed);
+		SmartDashboard::PutNumber("Drive Back Right Input", drive->forwardSpeed + drive->turnSpeed);
 
-		SmartDashboard::PutNumber("shooter encoder: ", shooter->getEncPos());
-		SmartDashboard::PutBoolean("Limit Switch: ", shooter->limitSwitch->Get());
-		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
+		SmartDashboard::PutNumber("forward speed", drive->forwardSpeed);
+		SmartDashboard::PutNumber("turn speed", drive->turnSpeed);
 
-		SmartDashboard::PutNumber("to send:", sensor->toSend[0]);
-		SmartDashboard::PutNumber("Lidar lite distance:", sensor->distance);
-		SmartDashboard::PutNumber("Gyro Value:", drive->navX->GetYaw());
+		SmartDashboard::PutNumber("error 180", drive->error180);
+		SmartDashboard::PutNumber("error 360", drive->error360);
+
+		SmartDashboard::PutNumber("Yaw", drive->navX->GetYaw());
+		SmartDashboard::PutNumber("Gyro Value", drive->gyroValue);
 		SmartDashboard::PutNumber("Reference Angle", drive->referenceAngle);
 
-		SmartDashboard::PutNumber("encoder drive left", drive->getCANTalonEncPos());
+		SmartDashboard::PutNumber("turbo", drive->turbo);
+		SmartDashboard::PutNumber("LeftRight", drive->leftRight);
 
-		SmartDashboard::PutNumber("drive left input", drive->getLeftInput());
-		SmartDashboard::PutNumber("drive right input", drive->getRightInput());
-
-		if(drive->getShiftState())
-			SmartDashboard::PutString("Shift state: ", "A");
-		else if(!drive->getShiftState())
-			SmartDashboard::PutString("Shift state: ", "B");
-		else
-			SmartDashboard::PutString("Shift state: ", "error in getting shift state");
+		SmartDashboard::PutBoolean("Auto Turn", drive->autoTurn);
+		SmartDashboard::PutBoolean("Shift State", drive->shiftState);
 	}
 };
 
