@@ -4,6 +4,8 @@
 #include "Lift/Lift.h"
 #include "Shooter/Shooter.h"
 #include "Sensor/Sensor.h"
+#include "AHRS.h"
+#include "Autonomous/Auto.h"
 
 class Neonatologist: public IterativeRobot
 {
@@ -19,6 +21,7 @@ private:
 	Shooter* shooter;
 	Intake* intake;
 	Sensor* sensor;
+	Autonomous* automode;
 
 	Joystick* xbox;
 	Joystick* atk3;
@@ -34,6 +37,7 @@ private:
 
 	void RobotInit()
 	{
+		sensor = new Sensor();
 		shooter = new Shooter();
 		chooser = new SendableChooser();
 		intake = new Intake();
@@ -46,6 +50,8 @@ private:
 		drive = new Drive();
 
 		servo = new Servo(0);
+
+		automode = new Autonomous();
 
 		disable = false;
 
@@ -82,6 +88,9 @@ private:
 		} else {
 			//Default Auto goes here
 		}*/
+		SmartDashboard::PutBoolean("Auto Selector Position 1:", automode->selector0->Get());
+		SmartDashboard::PutBoolean("Auto Selector Position 2:", automode->selector1->Get());
+		SmartDashboard::PutBoolean("Auto Selector Position 3:", automode->selector2->Get());
 	}
 
 	void TeleopInit()
@@ -96,7 +105,7 @@ private:
 		sensor->getDistance();
 
 		// shooter
-		shooter->motorTest(atk3->GetRawButton(SHOOTER_RESET_BUTTON));
+		shooter->motorTest(atk3->GetRawButton(SHOOTER_RESET_BUTTON));//SHOOTER_RESET_BUTTON));
 		shooter->pistonTest(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
 		/*shooter->shoot(xboxstick->GetRawButton(SHOOTER_BUTTON), xboxstick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
@@ -172,10 +181,13 @@ private:
 		SmartDashboard::PutNumber("xbox ", xbox->GetRawAxis(5));
 
 		SmartDashboard::PutNumber("shooter encoder: ", shooter->getEncPos());
+		SmartDashboard::PutBoolean("Limit Switch: ", shooter->Limit->Get());
 		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
 
 		SmartDashboard::PutNumber("to send:", sensor->toSend[0]);
 		SmartDashboard::PutNumber("Lidar lite distance:", sensor->distance);
+		SmartDashboard::PutNumber("Gyro Value:", drive->navX->GetYaw());
+		SmartDashboard::PutNumber("Reference Angle", drive->referenceAngle);
 
 		if(drive->getShiftState())
 			SmartDashboard::PutString("Shift state: ", "A");

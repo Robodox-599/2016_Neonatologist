@@ -2,17 +2,16 @@
 
 Shooter::Shooter()
 {
-	shooterMotor = new CANTalon(SHOOTER_MOTOR_CHANNEL);
+	shooterMotor = new CANTalon(6);//SHOOTER_MOTOR_CHANNEL);
 	//shooterEncoder = new Encoder(SHOOTER_ENCODER_CHANNEL_A, SHOOTER_ENCODER_CHANNEL_B);
 	gearPiston = new DoubleSolenoid(GEAR_PISTON_CHANNEL_A, GEAR_PISTON_CHANNEL_B);
 
-	ai = new AnalogInput(LIMIT_SWITCH_CHANNEL);
-
+	Limit = new DigitalInput(8);
 
 	speed = 0;
 
-	shooterMotor->SetEncPosition(0);
-
+	//shooterMotor->SetEncPosition(0);
+	shooterMotor->ConfigFwdLimitSwitchNormallyOpen(true);
 	safetyPressed = false;
 }
 
@@ -21,12 +20,13 @@ Shooter::~Shooter()
 	delete shooterMotor;
 	//delete shooterEncoder;
 	delete gearPiston;
-	delete ai;
+	delete Limit;
+
 
 	shooterMotor = nullptr; 
 	//shooterEncoder = nullptr;
 	gearPiston = nullptr;
-	ai = nullptr;
+	Limit = nullptr;
 }
 
 //auto reset after a shot 
@@ -57,9 +57,9 @@ void Shooter::shoot(bool shoot, bool reset)
 }
 */
 //add into neonatologist and make sure that the joysticks are mapped properly to this function
-void Shooter::shoot(bool shoot, bool reset)
+/*void Shooter::shoot(bool shoot, bool reset)
 {
-	if(shoot && (ai->GetVoltage() < 1))
+	if(shoot && shooterMotor->IsFwdLimitSwitchClosed() != 1)
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kForward);
 	}
@@ -68,7 +68,7 @@ void Shooter::shoot(bool shoot, bool reset)
 		shooterMotor->Set(speed);
 		gearPiston->Set(DoubleSolenoid::Value::kReverse);
 	}
-	else if(shoot && (ai->GetVoltage() > 4))
+	else if(shoot && (shooterMotor->IsFwdLimitSwitchClosed() == 1))
 	{
 		gearPiston->Set(DoubleSolenoid::Value::kOff);
 		shooterMotor->Set(0);
@@ -78,17 +78,17 @@ void Shooter::shoot(bool shoot, bool reset)
 		gearPiston->Set(DoubleSolenoid::Value::kOff);
 		shooterMotor->Set(0);
 	}
-}
+}*/
 
-void Shooter::motorTest(bool reset)
+void Shooter::catapultReset(bool reset)
 {
 	/*if(shooterMotor->GetEncPosition() > 10)
 	{
 		shooterMotor->Set(0);
 	}*/
-	if(reset == true)
+	if(reset == true && Limit->Get() != true)
 	{
-		shooterMotor->Set(.3); //WARNING: DO NOT MAKE NEGATIVE (and may need to change value)
+		shooterMotor->Set(.1); //WARNING: DO NOT MAKE NEGATIVE (and may need to change value)
 	}
 	else
 	{
@@ -96,7 +96,7 @@ void Shooter::motorTest(bool reset)
 	}
 }
 
-void Shooter::pistonTest(bool fwdPiston, bool safety)
+void Shooter::catapultLaunch(bool fwdPiston, bool safety)
 {
 	if(fwdPiston and safety)
 	{

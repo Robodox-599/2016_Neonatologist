@@ -26,12 +26,11 @@ public:
 
 	Drive* drive;
 
-
-
-private:
 	DigitalInput* selector0;
 	DigitalInput* selector1;
 	DigitalInput* selector2;
+
+private:
 };
 
 

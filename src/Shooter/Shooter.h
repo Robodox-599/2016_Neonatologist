@@ -3,6 +3,8 @@
 
 #include "../Macros.h"
 
+#include "DigitalInput.h"
+
 class Shooter
 {
 public:
@@ -10,20 +12,17 @@ public:
 	~Shooter();
 	void shoot(bool shoot, bool reset);
 
-	void motorTest(bool reset);
-	void pistonTest(bool fwdPiston, bool safety);
+	void catapultReset(bool reset);
+	void catapultLaunch(bool fwdPiston, bool safety);
 
 	double getMotorSpeed();
 	int getEncPos();
-
-	bool limitSwitchIsPressed();
-
+	DigitalInput* Limit;
 
 private:
 	//Encoder* shooterEncoder;
 	DoubleSolenoid* gearPiston;
 	CANTalon* shooterMotor;
-	AnalogInput* ai;
 
 
 	float speed;

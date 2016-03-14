@@ -40,6 +40,8 @@ public:
 
 	AHRS* navX;
 
+	int referenceAngle;
+
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
 	CANTalon* frontRightDrive;
@@ -61,7 +63,7 @@ private:
 
 	bool autoTurn;
 	float gyroValue;
-	int referenceAngle;
+
 
 	float encPosition;
 	float encVelocity;

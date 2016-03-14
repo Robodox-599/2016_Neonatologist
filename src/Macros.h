@@ -40,7 +40,7 @@
 
 
 // ~~~~~ Shooter
-#define SHOOTER_MOTOR_CHANNEL					(5)
+#define SHOOTER_MOTOR_CHANNEL					(5)		// has the limit switch
 #define SHOOTER_BUTTON							(1)		// 1 Done
 #define SHOOTER_RESET_BUTTON					(8)		// 8 Done
 #define SHOOTER_SAFTEY_MANUAL					(4)		// 4 Done

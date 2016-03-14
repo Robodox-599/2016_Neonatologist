@@ -111,29 +111,29 @@ void Drive::setTurnSpeed(float turn)
 	{
 		turnSpeed = turn;
 
-		autoTurn = false;
+		//autoTurn = false;
 
-		referenceAngle = 0;
-		navX->ZeroYaw();
+		//referenceAngle = 0;
+		//navX->ZeroYaw();
 	}
-	else if(std::abs(error360) >= .5 && std::abs(error180 >= .5) && gyroSwitch == true)
+	/*else if(std::abs(error360) >= 10 && std::abs(error180 >= 10) && gyroSwitch == true)
 	{
 		autoTurn = true;
-		turnSpeed = KP * shortestPath();
-	}
-	else if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)
+		turnSpeed = /*KP 0 * shortestPath();
+	}*/
+	else //if((gyroValue == referenceAngle || navX->GetYaw() == referenceAngle) && (turn < DEADZONE && turn > -DEADZONE))
 	{
 		turnSpeed = 0;
-		autoTurn = false;
-		navX->ZeroYaw();
-		gyroValue = 0;
-		referenceAngle = 0;
+		//autoTurn = false;
+		//navX->ZeroYaw();
+		//gyroValue = 0;
+		//referenceAngle = 0;
 	}
 }
 
 void Drive::setTriggerSpeed(float triggerR, float triggerL)
 {
-	if(triggerR > TRIGGER_DEADZONE || triggerR < -TRIGGER_DEADZONE)
+	/*if(triggerR > TRIGGER_DEADZONE || triggerR < -TRIGGER_DEADZONE)
 	{
 		triggerDriveR = triggerR;
 	}
@@ -149,7 +149,7 @@ void Drive::setTriggerSpeed(float triggerR, float triggerL)
 	else
 	{
 		triggerDriveL = 0;
-	}
+	}*/
 
 }
 
@@ -163,17 +163,17 @@ void Drive::drive(float xAxis, float yAxis, int POV)
 {
 	gyroValue = navX->GetYaw();
 
-	edgeCase();
-	setReferenceAngle(POV);
+	//edgeCase();
+	//setReferenceAngle(POV);
 
-	error360 = referenceAngle - gyroValue;
-	error180 = referenceAngle - navX->GetYaw();
+	//error360 = referenceAngle - gyroValue;
+	//error180 = referenceAngle - navX->GetYaw();
 
-	setForwardSpeed(xAxis);
-	setTurnSpeed(yAxis);
+	setForwardSpeed(yAxis);
+	setTurnSpeed(xAxis);
 
-	updateLeftMotors(forwardSpeed - linearizeDrive(turnSpeed) + triggerDriveL);
-	updateRightMotors(forwardSpeed + linearizeDrive(turnSpeed) + triggerDriveR);
+	updateLeftMotors(forwardSpeed - /*linearizeDrive(*/turnSpeed/*) + triggerDriveL*/);
+	updateRightMotors(forwardSpeed + /*linearizeDrive(*/turnSpeed/*) + triggerDriveR*/);
 }
 
 
