@@ -19,19 +19,15 @@ Drive::Drive()
 	error360 = 0;
 	error180 = 0;
 
+	navX->ZeroYaw();
 	autoTurn = false;
 	gyroValue = navX->GetYaw();
-	referenceAngle = 0;
+	referenceAngle = navX->GetYaw();
 
-	encPosition = 0;
-	encVelocity = 0;
 
 	shiftState = true;
-
-	gyroSwitch = false;
-
-	triggerDriveR = 0;
-	triggerDriveL = 0;
+	turbo = 1;
+	leftRight = 1;
 }
 
 
@@ -71,8 +67,8 @@ Drive::~Drive()
  */
 void Drive::updateLeftMotors(float speed)
 {
-	frontLeftDrive->Set(-speed);
-	backLeftDrive->Set(-speed);
+	frontLeftDrive->Set(-speed /* * 0.7*/);
+	backLeftDrive->Set(-speed /* * 0.7*/);
 }
 
 /**
@@ -81,8 +77,8 @@ void Drive::updateLeftMotors(float speed)
  */
 void Drive::updateRightMotors(float speed)
 {
-	frontRightDrive->Set(speed);
-	backRightDrive->Set(speed);
+	frontRightDrive->Set(speed /* * 0.7*/);
+	backRightDrive->Set(speed /* * 0.7*/);
 }
 
 /**
@@ -109,48 +105,21 @@ void Drive::setTurnSpeed(float turn)
 {
 	if(turn >= DEADZONE || turn <= -DEADZONE)
 	{
-		turnSpeed = turn;
-
+		turnSpeed = turn * turbo;
 		autoTurn = false;
 
-		referenceAngle = 0;
-		navX->ZeroYaw();
+		referenceAngle = navX->GetYaw();
 	}
-	else if(std::abs(error360) >= .5 && std::abs(error180 >= .5) && gyroSwitch == true)
-	{
-		autoTurn = true;
-		turnSpeed = KP * shortestPath();
-	}
-	else if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)
+	else if((error360 <= 1 && error360 >= -1) || (error180 <= 1 && error180 >= -1))
 	{
 		turnSpeed = 0;
 		autoTurn = false;
-		navX->ZeroYaw();
-		gyroValue = 0;
-		referenceAngle = 0;
-	}
-}
-
-void Drive::setTriggerSpeed(float triggerR, float triggerL)
-{
-	if(triggerR > TRIGGER_DEADZONE || triggerR < -TRIGGER_DEADZONE)
-	{
-		triggerDriveR = triggerR;
 	}
 	else
 	{
-		triggerDriveR = 0;
+		autoTurn = true;
+		turnSpeed = 0.3 * leftRight;
 	}
-
-	if(triggerL > TRIGGER_DEADZONE || triggerL < -TRIGGER_DEADZONE)
-	{
-		triggerDriveL = triggerL;
-	}
-	else
-	{
-		triggerDriveL = 0;
-	}
-
 }
 
 /**
@@ -159,7 +128,7 @@ void Drive::setTriggerSpeed(float triggerR, float triggerL)
  * @param fwd is the fwd/backward speed
  *
  */
-void Drive::drive(float xAxis, float yAxis, int POV)
+void Drive::drive(float xAxis, float yAxis, int POV)//make sure POV is on the scale from -180 to 180
 {
 	gyroValue = navX->GetYaw();
 
@@ -169,11 +138,13 @@ void Drive::drive(float xAxis, float yAxis, int POV)
 	error360 = referenceAngle - gyroValue;
 	error180 = referenceAngle - navX->GetYaw();
 
-	setForwardSpeed(xAxis);
-	setTurnSpeed(yAxis);
+	shortestPath();
 
-	updateLeftMotors(forwardSpeed - linearizeDrive(turnSpeed) + triggerDriveL);
-	updateRightMotors(forwardSpeed + linearizeDrive(turnSpeed) + triggerDriveR);
+	setForwardSpeed(yAxis);
+	setTurnSpeed(xAxis);
+
+	updateLeftMotors(forwardSpeed - turnSpeed);
+	updateRightMotors(forwardSpeed + turnSpeed);
 }
 
 
@@ -181,25 +152,23 @@ void Drive::drive(float xAxis, float yAxis, int POV)
 
 
 //this function sets the desired angle from the D-Pad
-void Drive::setReferenceAngle(int angle)
+void Drive::setReferenceAngle(int angle)//make sure angle is on the scale from -180 to 180
 {
-		switch(angle)
-		{
-			case 270 :
-				navX->ZeroYaw();
-				referenceAngle = -90;
-				autoTurn = true;
-				break;
-			case 180 :
-			case 90 :
-			case 0 :
-				navX->ZeroYaw();
-				referenceAngle = angle;
-				autoTurn = true;
-				break;
-			default :
-				break;
-		}
+	switch(angle)
+	{
+		case 270 :
+			referenceAngle = -90;
+			autoTurn = true;
+			break;
+		case 180 :
+		case 90 :
+		case 0 :
+			referenceAngle = angle;
+			autoTurn = true;
+			break;
+		default :
+			break;
+	}
 }
 
 //this function compensates for the edge cases on the gyro
@@ -212,34 +181,21 @@ void Drive::edgeCase()
 }
 
 //this function determines the shortest path to the desired angle
-float Drive::shortestPath()
+void Drive::shortestPath()
 {
 	if(std::abs(error180) < std::abs(error360))
 	{
-		return error180;
+		leftRight = sign(error180);
 	}
 
-	return error360;
-}
-
-//This function scales the motor input
-float Drive::linearizeDrive(float driveInput)
-{
-	if(autoTurn == true)
-	{
-		return driveInput / SLOPE_ADJUSTMENT;
-	}
-	else
-	{
-		return driveInput;
-	}
+	leftRight = sign(error360);
 }
 
 
 /************************************************************************/
 
-
 /*
+
 void Drive::driveMotors(float turn, float fwd)
 {
 	setForwardSpeed(fwd);
@@ -247,8 +203,8 @@ void Drive::driveMotors(float turn, float fwd)
 
 	updateLeftMotors(forwardSpeed + turnSpeed);
 	updateRightMotors(forwardSpeed - turnSpeed);
-}
-*/
+}*/
+
 
 //Returns the tick the encoder is currently at (0 - 1023)
 float Drive::getCANTalonEncPos()
@@ -269,18 +225,18 @@ float Drive::getCANTalonEncVel()
  */
 void Drive::shiftGears(bool shiftStateA)//, bool shiftStateB)
 {
-	if(shiftStateA == true && shiftState == false)
+	if(shiftStateA == true/* && shiftState == false*/) // low gear
 	{
 		shifter->Set(DoubleSolenoid::Value::kForward);
 		shiftState = true;
 		Wait(.1);
-	}
+	}/*
 	else if(shiftStateA == true && shiftState == true)//shiftStateB)
 	{
 		shifter->Set(DoubleSolenoid::Value::kReverse);
 		shiftState = false;
 		Wait(.1);
-	}
+	}*/
 }
 
 /**
@@ -289,16 +245,7 @@ void Drive::shiftGears(bool shiftStateA)//, bool shiftStateB)
  */
 void Drive::toggleGyro(bool gyro)
 {
-	if(gyro == true && gyroSwitch == true)
-	{
-		gyroSwitch = false;
-		Wait(.1);
-	}
-	else if(gyro == true && gyroSwitch == false)
-	{
-		gyroSwitch = true;
-		Wait(.1);
-	}
+
 }
 
 float Drive::getForwardSpeed()
@@ -314,4 +261,26 @@ float Drive::getTurnSpeed()
 bool Drive::getShiftState()
 {
 	return shiftState;
+}
+
+
+float Drive::getLeftInput()
+{
+	return frontLeftDrive->Get();
+}
+float Drive::getRightInput()
+{
+	return frontRightDrive->Get();
+}
+
+int Drive::sign(float num)
+{
+	if(num >= 0)
+	{
+		return 1;
+	}
+	else
+	{
+		return -1;
+	}
 }

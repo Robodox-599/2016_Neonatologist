@@ -4,7 +4,6 @@
 #include "../Macros.h"
 #include "AHRS.h"
 
-
 class Drive
 {
 public:
@@ -22,10 +21,10 @@ public:
 
 	void setReferenceAngle(int angle);
 	void edgeCase();
-	float shortestPath();
+	void shortestPath();
 	float linearizeDrive(float driveInput);
 
-	//void driveMotors(float turn, float fwd);
+	void driveMotors(float turn, float fwd);
 
 	void shiftGears(bool shiftStateA);//, bool shiftStateB);
 	void toggleGyro(bool gyro);
@@ -37,18 +36,25 @@ public:
 
 	float getCANTalonEncPos();
 	float getCANTalonEncVel();
+	float getRightInput();
+	float getLeftInput();
+
+	int sign(float num);
 
 	AHRS* navX;
+
+	float referenceAngle;
+
+	float turbo;
+	float leftRight;
+
+private:
+
 
 	CANTalon* frontLeftDrive;
 	CANTalon* backLeftDrive;
 	CANTalon* frontRightDrive;
 	CANTalon* backRightDrive;
-
-private:
-
-
-
 
 	DoubleSolenoid* shifter;
 
@@ -58,20 +64,10 @@ private:
 
 	float error360;
 	float error180;
-
-	bool autoTurn;
 	float gyroValue;
-	int referenceAngle;
-
-	float encPosition;
-	float encVelocity;
+	bool autoTurn;
 
 	bool shiftState;
-
-	bool gyroSwitch;
-
-	float triggerDriveR;
-	float triggerDriveL;
 };
 
 #endif

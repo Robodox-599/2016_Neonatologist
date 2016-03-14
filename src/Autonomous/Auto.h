@@ -9,6 +9,7 @@
 #define SRC_AUTONOMOUS_AUTONOMOUS_H_
 
 #include "Drive/Drive.h"
+#include "Shooter/Shooter.h"
 #include "DigitalInput.h"
 
 class Autonomous
@@ -23,12 +24,15 @@ public:
 	void auto1();
 	void auto2();
 	void autonomousSelect();
+	void forward();
 
-	Drive* drive;
-
-
+	bool cocked;
 
 private:
+
+	Drive* drive;
+	Shooter* shooter;
+
 	DigitalInput* selector0;
 	DigitalInput* selector1;
 	DigitalInput* selector2;

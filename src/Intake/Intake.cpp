@@ -69,7 +69,7 @@ void Intake::pivotIntake(float pivotSpeed)
 {
 	if(pivotSpeed > DEADZONE || pivotSpeed < -DEADZONE)//pivotMotor->GetEncPosition() > -83)
 	{
-		pivotMotor->Set(pivotSpeed*0.75);
+		pivotMotor->Set(-pivotSpeed*0.75);
 	}
 	else
 	{
@@ -91,7 +91,7 @@ void Intake::setAngle(bool lockPivot)
 	{
 		pivotIntake(0.8);
 	}
-	intakeRollerMotor->SetEncPosition(0);
+	pivotMotor->SetEncPosition(0);
 }
 
 int Intake::getIntakeEncoderValue ()
