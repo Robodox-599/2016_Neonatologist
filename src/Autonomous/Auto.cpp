@@ -17,6 +17,8 @@ Autonomous::Autonomous()
 	selector0 = new DigitalInput(0);
 	selector1 = new DigitalInput(1);
 	selector2 = new DigitalInput(2);
+	selector3 = new DigitalInput(3);
+	selector4 = new DigitalInput(4);
 }
 
 Autonomous::~Autonomous()
@@ -24,24 +26,36 @@ Autonomous::~Autonomous()
 	selector0 = nullptr;
 	selector1 = nullptr;
 	selector2 = nullptr;
+	selector3 = nullptr;
+	selector4 = nullptr;
 
 	delete selector0;
 	delete selector1;
 	delete selector2;
+	delete selector3;
+	delete selector4;
 }
 
 void Autonomous::autonomousSelect() // TODO: switch on will make the boolean false - need to confirm
 {
-	if (selector0->Get() == true)
+	if (selector0->Get() == false)
 	{
 	}
-	else if (selector1->Get() == true)
+	else if (selector1->Get() == false)
 	{
 		auto1();
 	}
-	else if(selector2->Get() == true)
+	else if(selector2->Get() == false)
 	{
 		auto2();
+	}
+	else if(selector3->Get() == false)
+	{
+		auto3();
+	}
+	else if(selector4->Get() == false)
+	{
+		auto4();
 	}
 }
 
@@ -49,7 +63,6 @@ void Autonomous::auto1()
 {
 	if(drive->backLeftDrive->GetEncPosition() < 100)
 	{
-		drive->setTurnSpeed(1);
 		drive->setForwardSpeed(1);
 	}
 	else
@@ -60,6 +73,19 @@ void Autonomous::auto1()
 }
 
 void Autonomous::auto2()
+{
+	if(drive->backLeftDrive->GetEncPosition() < -100)
+	{
+		drive->setForwardSpeed(-1);
+	}
+	else
+	{
+		drive->setTurnSpeed(0);
+		drive->setForwardSpeed(0);
+	}
+}
+
+void Autonomous::auto3()
 {
 	if(drive->backLeftDrive->GetEncPosition() < 100)
 	{
@@ -79,7 +105,7 @@ void Autonomous::auto2()
 
 }
 
-void Autonomous::auto3()
+void Autonomous::auto4()
 {
 	drive->navX->ZeroYaw();
 	intake->intakeRollerMotor(1);
