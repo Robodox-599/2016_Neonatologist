@@ -26,6 +26,9 @@ public:
 	void autonomousSelect();
 
 	Drive* drive;
+	Sensor* sensor;
+	Shooter* shooter;
+	Intake* intake;
 
 	DigitalInput* selector0;
 	DigitalInput* selector1;

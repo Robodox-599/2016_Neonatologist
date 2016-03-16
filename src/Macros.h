@@ -47,3 +47,6 @@
 #define SHOOTER_SAFTEY_AUTO						(2)		// 2 Done
 #define SHOOTER_ENCODER_CHANNEL_A				(1)
 #define SHOOTER_ENCODER_CHANNEL_B				(1)
+
+// ~~~~~ Misc
+#define AUTO_DEADZONE							(1)

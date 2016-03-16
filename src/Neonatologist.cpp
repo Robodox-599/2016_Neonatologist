@@ -105,8 +105,8 @@ private:
 		sensor->getDistance();
 
 		// shooter
-		shooter->motorTest(atk3->GetRawButton(SHOOTER_RESET_BUTTON));//SHOOTER_RESET_BUTTON));
-		shooter->pistonTest(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
+		shooter->catapultReset(atk3->GetRawButton(SHOOTER_RESET_BUTTON));//SHOOTER_RESET_BUTTON));
+		shooter->catapultLaunch(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
 		/*shooter->shoot(xboxstick->GetRawButton(SHOOTER_BUTTON), xboxstick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
 		// intake
@@ -132,7 +132,7 @@ private:
 				drive->updateRightMotors(0);
 				drive->updateLeftMotors(0);
 
-				shooter->motorTest(false);
+				shooter->catapultReset(false);
 
 				SmartDashboard::PutBoolean("Dead Man Switch", true);
 
