@@ -15,6 +15,9 @@ Drive::Drive()
 	forwardSpeed = 0;//
 	turnSpeed = 0;//
 
+	driveLeft = 0;
+	driveRight = 0;
+
 	error360 = 0;//
 	error180 = 0;//
 
@@ -78,6 +81,19 @@ void Drive::updateRightMotors(float speed)
 {
 	frontRightDrive->Set(speed /* * 0.7*/);
 	backRightDrive->Set(speed /* * 0.7*/);
+}
+
+void Drive::incriment(float motorLeftInput, float motorRightInput)
+{
+	if(motorRightInput - driveRight > 1 || motorRightInput - driveRight < -1)
+	{
+		driveRight += sign(motorRightInput - driveRight) * .01;
+	}
+
+	if(motorLeftInput - driveLeft > 1 || motorLeftInput - driveLeft < -1)
+	{
+		driveLeft += sign(motorLeftInput - driveLeft) * .01;//input variables to smart dashboard printout
+	}
 }
 
 /**
@@ -153,20 +169,19 @@ void Drive::drive(float xAxis, float yAxis, int POV)//make sure POV is on the sc
 //this function sets the desired angle from the D-Pad
 void Drive::setReferenceAngle(int angle)//make sure angle is on the scale from -180 to 180
 {
-	switch(angle)
+	if(angle == -1)
 	{
-		case -1 :
-			break;
-		case angle > 180 :
-			referenceAngle = angle - 360;
-			autoTurn = true;
-			break;
-		case angle <= 180 :
-			referenceAngle = angle;
-			autoTurn = true;
-			break;
-		default :
-			break;
+
+	}
+	else if(angle > 180)
+	{
+		referenceAngle = angle - 360;
+		autoTurn = true;
+	}
+	else if(angle <= 180)
+	{
+		referenceAngle = angle;
+		autoTurn = true;
 	}
 }
 

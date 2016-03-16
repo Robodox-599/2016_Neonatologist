@@ -182,6 +182,9 @@ private:
 		SmartDashboard::PutNumber("forward speed", drive->forwardSpeed);
 		SmartDashboard::PutNumber("turn speed", drive->turnSpeed);
 
+		SmartDashboard::PutNumber("Drive Right", drive->driveRight);
+		SmartDashboard::PutNumber("Drive Left", drive->driveLeft);
+
 		SmartDashboard::PutNumber("error 180", drive->error180);
 		SmartDashboard::PutNumber("error 360", drive->error360);
 

@@ -33,7 +33,6 @@ public:
 	float getForwardSpeed();
 	float getTurnSpeed();
 
-
 	float getCANTalonEncPos();
 	float getCANTalonEncVel();
 	float getRightInput();
@@ -41,12 +40,28 @@ public:
 
 	int sign(float num);
 
+	//create an incriment function to control sensitivity of drive motor input
+	void incriment(float motorLeftInput, float motorRightInput);
+
 	AHRS* navX;
 
 	float referenceAngle;
 
 	float turbo;
 	float leftRight;
+
+	float forwardSpeed;
+	float turnSpeed;
+
+	float driveLeft;
+	float driveRight;
+
+	float error360;
+	float error180;
+	float gyroValue;
+	bool autoTurn;
+
+	bool shiftState;
 
 private:
 
@@ -58,16 +73,6 @@ private:
 
 	DoubleSolenoid* shifter;
 
-
-	float forwardSpeed;
-	float turnSpeed;
-
-	float error360;
-	float error180;
-	float gyroValue;
-	bool autoTurn;
-
-	bool shiftState;
 };
 
 #endif
