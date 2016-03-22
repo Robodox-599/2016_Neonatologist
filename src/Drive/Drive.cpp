@@ -2,7 +2,6 @@
 
 Drive::Drive()
 {
-	//left drive
 	frontLeftDrive = new CANTalon(FRONT_LEFT_MOTOR_PORT);
 	backLeftDrive = new CANTalon(BACK_LEFT_MOTOR_PORT);
 	frontRightDrive = new CANTalon(FRONT_RIGHT_MOTOR_PORT); // right motors are reversed
