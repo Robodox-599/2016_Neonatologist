@@ -4,7 +4,7 @@ Shooter::Shooter()
 {
 	shooterMotor = new CANTalon(6);//SHOOTER_MOTOR_CHANNEL);
 	gearPiston = new DoubleSolenoid(GEAR_PISTON_CHANNEL_A, GEAR_PISTON_CHANNEL_B);
-	Limit = new DigitalInput(8);
+	limit = new DigitalInput(8);
 
 	shooterMotor->ConfigFwdLimitSwitchNormallyOpen(true);
 	safetyPressed = false;
@@ -16,11 +16,16 @@ Shooter::~Shooter()
 {
 	delete shooterMotor;
 	delete gearPiston;
-	delete Limit;
+	delete limit;
 
 	shooterMotor = nullptr; 
 	gearPiston = nullptr;
-	Limit = nullptr;
+	limit = nullptr;
+}
+
+bool Shooter::getLimit()
+{
+	return limit-Get();
 }
 
 void Shooter::catapultReset(bool reset)
@@ -29,7 +34,7 @@ void Shooter::catapultReset(bool reset)
 	{
 		shooterMotor->Set(0);
 	}*/
-	if(reset == true && Limit->Get() != true)
+	if(reset == true && !getLimit())
 	{
 		shooterMotor->Set(.1); //WARNING: DO NOT MAKE NEGATIVE (and may need to change value)
 	}

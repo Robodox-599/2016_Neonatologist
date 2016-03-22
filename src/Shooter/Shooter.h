@@ -9,6 +9,8 @@ class Shooter
 public:
 	Shooter();
 	~Shooter();
+
+	void getLimit();
 	void shoot(bool shoot, bool reset);
 
 	void catapultReset(bool reset);
@@ -16,8 +18,8 @@ public:
 
 	double getMotorSpeed();
 	int getEncPos();
-	DigitalInput* Limit;
 private:
+	DigitalInput* limit;
 	DoubleSolenoid* gearPiston;
 	CANTalon* shooterMotor;
 

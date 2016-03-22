@@ -145,7 +145,7 @@ private:
 		SmartDashboard::PutNumber("xbox ", xbox->GetRawAxis(5));
 
 		SmartDashboard::PutNumber("shooter encoder: ", shooter->getEncPos());
-		SmartDashboard::PutBoolean("Limit Switch: ", shooter->Limit->Get());
+		SmartDashboard::PutBoolean("Limit Switch: ", shooter->getLimit());
 		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
 
 		SmartDashboard::PutNumber("to send:", sensor->toSend[0]);
