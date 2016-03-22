@@ -12,10 +12,10 @@
 #define TOGGLE_GEARS							(4)		// Y							Done
 // ~~~~~ joystick ~~~~~ Attack 3
 #define OUTTAKE_BUTTON							(3)		// 3							Done
-//#define SHOOTER_BUTTON						(1)		// 1 							Done
-//#define SHOOTER_RESET_BUTTON					(8)		// 8 							Done
-//#define SHOOTER_SAFTEY_MANUAL					(4)		// 4 							Done
-//#define SHOOTER_SAFTEY_AUTO					(2)		// 2 							Done
+#define SHOOTER_BUTTON							(1)		// 1 							Done
+#define SHOOTER_RESET_BUTTON					(8)		// 8 							Done
+#define SHOOTER_SAFTEY_MANUAL					(4)		// 4 							Done
+#define SHOOTER_SAFTEY_AUTO						(2)		// 2 							Done
 
 // ~~~~~ Drive
 #define DEADZONE								(.20)
@@ -38,13 +38,8 @@
 #define INTAKE_SPEED							(0.5)
 #define PIVOT_SPEED								(2)
 
-
 // ~~~~~ Shooter
 #define SHOOTER_MOTOR_CHANNEL					(5)		// has the limit switch
-#define SHOOTER_BUTTON							(1)		// 1 Done
-#define SHOOTER_RESET_BUTTON					(8)		// 8 Done
-#define SHOOTER_SAFTEY_MANUAL					(4)		// 4 Done
-#define SHOOTER_SAFTEY_AUTO						(2)		// 2 Done
 #define SHOOTER_ENCODER_CHANNEL_A				(1)
 #define SHOOTER_ENCODER_CHANNEL_B				(1)
 
