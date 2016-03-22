@@ -4,7 +4,6 @@
 #include "Lift/Lift.h"
 #include "Shooter/Shooter.h"
 #include "Sensor/Sensor.h"
-#include "AHRS.h"
 #include "Autonomous/Auto.h"
 
 class Neonatologist: public IterativeRobot
@@ -29,12 +28,6 @@ private:
 
 	bool disable;
 
-#if 0
-	IMAQdxSession session;
-	Image *frame;
-	IMAQdxError imaqError;
-#endif
-
 	void RobotInit()
 	{
 		sensor = new Sensor();
@@ -54,17 +47,6 @@ private:
 		automode = new Autonomous();
 
 		disable = false;
-
-#if 0
-		frame = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
-		imaqError = IMAQdxOpenCamera("cam0", IMAQdxCameraControlModeController, &session);
-		if(imaqError != IMAQdxErrorSuccess)
-			DriverStation::ReportError("IMAQdxOpenCamera error: " + std::to_string((long)imaqError) + "\n");
-		imaqError = IMAQdxConfigureGrab(session);
-
-		if(imaqError != IMAQdxErrorSuccess)
-			DriverStation::ReportError("IMAQdxConfigureGrab error: " + std::to_string((long)imaqError) + "\n");
-#endif
 	}
 
 	void AutonomousInit()
@@ -143,24 +125,6 @@ private:
 			}
 		}
 	}
-#if 0
-	void RunCamera()
-	{
-		IMAQdxStartAcquisition(session);
-		{
-			IMAQdxGrab(session, frame, true, NULL);
-			if(imaqError != IMAQdxErrorSuccess)
-			{
-				DriverStation::ReportError("IMAQdxGrab error: " + std::to_string((long)imaqError) + "\n");
-			}
-			else
-			{
-				imaqDrawShapeOnImage(frame, frame, { 10, 10, 100, 100 }, DrawMode::IMAQ_DRAW_VALUE, ShapeMode::IMAQ_SHAPE_OVAL, 0.0f);
-				CameraServer::GetInstance()->SetImage(frame);
-			}
-		}
-	}
-#endif
 
 	void servoControl()
 	{

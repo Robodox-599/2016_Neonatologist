@@ -1,4 +1,5 @@
 #include "WPILib.h"
+#include "AHRS.h"
 
 // ~~~~~ joystick ~~~~~ Xbox					Value	Button							Status
 #define JOYSTICK_PORT							(0)
