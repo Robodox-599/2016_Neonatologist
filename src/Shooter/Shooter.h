@@ -10,7 +10,7 @@ public:
 	Shooter();
 	~Shooter();
 
-	void getLimit();
+	bool getLimit();
 	void shoot(bool shoot, bool reset);
 
 	void catapultReset(bool reset);
