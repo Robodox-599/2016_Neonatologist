@@ -1,10 +1,3 @@
-/*
- * Autonomous.h
- *
- *  Created on: Mar 7, 2016
- *      Author: Admin
- */
-
 #ifndef SRC_AUTONOMOUS_AUTONOMOUS_H_
 #define SRC_AUTONOMOUS_AUTONOMOUS_H_
 
@@ -26,11 +19,6 @@ public:
 	void auto4(); // low-bar to high-goal (shoot)
 	void autonomousSelect();
 
-	Drive* drive;
-	Sensor* sensor;
-	Shooter* shooter;
-	Intake* intake;
-
 	DigitalInput* selector0;
 	DigitalInput* selector1;
 	DigitalInput* selector2;
@@ -38,7 +26,10 @@ public:
 	DigitalInput* selector4;
 
 private:
+	Drive* drive;
+	Sensor* sensor;
+	Shooter* shooter;
+	Intake* intake;
 };
-
 
 #endif /* SRC_AUTONOMOUS_AUTONOMOUS_H_ */
