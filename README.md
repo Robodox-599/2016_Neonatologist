@@ -1,10 +1,8 @@
 ## NEONATOLOGIST 2K16
 
-### Testing Branch
+### Pre-Ventura Branch
 
-This testing branch holds the code used for the first official test of the Neonatologist, with almost all features of the Robot implemented.
-
-*First created 2016-02-20, last updated 2016-02-20.*
+This branch is for code in preparation for the upcoming Ventura FRC Regional.
 
 #### Controls
 
@@ -36,11 +34,6 @@ Intake
 
 - Pivot up/down
 - Intake/Outtake
-
-**Stuff to be tested.**
-
-Intake
-
 - Button to automatically pivot to a desired angle via an encoder
 
 Shooter
@@ -50,5 +43,11 @@ Shooter
 
 Sensors
 
-- Webcamera
-- LIDAR Lite Sensor
+- Web camera
+- LIDAR Lite Sensors
+
+**Stuff to be tested.**
+
+Sensors
+
+- Pixy Camera
