@@ -54,7 +54,7 @@ void Autonomous::autonomousSelect() // TODO: switch on will make the boolean fal
 
 void Autonomous::auto1()
 {
-	if(drive->backLeftDrive->GetEncPosition() < 100)
+	if(drive->getCANTalonEncPos() < 100)
 	{
 		drive->setForwardSpeed(1);
 	}
@@ -67,7 +67,7 @@ void Autonomous::auto1()
 
 void Autonomous::auto2()
 {
-	if(drive->backLeftDrive->GetEncPosition() < -100)
+	if(drive->getCANTalonEncPos() < -100)
 	{
 		drive->setForwardSpeed(-1);
 	}
