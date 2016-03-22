@@ -84,7 +84,7 @@ private:
 	{
 		//might need to change dont know if you want to continuously update these two functions
 		sensor->RunCamera();
-		sensor->getDistance();
+		sensor->setLidarDistance();
 
 		// shooter
 		shooter->catapultReset(atk3->GetRawButton(SHOOTER_RESET_BUTTON));//SHOOTER_RESET_BUTTON));
