@@ -89,7 +89,6 @@ private:
 		// shooter
 		shooter->catapultReset(atk3->GetRawButton(SHOOTER_RESET_BUTTON));//SHOOTER_RESET_BUTTON));
 		shooter->catapultLaunch(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
-		/*shooter->shoot(xboxstick->GetRawButton(SHOOTER_BUTTON), xboxstick->GetRawButton(SHOOTER_RESET_BUTTON));*/
 
 		// intake
 		intake->toggleIntake(xbox->GetRawButton(INTAKE_BUTTON), atk3->GetRawButton(OUTTAKE_BUTTON));
