@@ -34,28 +34,19 @@ Drive::Drive()
 
 Drive::~Drive()
 {
-	delete navX;
-
-	//left drive
 	delete frontLeftDrive;
 	delete backLeftDrive;
-
-	//right drive
 	delete frontRightDrive;
 	delete backRightDrive;
 	delete shifter;
+	delete navX;
 
-	navX = nullptr;
-
-	//left drive
 	frontLeftDrive = nullptr;
 	backLeftDrive = nullptr;
-
-	//right drive
 	frontRightDrive = nullptr;
 	backRightDrive = nullptr;
-
 	shifter = nullptr;
+	navX = nullptr;
 }
 
 /**
@@ -213,7 +204,7 @@ float Drive::shortestPath()
 //This function scales the motor input
 float Drive::linearizeDrive(float driveInput)
 {
-	if(autoTurn == true)
+	if(autoTurn)
 	{
 		return driveInput / SLOPE_ADJUSTMENT;
 	}
