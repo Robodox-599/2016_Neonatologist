@@ -17,11 +17,12 @@ public:
 	Sensor();
 	~Sensor();
 
-	void getDistance();
+	void setDistance();
 	void RunCamera();
+	void getDistance();
 
 	char toSend[1] = {0};
-	uint16_t distance;
+	
 
 private:
 	Servo *servo;
@@ -39,7 +40,7 @@ private:
 	SerialPort *serial;
 
 	char buffer[1] = {0};
-
+	uint16_t distance;
 
 };
 

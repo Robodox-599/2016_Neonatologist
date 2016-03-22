@@ -38,13 +38,19 @@ Sensor::~Sensor()
 
 }
 
-void Sensor::getDistance()
+void Sensor::setDistance()
 {
 	if (lidar == true)
 	{
 		if (serial->Read(buffer, 2))
 		distance = (buffer[0] << 8) | buffer[1];
 	}
+}
+
+
+uint16_t Sensor::getDistance()
+{
+	return distance;
 }
 
 //Camera
