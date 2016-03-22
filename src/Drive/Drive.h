@@ -2,7 +2,6 @@
 #define DRIVE_H_
 
 #include "../Macros.h"
-#include "AHRS.h"
 
 class Drive
 {
