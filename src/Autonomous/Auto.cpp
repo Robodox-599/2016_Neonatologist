@@ -1,10 +1,3 @@
-/*
- * Autonomous.cpp
- *
- *  Created on: Mar 7, 2016
- *      Author: Admin
- */
-
 #include "Auto.h"
 
 Autonomous::Autonomous()
