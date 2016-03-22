@@ -149,8 +149,8 @@ private:
 		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
 
 		SmartDashboard::PutNumber("to send:", sensor->toSend[0]);
-		SmartDashboard::PutNumber("Lidar lite distance:", sensor->distance);
-		SmartDashboard::PutNumber("Gyro Value:", drive->navX->GetYaw());
+		SmartDashboard::PutNumber("Lidar lite distance:", (double)sensor->getLidarDistance());
+		SmartDashboard::PutNumber("Gyro Value:", (double)drive->navX->GetYaw());
 		SmartDashboard::PutNumber("Reference Angle", drive->referenceAngle);
 
 		if(drive->getShiftState())
