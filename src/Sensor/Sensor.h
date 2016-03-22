@@ -16,9 +16,9 @@ public:
 	Sensor();
 	~Sensor();
 
-	void setDistance();
+	void setLidarDistance();
 	void RunCamera();
-	void getDistance();
+	void getLidarDistance();
 
 	char toSend[1] = {0};
 

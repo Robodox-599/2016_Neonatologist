@@ -31,7 +31,7 @@ Sensor::~Sensor()
 	delete serial;
 }
 
-void Sensor::setDistance()
+void Sensor::setLidarDistance()
 {
 	if (lidar == true)
 	{
@@ -40,7 +40,7 @@ void Sensor::setDistance()
 	}
 }
 
-uint16_t Sensor::getDistance()
+uint16_t Sensor::getLidarDistance()
 {
 	return distance;
 }
