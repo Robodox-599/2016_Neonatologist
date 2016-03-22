@@ -33,7 +33,7 @@ Sensor::~Sensor()
 
 void Sensor::setLidarDistance()
 {
-	if (lidar == true)
+	if(lidar)
 	{
 		if (serial->Read(buffer, 2))
 		distance = (buffer[0] << 8) | buffer[1];
@@ -48,7 +48,7 @@ uint16_t Sensor::getLidarDistance()
 //Camera
 void Sensor::RunCamera()
 {
-	if (camera == true)
+	if(camera)
 	{
 		IMAQdxStartAcquisition(session);
 		{

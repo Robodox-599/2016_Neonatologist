@@ -19,11 +19,6 @@ Intake::~Intake()
 	pivotMotor = nullptr;
 }
 
-//there has to be a god angle in which it automattically goes there in order to fit under the low goal 
-//toggle manual button
-//automatic button to self set to certain angle
-//intake and outake buttons 
-
 /**
  * toggleIntake: change whether the intake is in 'intake' or 'outtake mode'
  * @param intakeButton is the joystick button to start intake
@@ -31,29 +26,13 @@ Intake::~Intake()
  */
 void Intake::toggleIntake(bool intakeButton, bool outtakeButton)
 {
-	/*if(intakeButton && !intakeInwards) // if we want to intake something, we have to make sure nothing has already been taken in
-	{
-		intakeRollerMotor->Set(INTAKE_SPEED);
-		intakeInwards = true;
-	}
-	else if(outtakeButton && intakeInwards) // but if we want to do the outake thing, we should only do it if something has already been taken in
-	{
-		intakeRollerMotor->Set(-INTAKE_SPEED);
-		intakeInwards = false;
-	}
-	else // don't do anything if we don't tell the motors anything
-	{
-		intakeRollerMotor->Set(0);
-	}*/
 	if(intakeButton)
 	{
-		//while(intakeButton)
-			intakeRollerMotor->Set(INTAKE_SPEED);
+		intakeRollerMotor->Set(INTAKE_SPEED);
 	}
 	else if(outtakeButton)
 	{
-		//while(outtakeButton)
-			intakeRollerMotor->Set(-INTAKE_SPEED);
+		intakeRollerMotor->Set(-INTAKE_SPEED);
 	}
 	else
 	{
@@ -94,7 +73,7 @@ void Intake::setAngle(bool lockPivot)
 	pivotMotor->SetEncPosition(0);
 }
 
-int Intake::getIntakeEncoderValue ()
+int Intake::getIntakeEncoderValue()
 {
 	return pivotMotor->GetEncPosition();
 }

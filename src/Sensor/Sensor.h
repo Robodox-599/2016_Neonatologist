@@ -1,15 +1,7 @@
-/*
- * Sensor.h
- *
- *  Created on: Mar 9, 2016
- *      Author: Admin
- */
-
-#ifndef SRC_SENSOR_SENSOR_H_
-#define SRC_SENSOR_SENSOR_H_
+#ifndef SENSOR_H_
+#define SENSOR_H_
 
 #include "WPILib.h"
-#include "AHRS.h"
 class Sensor
 {
 public:
@@ -42,4 +34,4 @@ private:
 
 };
 
-#endif /* SRC_SENSOR_SENSOR_H_ */
+#endif

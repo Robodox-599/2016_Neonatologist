@@ -31,22 +31,22 @@ Autonomous::~Autonomous()
 
 void Autonomous::autonomousSelect() // TODO: switch on will make the boolean false - need to confirm
 {
-	if (selector0->Get() == false)
+	if (!selector0->Get())
 	{
 	}
-	else if (selector1->Get() == false)
+	else if (!selector1->Get())
 	{
 		auto1();
 	}
-	else if(selector2->Get() == false)
+	else if(!selector2->Get())
 	{
 		auto2();
 	}
-	else if(selector3->Get() == false)
+	else if(!selector3->Get())
 	{
 		auto3();
 	}
-	else if(selector4->Get() == false)
+	else if(!selector4->Get())
 	{
 		auto4();
 	}
