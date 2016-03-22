@@ -12,7 +12,6 @@
 #include "AHRS.h"
 class Sensor
 {
-
 public:
 	Sensor();
 	~Sensor();
@@ -22,7 +21,6 @@ public:
 	void getDistance();
 
 	char toSend[1] = {0};
-	
 
 private:
 	Servo *servo;
@@ -43,7 +41,5 @@ private:
 	uint16_t distance;
 
 };
-
-
 
 #endif /* SRC_SENSOR_SENSOR_H_ */

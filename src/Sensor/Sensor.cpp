@@ -1,9 +1,3 @@
-/*
- * Sensor.cpp
- *
- *  Created on: Mar 9, 2016
- *      Author: Admin
- */
 #include "Sensor.h"
 
 Sensor::Sensor()
@@ -35,7 +29,6 @@ Sensor::~Sensor()
 
 	delete servo;
 	delete serial;
-
 }
 
 void Sensor::setDistance()
@@ -47,14 +40,14 @@ void Sensor::setDistance()
 	}
 }
 
-
 uint16_t Sensor::getDistance()
 {
 	return distance;
 }
 
 //Camera
-void Sensor::RunCamera(){
+void Sensor::RunCamera()
+{
 	if (camera == true)
 	{
 		IMAQdxStartAcquisition(session);
@@ -72,5 +65,3 @@ void Sensor::RunCamera(){
 		}
 	}
 }
-
-
