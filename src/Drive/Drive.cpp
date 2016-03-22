@@ -1,6 +1,5 @@
 #include "Drive.h"
 
-
 Drive::Drive()
 {
 	//left drive
@@ -34,7 +33,6 @@ Drive::Drive()
 	triggerDriveL = 0;
 }
 
-
 Drive::~Drive()
 {
 	delete navX;
@@ -60,10 +58,6 @@ Drive::~Drive()
 
 	shifter = nullptr;
 }
-
-
-/*************************************************/
-
 
 /**
  * updateLeftMotors: set left motors to desired speed
@@ -176,30 +170,26 @@ void Drive::drive(float xAxis, float yAxis, int POV)
 	updateRightMotors(forwardSpeed + /*linearizeDrive(*/turnSpeed/*) + triggerDriveR*/);
 }
 
-
-/*******************************************************************/
-
-
 //this function sets the desired angle from the D-Pad
 void Drive::setReferenceAngle(int angle)
 {
-		switch(angle)
-		{
-			case 270 :
-				navX->ZeroYaw();
-				referenceAngle = -90;
-				autoTurn = true;
-				break;
-			case 180 :
-			case 90 :
-			case 0 :
-				navX->ZeroYaw();
-				referenceAngle = angle;
-				autoTurn = true;
-				break;
-			default :
-				break;
-		}
+	switch(angle)
+	{
+		case 270 :
+			navX->ZeroYaw();
+			referenceAngle = -90;
+			autoTurn = true;
+			break;
+		case 180 :
+		case 90 :
+		case 0 :
+			navX->ZeroYaw();
+			referenceAngle = angle;
+			autoTurn = true;
+			break;
+		default :
+			break;
+	}
 }
 
 //this function compensates for the edge cases on the gyro
@@ -218,7 +208,6 @@ float Drive::shortestPath()
 	{
 		return error180;
 	}
-
 	return error360;
 }
 
@@ -234,10 +223,6 @@ float Drive::linearizeDrive(float driveInput)
 		return driveInput;
 	}
 }
-
-
-/************************************************************************/
-
 
 /*
 void Drive::driveMotors(float turn, float fwd)

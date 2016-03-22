@@ -4,7 +4,6 @@
 #include "../Macros.h"
 #include "AHRS.h"
 
-
 class Drive
 {
 public:
@@ -29,7 +28,7 @@ public:
 
 	void shiftGears(bool shiftStateA);//, bool shiftStateB);
 	void toggleGyro(bool gyro);
-	
+
 	bool getShiftState();
 	float getForwardSpeed();
 	float getTurnSpeed();
@@ -72,4 +71,3 @@ private:
 };
 
 #endif
-
