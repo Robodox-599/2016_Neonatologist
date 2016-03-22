@@ -18,7 +18,7 @@ public:
 
 	void setLidarDistance();
 	void RunCamera();
-	void getLidarDistance();
+	uint16_t getLidarDistance();
 
 	char toSend[1] = {0};
 
