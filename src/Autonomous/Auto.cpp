@@ -109,15 +109,15 @@ void Autonomous::auto4()
 {
 	drive->navX->ZeroYaw();
 	intake->intakeRollerMotor(1);
-	if(drive->getCANTalonEncPos() < 150) // move approximate distance so that it could go above the defense
+	if(drive->getCANTalonEncPos() < 150) // move approximate getDistance() so that it could go above the defense
 	{
 		drive->setForwardSpeed(1);
 	}
-	else if(sensor->distance < 100 && (drive->navX->GetYaw() > -AUTO_DEADZONE && drive->navX->GetYaw() < AUTO_DEADZONE)) //TODO find correct lidar distance
+	else if(sensor->getDistance() < 100 && (drive->navX->GetYaw() > -AUTO_DEADZONE && drive->navX->GetYaw() < AUTO_DEADZONE)) //TODO find correct lidar getDistance()
 	{
 		drive->setForwardSpeed(1);
 	}
-	else if(drive->navX->GetYaw() < 52 && sensor->distance == 100)
+	else if(drive->navX->GetYaw() < 52 && sensor->getDistance() == 100)
 	{
 		drive->setForwardSpeed(0);
 		drive->setTurnSpeed(-1);
@@ -138,10 +138,10 @@ void Autonomous::auto4()
 	//check gyro value
 	//adjust angle using gyro
 	//use pixy camera to ensure that we are on target
-	//check lidar distance
-	//adjust distance using lidar
+	//check lidar getDistance()
+	//adjust getDistance() using lidar
 	//turn using gyro
-	//go forward until it goes near the castle (adjust lidar distance)
+	//go forward until it goes near the castle (adjust lidar getDistance())
 	//double check the angle with the pixy camera
 	//shoot the ball
 	//yey
