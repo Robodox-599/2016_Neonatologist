@@ -41,6 +41,10 @@ public:
 	int referenceAngle;
 
 private:
+	CANTalon* frontLeftDrive;
+	CANTalon* backLeftDrive;
+	CANTalon* frontRightDrive;
+	CANTalon* backRightDrive;
 	DoubleSolenoid* shifter;
 
 	float forwardSpeed;
@@ -52,7 +56,6 @@ private:
 	bool autoTurn;
 	float gyroValue;
 
-
 	float encPosition;
 	float encVelocity;
 
@@ -62,11 +65,6 @@ private:
 
 	float triggerDriveR;
 	float triggerDriveL;
-
-	CANTalon* frontLeftDrive;
-	CANTalon* backLeftDrive;
-	CANTalon* frontRightDrive;
-	CANTalon* backRightDrive;
 };
 
 #endif
