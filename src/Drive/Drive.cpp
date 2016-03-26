@@ -91,7 +91,7 @@ void Drive::setTriggerSpeed(float triggerR, float triggerL)
 	}
 }
 
-/*void Drive::incriment(float motorLeftInput, float motorRightInput)
+/*void Drive::increment(float motorLeftInput, float motorRightInput)
 {
 	if(motorRightInput - driveRight > 1 || motorRightInput - driveRight < -1)
 	{
@@ -143,42 +143,12 @@ void Drive::setForwardSpeed(float forward)
 	{
 		turnSpeed = 0;
 		autoTurn = false;
-=======
-		turnSpeed = turn;
-
-		//autoTurn = false;
-
-		//referenceAngle = 0;
-		//navX->ZeroYaw();
-	}
-	/*else if(std::abs(error360) >= 10 && std::abs(error180 >= 10) && gyroSwitch == true)
-	{
-		autoTurn = true;
-		turnSpeed = /*KP 0 * shortestPath();
-	}*/
-	else //if((gyroValue == referenceAngle || navX->GetYaw() == referenceAngle) && (turn < DEADZONE && turn > -DEADZONE))
-	{
-		turnSpeed = 0;
-		//autoTurn = false;
-		//navX->ZeroYaw();
-		//gyroValue = 0;
-		//referenceAngle = 0;
->>>>>>> d7dd6922175e33e9042c0a972bb023ee2bec62ad
 	}
 }*/
 
 void Drive::setTurnSpeed(float turn)
 {
-<<<<<<< HEAD
-
 	if(/*autoTurn == false &&*/ turn >= DEADZONE || turn <= -DEADZONE)
-=======
-	/*if(triggerR > TRIGGER_DEADZONE || triggerR < -TRIGGER_DEADZONE)
-	{
-		triggerDriveR = triggerR;
-	}
-	else
->>>>>>> d7dd6922175e33e9042c0a972bb023ee2bec62ad
 	{
 		turnSpeed = turn * turbo;
 
@@ -191,9 +161,8 @@ void Drive::setTurnSpeed(float turn)
 	{
 		turnSpeed = KP * shortestPath();
 	}
-	else //if((error360 > -.5 && error360 < .5) || (error180 > -.5 && error180 < .5)) /*if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)*/
+	else //if((error360 > -.5 && error360 < .5) || (error180 > -.5 && error180 < .5)) if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)
 	{
-<<<<<<< HEAD
 		turnSpeed = 0;
 		autoTurn = false;
 		navX->ZeroYaw();
@@ -201,11 +170,6 @@ void Drive::setTurnSpeed(float turn)
 		referenceAngle = 0;
 		//Testing relative turns for Auto Turning 2/6/16
 	}
-=======
-		triggerDriveL = 0;
-	}*/
-
->>>>>>> d7dd6922175e33e9042c0a972bb023ee2bec62ad
 }
 
 /**
@@ -224,7 +188,6 @@ void Drive::drive(float xAxis, float yAxis, int POV)//make sure POV is on the sc
 	//error360 = referenceAngle - gyroValue;
 	//error180 = referenceAngle - navX->GetYaw();
 
-<<<<<<< HEAD
 	shortestPath();
 
 	setForwardSpeed(yAxis);
@@ -233,20 +196,12 @@ void Drive::drive(float xAxis, float yAxis, int POV)//make sure POV is on the sc
 	updateLeftMotors(forwardSpeed - turnSpeed - trigL);
 	updateRightMotors(forwardSpeed + turnSpeed - trigR);
 
-	//incriment(forwardSpeed - turnSpeed, forwardSpeed + turnSpeed);//undo this
-=======
-	setForwardSpeed(yAxis);
-	setTurnSpeed(xAxis);
-
-	updateLeftMotors(forwardSpeed - /*linearizeDrive(*/turnSpeed/*) + triggerDriveL*/);
-	updateRightMotors(forwardSpeed + /*linearizeDrive(*/turnSpeed/*) + triggerDriveR*/);
->>>>>>> d7dd6922175e33e9042c0a972bb023ee2bec62ad
+	//increment(forwardSpeed - turnSpeed, forwardSpeed + turnSpeed);//undo this
 }
 
 //this function sets the desired angle from the D-Pad
 void Drive::setReferenceAngle(int angle)//make sure angle is on the scale from -180 to 180
 {
-<<<<<<< HEAD
 	if(angle == -1)
 	{
 
@@ -260,24 +215,6 @@ void Drive::setReferenceAngle(int angle)//make sure angle is on the scale from -
 	{
 		referenceAngle = angle;
 		autoTurn = true;
-=======
-	switch(angle)
-	{
-		case 270 :
-			navX->ZeroYaw();
-			referenceAngle = -90;
-			autoTurn = true;
-			break;
-		case 180 :
-		case 90 :
-		case 0 :
-			navX->ZeroYaw();
-			referenceAngle = angle;
-			autoTurn = true;
-			break;
-		default :
-			break;
->>>>>>> d7dd6922175e33e9042c0a972bb023ee2bec62ad
 	}
 }
 
@@ -297,32 +234,12 @@ float Drive::shortestPath()
 	{
 		return error180; //leftRight = sign(error180);
 	}
-<<<<<<< HEAD
 
 	return error360;//leftRight = sign(error360);
 }
 
 
 /************************************************************************/
-
-=======
-	return error360;
-}
-
-//This function scales the motor input
-float Drive::linearizeDrive(float driveInput)
-{
-	if(autoTurn)
-	{
-		return driveInput / SLOPE_ADJUSTMENT;
-	}
-	else
-	{
-		return driveInput;
-	}
-}
-
->>>>>>> d7dd6922175e33e9042c0a972bb023ee2bec62ad
 /*
 
 void Drive::driveMotors(float turn, float fwd)
@@ -391,7 +308,6 @@ bool Drive::getShiftState()
 {
 	return shiftState;
 }
-
 
 float Drive::getLeftInput()
 {

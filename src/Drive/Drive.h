@@ -38,7 +38,6 @@ public:
 	float getRightInput();
 	float getLeftInput();
 
-<<<<<<< HEAD
 	int sign(float num);
 
 	//create an incriment function to control sensitivity of drive motor input
