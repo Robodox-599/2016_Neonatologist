@@ -1,111 +1,46 @@
-/*
- * Autonomous.cpp
- *
- *  Created on: Mar 7, 2016
- *      Author: Admin
- */
-
 #include "Auto.h"
 
 Autonomous::Autonomous()
 {
 	//bool toggleSwitch = false;
 	drive = new Drive;
-	shooter = new Shooter();
+	shooter = new Shooter;
+	intake = new Intake;
 
-	selector0 = new DigitalInput(0);
 	selector1 = new DigitalInput(1);
-	selector2 = new DigitalInput(2);
-
-	cocked = false;
+	selector8 = new DigitalInput(8);
 }
 
 Autonomous::~Autonomous()
 {
-	drive = nullptr;
-	shooter = nullptr;
-
-	selector0 = nullptr;
+	selector8 = nullptr;
 	selector1 = nullptr;
-	selector2 = nullptr;
 
-	delete drive;
-	delete shooter;
-
-	delete selector0;
+	delete selector8;
 	delete selector1;
-	delete selector2;
 }
 
-void Autonomous::autonomousSelect()
+void Autonomous::autonomousSelect() // TODO: switch on will make the boolean false - need to confirm
 {
-	if (selector0->Get() == true)
+	if(selector1->Get())
 	{
-	}
-	else if (selector1->Get() == true)
-	{
-		auto1();
-	}
-	else if(selector2->Get() == true)
-	{
-		auto2();
-	}
-}
-
-void Autonomous::forward()
-{
-	drive->setForwardSpeed(-0.5);
-}
-
-void Autonomous::auto1()
-{
-	/*if(!cocked)
-	{
-		shooter->motorTest(true);
-		Wait(2);
-		shooter->motorTest(false);
-		cocked = true;
-	}*/
-
-	if(!cocked)
-	{
-		drive->setForwardSpeed(.5);
+		drive->updateLeftMotors(-0.5); // negative for fwd when facing obstacle
+		drive->updateRightMotors(-0.5); // negative for fwd when facing obstacle
 		Wait(2.5);
-		drive->setForwardSpeed(0);
-		cocked = true;
+		drive->updateLeftMotors(0);
+		drive->updateRightMotors(0);
 	}
-
-	/*if(drive->backLeftDrive->GetEncPosition() < 1023)//162in forward turn 60 deg up 20in shoot
+	else if(selector8->Get())
 	{
-		drive->setTurnSpeed(0);
-		drive->setForwardSpeed(.8);
-	}
-	else
-	{
-		drive->setTurnSpeed(0);
-		drive->setForwardSpeed(0);
-	}*/
-}
-
-void Autonomous::auto2()
-{
-	if(drive->getCANTalonEncPos() < 100)
-	{
-		drive->setTurnSpeed(0);
-		drive->setForwardSpeed(1);
-	}
-	else if(drive->getCANTalonEncPos() < 150)
-	{
-		drive->setTurnSpeed(0.5);
-	}
-	else if(drive->getCANTalonEncPos() > 150)
-	{
-		drive->setForwardSpeed(1);
+		drive->updateLeftMotors(0.5); // positive for rev when facing obstacle
+		drive->updateRightMotors(0.5); // positive for rev when facing obstacle
+		Wait(2.5);
+		drive->updateLeftMotors(0);
+		drive->updateRightMotors(0);
 	}
 	else
 	{
-		drive->setTurnSpeed(0);
-		drive->setForwardSpeed(0);
+		drive->updateLeftMotors(0);
+		drive->updateRightMotors(0);
 	}
-
 }

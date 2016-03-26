@@ -1,15 +1,9 @@
-/*
- * Autonomous.h
- *
- *  Created on: Mar 7, 2016
- *      Author: Admin
- */
-
 #ifndef SRC_AUTONOMOUS_AUTONOMOUS_H_
 #define SRC_AUTONOMOUS_AUTONOMOUS_H_
 
-#include "Drive/Drive.h"
-#include "Shooter/Shooter.h"
+#include "../Drive/Drive.h"
+#include "../Shooter/Shooter.h"
+#include "../Intake/Intake.h"
 #include "DigitalInput.h"
 
 class Autonomous
@@ -20,23 +14,15 @@ public:
 	~Autonomous();
 
 	//bool toggleSwitch;
-
-	void auto1();
-	void auto2();
 	void autonomousSelect();
-	void forward();
 
-	bool cocked;
+	DigitalInput* selector1;
+	DigitalInput* selector8;
 
 private:
-
 	Drive* drive;
 	Shooter* shooter;
-
-	DigitalInput* selector0;
-	DigitalInput* selector1;
-	DigitalInput* selector2;
+	Intake* intake;
 };
-
 
 #endif /* SRC_AUTONOMOUS_AUTONOMOUS_H_ */

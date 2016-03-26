@@ -3,55 +3,44 @@
 #include "Intake/Intake.h"
 #include "Lift/Lift.h"
 #include "Shooter/Shooter.h"
-#include "Sensor/Sensor.h"
-#include "AHRS.h"
+//#include "Autonomous/Auto.h"
 
 class Neonatologist: public IterativeRobot
 {
+
 private:
 
 	LiveWindow *lw = LiveWindow::GetInstance();
-
+	SendableChooser *chooser;
 	SmartDashboard* dash;
-	/*SendableChooser *chooser;
-	 * const std::string autoNameDefault = "Default";
+	/*const std::string autoNameDefault = "Default";
 	const std::string autoNameCustom = "My Auto";
 	std::string autoSelected;*/
 	Drive* drive;
 	Shooter* shooter;
 	Intake* intake;
-	Sensor* sensor;
 
 	Joystick* xbox;
 	Joystick* atk3;
-	Servo* servo;
-
 	bool disable;
-
-	bool autodone;
-
-	int servoPosition;
 
 	void RobotInit()
 	{
-		drive = new Drive();
-		sensor = new Sensor();
 		shooter = new Shooter();
-
+		chooser = new SendableChooser();
 		intake = new Intake();
-		/*chooser = new SendableChooser();
-		 * chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
+		/*chooser->AddDefault(autoNameDefault, (void*)&autoNameDefault);
 		chooser->AddObject(autoNameCustom, (void*)&autoNameCustom);
 		SmartDashboard::PutData("Auto Modes", chooser);*/
 
-		xbox = new Joystick(0);
-		atk3 = new Joystick(2);
-		servo = new Servo(0);
+		xbox = new Joystick(XBOX_JOYSTICK_PORT);
+		atk3 = new Joystick(ATK3_JOYSTICK_PORT);
+		drive = new Drive();
 
 		disable = false;
-		autodone = true;
-		servoPosition = 90;
-
+		CameraServer::GetInstance()->SetQuality(50);
+		//the camera name (ex "cam0") can be found through the roborio web interface
+		CameraServer::GetInstance()->StartAutomaticCapture("cam0");
 	}
 
 	void AutonomousInit()
@@ -66,74 +55,74 @@ private:
 		} else {
 			//Default Auto goes here
 		}*/
-
-		autodone = true;
+		drive->updateLeftMotors(-1);
+		drive->updateRightMotors(-1);
+		Wait(3);
+		drive->updateLeftMotors(0);
+		drive->updateRightMotors(0);
 	}
 
 	void AutonomousPeriodic()
-	{
-		SmartDashboard::PutBoolean("auto done ", autodone);
-
-		//intake->toggleIntake(true, false);
-
-		if(autodone == true)
-		{
-			//shooter->shootMotor(true);
-
-			drive->updateLeftMotors(-.8);
-			drive->updateRightMotors(-.8);
-			Wait(1);
-			drive->updateLeftMotors(-1);
-			drive->updateRightMotors(-1);
-			Wait(1);
-			drive->updateLeftMotors(-.5);
-			drive->updateRightMotors(-.5);
-			Wait(1);
-			drive->updateLeftMotors(0);
-			drive->updateRightMotors(0);
-			autodone = false;
-		}
+	{/*
+		if(autoSelected == autoNameCustom){
+			//Custom Auto goes here
+		} else {
+			//Default Auto goes here
+		}*/
 	}
 
 	void TeleopInit()
 	{
+		drive->navX->ZeroYaw();
+		drive->referenceAngle = drive->navX->GetYaw();
+		drive->gyroValue = drive->navX->GetYaw();
+		drive->autoTurn = false;
+	}
 
+	void PrintToDashboard()
+	{
+		SmartDashboard::PutNumber("Drive forward speed: ", drive->getForwardSpeed());
+		SmartDashboard::PutNumber("Drive turn speed: ", drive->getTurnSpeed());
+		SmartDashboard::PutNumber("Intake encoder: ", intake->getIntakeEncoderValue());
+		SmartDashboard::PutNumber("Drive encoder: ", drive->getCANTalonEncPos());
+		SmartDashboard::PutNumber("Drive encoder2: ", drive->getCANTalonEncVel());
+
+		SmartDashboard::PutNumber("xbox ", xbox->GetRawAxis(5));
+
+		SmartDashboard::PutNumber("shooter encoder: ", shooter->getEncPos());
+		SmartDashboard::PutBoolean("Limit Switch: ", shooter->getLimit());
+		//SmartDashboard::PutNumber("encoder ", shooter->shooterEncoder->GetDirection());
+
+		SmartDashboard::PutNumber("Gyro Value:", (double)drive->navX->GetYaw());
+		SmartDashboard::PutNumber("Reference Angle", drive->referenceAngle);
+
+		if(drive->getShiftState())
+			SmartDashboard::PutString("Shift state: ", "A");
+		else if(!drive->getShiftState())
+			SmartDashboard::PutString("Shift state: ", "B");
+		else
+			SmartDashboard::PutString("Shift state: ", "error in getting shift state");
 	}
 
 	void TeleopPeriodic()
 	{
-		if(xbox->GetRawButton(4))
-		{
-			drive->turbo = 1;
-		}
-
-		else if(xbox->GetRawButton(2))
-		{
-			drive->turbo = .7;
-		}
-
-		//might need to change dont know if you want to continuously update these two functions
-		sensor->RunCamera();
-		sensor->getDistance();
-
 		// shooter
-		shooter->shootMotor(atk3->GetRawButton(SHOOTER_RESET_BUTTON)); // no reset button for now
-		shooter->shootPiston(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
+		shooter->catapultReset(atk3->GetRawButton(SHOOTER_RESET_BUTTON));//SHOOTER_RESET_BUTTON));
+		shooter->catapultLaunch(atk3->GetRawButton(SHOOTER_BUTTON), atk3->GetRawButton(SHOOTER_SAFTEY_MANUAL));
 
 		// intake
 		intake->toggleIntake(atk3->GetRawButton(INTAKE_BUTTON), atk3->GetRawButton(OUTTAKE_BUTTON));
-		intake->pivotIntake(atk3->GetY() * 0.8);
+		intake->pivotIntake(atk3->GetY());
 
 		// drive
 		drive->drive(xbox->GetRawAxis(X_AXIS_L), xbox->GetRawAxis(Y_AXIS_L), xbox->GetPOV(AUTO_TURN_BUTTON));
-		drive->shiftGears(true);
+		drive->shiftGears(xbox->GetRawButton(TOGGLE_GEARS));
 		drive->toggleGyro(xbox->GetRawButton(GYRO_TOGGLE));
+
+		drive->setTriggerSpeed(xbox->GetRawAxis(3), xbox->GetRawAxis(2));
 
 		// print information
 		PrintToDashboard();
-
-		sensor->RunCamera();
-		//servoControl();
 
 		if(xbox->GetRawButton(7) == 1)
 		{
@@ -143,8 +132,7 @@ private:
 				drive->updateRightMotors(0);
 				drive->updateLeftMotors(0);
 
-				shooter->shootMotor(false);
-				shooter->shootPiston(false, false);
+				shooter->catapultReset(false);
 
 				SmartDashboard::PutBoolean("Dead Man Switch", true);
 
@@ -154,49 +142,6 @@ private:
 				}
 			}
 		}
-	}
-
-/* servo is locked
-	void servoControl()
-	{
-		if(atk3->GetRawButton(7))
-		{
-			servoPosition -= 1;
-			servo->SetAngle(servoPosition);
-		}
-		else if(atk3->GetRawButton(8))
-		{
-			servoPosition += 1;
-			servo->SetAngle(servoPosition);
-		}
-	}*/
-
-	void PrintToDashboard()
-	{
-		SmartDashboard::PutNumber("Drive Front Left Input", -(drive->forwardSpeed - drive->turnSpeed));
-		SmartDashboard::PutNumber("Drive Back Left Input", -(drive->forwardSpeed - drive->turnSpeed));
-
-		SmartDashboard::PutNumber("Drive Front Right Input", drive->forwardSpeed + drive->turnSpeed);
-		SmartDashboard::PutNumber("Drive Back Right Input", drive->forwardSpeed + drive->turnSpeed);
-
-		SmartDashboard::PutNumber("forward speed", drive->forwardSpeed);
-		SmartDashboard::PutNumber("turn speed", drive->turnSpeed);
-
-		SmartDashboard::PutNumber("Drive Right", drive->driveRight);
-		SmartDashboard::PutNumber("Drive Left", drive->driveLeft);
-
-		SmartDashboard::PutNumber("error 180", drive->error180);
-		SmartDashboard::PutNumber("error 360", drive->error360);
-
-		SmartDashboard::PutNumber("Yaw", drive->navX->GetYaw());
-		SmartDashboard::PutNumber("Gyro Value", drive->gyroValue);
-		SmartDashboard::PutNumber("Reference Angle", drive->referenceAngle);
-
-		SmartDashboard::PutNumber("turbo", drive->turbo);
-		SmartDashboard::PutNumber("LeftRight", drive->leftRight);
-
-		SmartDashboard::PutBoolean("Auto Turn", drive->autoTurn);
-		SmartDashboard::PutBoolean("Shift State", drive->shiftState);
 	}
 };
 

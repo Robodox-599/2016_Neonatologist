@@ -26,6 +26,8 @@ Drive::Drive()
 	gyroValue = navX->GetYaw();//
 	referenceAngle = navX->GetYaw();//
 
+	trigR = 0;
+	trigL = 0;
 
 	shiftState = true;//
 	turbo = 1;//
@@ -83,18 +85,39 @@ void Drive::updateRightMotors(float speed)
 	backRightDrive->Set(speed /* * 0.7*/);
 }
 
-void Drive::incriment(float motorLeftInput, float motorRightInput)
+void Drive::setTriggerSpeed(float triggerR, float triggerL)
+{
+	if(triggerR > DEADZONE)
+	{
+		trigR = triggerR;
+	}
+	else
+	{
+		trigR = 0;
+	}
+
+	if(triggerL > DEADZONE)
+	{
+		trigL = triggerL;
+	}
+	else
+	{
+		trigL = 0;
+	}
+}
+
+/*void Drive::incriment(float motorLeftInput, float motorRightInput)
 {
 	if(motorRightInput - driveRight > 1 || motorRightInput - driveRight < -1)
 	{
-		driveRight += sign(motorRightInput - driveRight) * .01;
+		driveRight += sign(motorRightInput - driveRight) * .1;
 	}
 
 	if(motorLeftInput - driveLeft > 1 || motorLeftInput - driveLeft < -1)
 	{
-		driveLeft += sign(motorLeftInput - driveLeft) * .01;//input variables to smart dashboard printout
+		driveLeft += sign(motorLeftInput - driveLeft) * .1;//input variables to smart dashboard printout
 	}
-}
+}*/
 
 /**
  * setForwardSpeed: update forward speed with joystick input
@@ -116,7 +139,7 @@ void Drive::setForwardSpeed(float forward)
  * setTurnSpeed: update turn speed with joystick input and does PID (straight drive)
  * @param turn is the joystick x-axis
  */
-void Drive::setTurnSpeed(float turn)
+/*void Drive::setTurnSpeed(float turn)
 {
 	if(turn >= DEADZONE || turn <= -DEADZONE)
 	{
@@ -134,6 +157,33 @@ void Drive::setTurnSpeed(float turn)
 	{
 		turnSpeed = 0;
 		autoTurn = false;
+	}
+}*/
+
+void Drive::setTurnSpeed(float turn)
+{
+
+	if(/*autoTurn == false &&*/ turn >= DEADZONE || turn <= -DEADZONE)
+	{
+		turnSpeed = turn * turbo;
+
+		autoTurn = false;
+
+		referenceAngle = 0;
+		navX->ZeroYaw();
+	}
+	else if((error360 <= -.5 || error360 >= .5) && (error180 <= -.5 || error180 >= .5))//added the equal signs
+	{
+		turnSpeed = KP * shortestPath();
+	}
+	else //if((error360 > -.5 && error360 < .5) || (error180 > -.5 && error180 < .5)) /*if(gyroValue == referenceAngle || navX->GetYaw() == referenceAngle)*/
+	{
+		turnSpeed = 0;
+		autoTurn = false;
+		navX->ZeroYaw();
+		gyroValue = 0;
+		referenceAngle = 0;
+		//Testing relative turns for Auto Turning 2/6/16
 	}
 }
 
@@ -158,8 +208,10 @@ void Drive::drive(float xAxis, float yAxis, int POV)//make sure POV is on the sc
 	setForwardSpeed(yAxis);
 	setTurnSpeed(xAxis);
 
-	updateLeftMotors(forwardSpeed - turnSpeed);
-	updateRightMotors(forwardSpeed + turnSpeed);
+	updateLeftMotors(forwardSpeed - turnSpeed - trigL);
+	updateRightMotors(forwardSpeed + turnSpeed - trigR);
+
+	//incriment(forwardSpeed - turnSpeed, forwardSpeed + turnSpeed);//undo this
 }
 
 
@@ -195,14 +247,14 @@ void Drive::edgeCase()
 }
 
 //this function determines the shortest path to the desired angle
-void Drive::shortestPath()
+float Drive::shortestPath()
 {
 	if(std::abs(error180) < std::abs(error360))
 	{
-		leftRight = sign(error180);
+		return error180; //leftRight = sign(error180);
 	}
 
-	leftRight = sign(error360);
+	return error360;//leftRight = sign(error360);
 }
 
 

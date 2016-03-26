@@ -21,7 +21,7 @@ public:
 
 	void setReferenceAngle(int angle);
 	void edgeCase();
-	void shortestPath();
+	float shortestPath();
 	float linearizeDrive(float driveInput);
 
 	void driveMotors(float turn, float fwd);
@@ -55,6 +55,9 @@ public:
 
 	float driveLeft;
 	float driveRight;
+
+	float trigL;
+	float trigR;
 
 	float error360;
 	float error180;
