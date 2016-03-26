@@ -13,8 +13,8 @@
 #define AUTO_TURN_BUTTON						(0)
 #define GYRO_TOGGLE								(3)		// X							Done
 #define TOGGLE_GEARS							(4)		// Y							Done
-// ~~~~~ joystick ~~~~~ Attack 3
 
+// ~~~~~ joystick ~~~~~ Attack 3
 #define SHOOTER_BUTTON							(1)		// 1 							Done
 #define SHOOTER_RESET_BUTTON					(8)		// 8 							Done
 #define SHOOTER_SAFTEY_MANUAL					(4)		// 4 							Done

@@ -24,6 +24,7 @@ void Intake::setIntakeMotor(float speed)
 {
 	intakeRollerMotor->Set(speed);
 }
+
 /**
  * toggleIntake: change whether the intake is in 'intake' or 'outtake mode'
  * @param intakeButton is the joystick button to start intake

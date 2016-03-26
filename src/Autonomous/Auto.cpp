@@ -4,6 +4,7 @@ Autonomous::Autonomous()
 {
 	//bool toggleSwitch = false;
 	drive = new Drive;
+
 	shooter = new Shooter;
 	intake = new Intake;
 
@@ -19,6 +20,7 @@ Autonomous::~Autonomous()
 	delete selector8;
 	delete selector1;
 }
+
 
 void Autonomous::autonomousSelect() // TODO: switch on will make the boolean false - need to confirm
 {

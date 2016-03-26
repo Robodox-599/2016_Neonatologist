@@ -14,7 +14,6 @@ public:
 	~Autonomous();
 
 	//bool toggleSwitch;
-	void autonomousSelect();
 
 	DigitalInput* selector1;
 	DigitalInput* selector8;

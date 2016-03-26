@@ -28,7 +28,7 @@ public:
 
 	void shiftGears(bool shiftStateA);//, bool shiftStateB);
 	void toggleGyro(bool gyro);
-	
+
 	bool getShiftState();
 	float getForwardSpeed();
 	float getTurnSpeed();
@@ -38,6 +38,7 @@ public:
 	float getRightInput();
 	float getLeftInput();
 
+<<<<<<< HEAD
 	int sign(float num);
 
 	//create an incriment function to control sensitivity of drive motor input
@@ -62,6 +63,7 @@ public:
 	float error360;
 	float error180;
 	float gyroValue;
+
 	bool autoTurn;
 
 	bool shiftState;
@@ -79,4 +81,3 @@ private:
 };
 
 #endif
-

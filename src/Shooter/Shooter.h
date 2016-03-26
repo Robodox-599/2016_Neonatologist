@@ -18,6 +18,7 @@ public:
 
 	double getMotorSpeed();
 	int getEncPos();
+
 	DoubleSolenoid* gearPiston;
 private:
 	DigitalInput* limit;
@@ -29,3 +30,4 @@ private:
 };
 
 #endif
+
