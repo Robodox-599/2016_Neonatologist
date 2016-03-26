@@ -48,7 +48,7 @@
 
 // ~~~~~ Misc
 #define AUTO_DEADZONE							(2)
-#define PIXY_DEADZONE							(5)
+/*#define PIXY_DEADZONE							(5)
 
 #define PIXY_I2C_DEFAULT_ADDR           0x54
 
@@ -71,4 +71,4 @@
 #define PIXY_RCS_MIN_POS            0L
 #define PIXY_RCS_MAX_POS            1000L
 #define PIXY_RCS_CENTER_POS         ((PIXY_RCS_MAX_POS-PIXY_RCS_MIN_POS)/2)
-
+*/
