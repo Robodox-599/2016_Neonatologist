@@ -8,8 +8,19 @@ class Intake
 public:
 	Intake();
 	~Intake();
-private:
 
+	void setIntakeMotor(float speed);
+	void toggleIntake(bool intakeButton, bool outtakeButton);
+	void pivotIntake(float pivotSpeed);
+	void setAngle(bool lockPivot);
+	int getIntakeEncoderValue();
+
+private:
+	CANTalon* intakeRollerMotor;
+	CANTalon* pivotMotor;
+
+	bool intakeInwards;
+	float rollerSpeed;
 };
 
 #endif
