@@ -20,7 +20,7 @@ private:
 	Shooter* shooter;
 	Intake* intake;
 	Sensor* sensor;
-	Autonomous* automode;
+	//Autonomous* automode;
 
 	Joystick* xbox;
 	Joystick* atk3;
@@ -44,7 +44,7 @@ private:
 
 		servo = new Servo(0);
 
-		automode = new Autonomous();
+		//automode = new Autonomous();
 
 		disable = false;
 	}
@@ -69,10 +69,10 @@ private:
 			//Custom Auto goes here
 		} else {
 			//Default Auto goes here
-		}*/
+		}
 		SmartDashboard::PutBoolean("Auto Selector Position 1:", automode->selector0->Get());
 		SmartDashboard::PutBoolean("Auto Selector Position 2:", automode->selector1->Get());
-		SmartDashboard::PutBoolean("Auto Selector Position 3:", automode->selector2->Get());
+		SmartDashboard::PutBoolean("Auto Selector Position 3:", automode->selector2->Get());*/
 	}
 
 	void TeleopInit()

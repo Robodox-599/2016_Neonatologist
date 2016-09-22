@@ -1,4 +1,4 @@
-#include "Auto.h"
+/*#include "Auto.h"
 
 Autonomous::Autonomous()
 {
@@ -120,7 +120,7 @@ void Autonomous::auto4()
 		drive->setTurnSpeed(0);
 		drive->setForwardSpeed(1);
 	}
-	else if(drive->getCANTalonEncPos() == 100/*&& if pixy sees high goal*/)
+	else if(drive->getCANTalonEncPos() == 100/*&& if pixy sees high goal)
 	{
 		drive->setForwardSpeed(0);
 		intake->pivotIntake(1);
@@ -138,4 +138,4 @@ void Autonomous::auto4()
 	//double check the angle with the pixy camera
 	//shoot the ball
 	//yey
-}
+}*/
