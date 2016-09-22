@@ -25,8 +25,13 @@ Shooter::~Shooter()
 
 /*bool Shooter::getLimit()
 {
+<<<<<<< HEAD
 	return limit-Get();
 }*/
+=======
+	return limit->Get();
+}
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856
 
 void Shooter::catapultReset(bool reset)
 {
@@ -36,7 +41,7 @@ void Shooter::catapultReset(bool reset)
 	}*/
 	if(reset == true && !getLimit())
 	{
-		shooterMotor->Set(.1); //WARNING: DO NOT MAKE NEGATIVE (and may need to change value)
+		shooterMotor->Set(.7); //WARNING: DO NOT MAKE NEGATIVE (and may need to change value)
 	}
 	else
 	{
@@ -46,11 +51,11 @@ void Shooter::catapultReset(bool reset)
 
 void Shooter::catapultLaunch(bool fwdPiston, bool safety)
 {
-	if(fwdPiston and safety)
+	if(fwdPiston && safety)
 	{
-		gearPiston->Set(DoubleSolenoid::Value::kForward);
-		Wait(2);
 		gearPiston->Set(DoubleSolenoid::Value::kReverse);
+		Wait(1);
+		gearPiston->Set(DoubleSolenoid::Value::kForward);
 	}
 	/*else if(revPiston)
 	{

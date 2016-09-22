@@ -3,9 +3,15 @@
 
 #include "../Macros.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "DigitalInput.h"
 =======
 >>>>>>> origin
+=======
+=======
+#include "DigitalInput.h"
+>>>>>>> 58341f612214fa77bd11cca382acc04f44106a7d
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856
 
 class Shooter
 {
@@ -21,9 +27,10 @@ public:
 
 	double getMotorSpeed();
 	int getEncPos();
+
+	DoubleSolenoid* gearPiston;
 private:
 	DigitalInput* limit;
-	DoubleSolenoid* gearPiston;
 	CANTalon* shooterMotor;
 
 	bool safetyPressed;
@@ -32,3 +39,4 @@ private:
 };
 
 #endif
+

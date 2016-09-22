@@ -4,94 +4,45 @@ Autonomous::Autonomous()
 {
 	//bool toggleSwitch = false;
 	drive = new Drive;
-	sensor = new Sensor;
+
 	shooter = new Shooter;
 	intake = new Intake;
-	selector0 = new DigitalInput(0);
+
 	selector1 = new DigitalInput(1);
-	selector2 = new DigitalInput(2);
-	selector3 = new DigitalInput(3);
-	selector4 = new DigitalInput(4);
+	selector8 = new DigitalInput(8);
 }
 
 Autonomous::~Autonomous()
 {
-	selector0 = nullptr;
+	selector8 = nullptr;
 	selector1 = nullptr;
-	selector2 = nullptr;
-	selector3 = nullptr;
-	selector4 = nullptr;
 
-	delete selector0;
+	delete selector8;
 	delete selector1;
-	delete selector2;
-	delete selector3;
-	delete selector4;
 }
+
 
 void Autonomous::autonomousSelect() // TODO: switch on will make the boolean false - need to confirm
 {
-	if (!selector0->Get())
+	if(selector1->Get())
 	{
+		drive->updateLeftMotors(-0.5); // negative for fwd when facing obstacle
+		drive->updateRightMotors(-0.5); // negative for fwd when facing obstacle
+		Wait(2.5);
+		drive->updateLeftMotors(0);
+		drive->updateRightMotors(0);
 	}
-	else if (!selector1->Get())
+	else if(selector8->Get())
 	{
-		auto1();
-	}
-	else if(!selector2->Get())
-	{
-		auto2();
-	}
-	else if(!selector3->Get())
-	{
-		auto3();
-	}
-	else if(!selector4->Get())
-	{
-		auto4();
-	}
-}
-
-void Autonomous::auto1()
-{
-	if(drive->getCANTalonEncPos() < 100)
-	{
-		drive->setForwardSpeed(1);
+		drive->updateLeftMotors(0.5); // positive for rev when facing obstacle
+		drive->updateRightMotors(0.5); // positive for rev when facing obstacle
+		Wait(2.5);
+		drive->updateLeftMotors(0);
+		drive->updateRightMotors(0);
 	}
 	else
 	{
-		drive->setTurnSpeed(0);
-		drive->setForwardSpeed(0);
-	}
-}
-
-void Autonomous::auto2()
-{
-	if(drive->getCANTalonEncPos() < -100)
-	{
-		drive->setForwardSpeed(-1);
-	}
-	else
-	{
-		drive->setTurnSpeed(0);
-		drive->setForwardSpeed(0);
-	}
-}
-
-void Autonomous::auto3()
-{
-	if(drive->backLeftDrive->GetEncPosition() < 100)
-	{
-		drive->setTurnSpeed(1);
-		drive->setForwardSpeed(1);
-	}
-	else if(drive->backLeftDrive->GetEncPosition() < 150)
-	{
-		drive->setTurnSpeed(0.5);
-		drive->setForwardSpeed(1);
-	}
-	else
-	{
+<<<<<<< HEAD
 		drive->setTurnSpeed(0);
 		drive->setForwardSpeed(0);
 	}
@@ -139,3 +90,9 @@ void Autonomous::auto4()
 	//shoot the ball
 	//yey
 }*/
+=======
+		drive->updateLeftMotors(0);
+		drive->updateRightMotors(0);
+	}
+}
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856

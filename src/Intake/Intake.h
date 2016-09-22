@@ -9,6 +9,7 @@ public:
 	Intake();
 	~Intake();
 
+	void setIntakeMotor(float speed);
 	void toggleIntake(bool intakeButton, bool outtakeButton);
 	void pivotIntake(float pivotSpeed);
 	void setAngle(bool lockPivot);
@@ -19,6 +20,7 @@ private:
 	CANTalon* pivotMotor;
 
 	bool intakeInwards;
+	float rollerSpeed;
 };
 
 #endif

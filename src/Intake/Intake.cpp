@@ -6,6 +6,7 @@ Intake::Intake()
 	pivotMotor = new CANTalon(PIVOT_MOTOR_CHANNEL);
 
 	intakeInwards = false;
+	rollerSpeed = 0;
 
 	pivotMotor->SetEncPosition(0);
 }
@@ -17,6 +18,11 @@ Intake::~Intake()
 
 	intakeRollerMotor = nullptr;
 	pivotMotor = nullptr;
+}
+
+void Intake::setIntakeMotor(float speed)
+{
+	intakeRollerMotor->Set(speed);
 }
 
 /**

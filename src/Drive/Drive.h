@@ -2,6 +2,10 @@
 #define DRIVE_H_
 
 #include "../Macros.h"
+<<<<<<< HEAD
+=======
+#include "AHRS.h"
+>>>>>>> 58341f612214fa77bd11cca382acc04f44106a7d
 
 class Drive
 {
@@ -23,7 +27,7 @@ public:
 	float shortestPath();
 	float linearizeDrive(float driveInput);
 
-	//void driveMotors(float turn, float fwd);
+	void driveMotors(float turn, float fwd);
 
 	void shiftGears(bool shiftStateA);//, bool shiftStateB);
 	void toggleGyro(bool gyro);
@@ -32,39 +36,50 @@ public:
 	float getForwardSpeed();
 	float getTurnSpeed();
 
-
 	float getCANTalonEncPos();
 	float getCANTalonEncVel();
+	float getRightInput();
+	float getLeftInput();
+
+	int sign(float num);
+
+	//create an incriment function to control sensitivity of drive motor input
+	void incriment(float motorLeftInput, float motorRightInput);
 
 	AHRS* navX;
 
-	int referenceAngle;
+	float referenceAngle;
 
-private:
-	CANTalon* frontLeftDrive;
-	CANTalon* backLeftDrive;
-	CANTalon* frontRightDrive;
-	CANTalon* backRightDrive;
-	DoubleSolenoid* shifter;
+	float turbo;
+	float leftRight;
 
 	float forwardSpeed;
 	float turnSpeed;
 
+	float driveLeft;
+	float driveRight;
+
+	float trigL;
+	float trigR;
+
 	float error360;
 	float error180;
-
-	bool autoTurn;
 	float gyroValue;
 
-	float encPosition;
-	float encVelocity;
+	bool autoTurn;
 
 	bool shiftState;
 
-	bool gyroSwitch;
+private:
 
-	float triggerDriveR;
-	float triggerDriveL;
+
+	CANTalon* frontLeftDrive;
+	CANTalon* backLeftDrive;
+	CANTalon* frontRightDrive;
+	CANTalon* backRightDrive;
+
+	DoubleSolenoid* shifter;
+
 };
 
 #endif
