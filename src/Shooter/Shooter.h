@@ -2,7 +2,10 @@
 #define SHOOTER_H_
 
 #include "../Macros.h"
+<<<<<<< HEAD
 #include "DigitalInput.h"
+=======
+>>>>>>> origin
 
 class Shooter
 {

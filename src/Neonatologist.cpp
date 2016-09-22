@@ -3,8 +3,11 @@
 #include "Intake/Intake.h"
 #include "Lift/Lift.h"
 #include "Shooter/Shooter.h"
+<<<<<<< HEAD
 #include "Sensor/Sensor.h"
 #include "Autonomous/Auto.h"
+=======
+>>>>>>> origin
 
 class Neonatologist: public IterativeRobot
 {
