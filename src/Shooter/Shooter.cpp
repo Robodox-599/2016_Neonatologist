@@ -23,10 +23,15 @@ Shooter::~Shooter()
 	limit = nullptr;
 }
 
-bool Shooter::getLimit()
+/*bool Shooter::getLimit()
 {
+<<<<<<< HEAD
+	return limit-Get();
+}*/
+=======
 	return limit->Get();
 }
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856
 
 void Shooter::catapultReset(bool reset)
 {

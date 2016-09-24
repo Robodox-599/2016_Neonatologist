@@ -2,10 +2,25 @@
 #include "Drive/Drive.h"
 #include "Intake/Intake.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include "Lift/Lift.h"
 >>>>>>> origin
+=======
+#include "Lift/Lift.h"
+<<<<<<< HEAD
 #include "Shooter/Shooter.h"
+<<<<<<< HEAD
+#include "Sensor/Sensor.h"
+#include "Autonomous/Auto.h"
+=======
+>>>>>>> origin
+=======
+=======
+>>>>>>> 58341f612214fa77bd11cca382acc04f44106a7d
+>>>>>>> e738839430d47281dc7e5ea77bb43598f6e75cca
+#include "Shooter/Shooter.h"
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856
 
 class Neonatologist: public IterativeRobot
 {
@@ -21,6 +36,11 @@ private:
 	Drive* drive;
 	Shooter* shooter;
 	Intake* intake;
+<<<<<<< HEAD
+	Sensor* sensor;
+	//Autonomous* automode;
+=======
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856
 
 	Joystick* xbox;
 	Joystick* atk3;
@@ -39,6 +59,13 @@ private:
 		atk3 = new Joystick(ATK3_JOYSTICK_PORT);
 		drive = new Drive();
 
+<<<<<<< HEAD
+		servo = new Servo(0);
+
+		//automode = new Autonomous();
+
+=======
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856
 		disable = false;
 		//CameraServer::GetInstance()->SetQuality(50);
 		//the camera name (ex "cam0") can be found through the roborio web interface
@@ -65,7 +92,14 @@ private:
 			//Custom Auto goes here
 		} else {
 			//Default Auto goes here
+<<<<<<< HEAD
+		}
+		SmartDashboard::PutBoolean("Auto Selector Position 1:", automode->selector0->Get());
+		SmartDashboard::PutBoolean("Auto Selector Position 2:", automode->selector1->Get());
+		SmartDashboard::PutBoolean("Auto Selector Position 3:", automode->selector2->Get());*/
+=======
 		}*/
+>>>>>>> 59396bf37b2521563125c36375afef0f82caf856
 	}
 
 	void TeleopInit()
