@@ -13,6 +13,8 @@ public:
 	Autonomous();
 	~Autonomous();
 
+	void autonomousSelect();
+
 	//bool toggleSwitch;
 
 	DigitalInput* selector1;

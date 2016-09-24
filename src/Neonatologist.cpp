@@ -36,9 +36,9 @@ private:
 		drive = new Drive();
 
 		disable = false;
-		CameraServer::GetInstance()->SetQuality(50);
+		//CameraServer::GetInstance()->SetQuality(50);
 		//the camera name (ex "cam0") can be found through the roborio web interface
-		CameraServer::GetInstance()->StartAutomaticCapture("cam0");
+		//CameraServer::GetInstance()->StartAutomaticCapture("cam0");
 	}
 
 	void AutonomousInit()
@@ -53,11 +53,6 @@ private:
 		} else {
 			//Default Auto goes here
 		}*/
-		drive->updateLeftMotors(-1);
-		drive->updateRightMotors(-1);
-		Wait(3);
-		drive->updateLeftMotors(0);
-		drive->updateRightMotors(0);
 	}
 
 	void AutonomousPeriodic()
@@ -110,16 +105,16 @@ private:
 
 		// intake
 		intake->toggleIntake(atk3->GetRawButton(INTAKE_BUTTON), atk3->GetRawButton(OUTTAKE_BUTTON));
-		intake->pivotIntake(atk3->GetY());
+		//intake->pivotIntake(atk3->GetY());
 
 		// drive
-		drive->drive(xbox->GetRawAxis(X_AXIS_L), xbox->GetRawAxis(Y_AXIS_L), xbox->GetPOV(AUTO_TURN_BUTTON));
+		drive->drive(xbox->GetRawAxis(X_AXIS_R), xbox->GetRawAxis(Y_AXIS_L), xbox->GetPOV(AUTO_TURN_BUTTON));
 		drive->shiftGears(xbox->GetRawButton(TOGGLE_GEARS));
-		drive->toggleGyro(xbox->GetRawButton(GYRO_TOGGLE));
+		//drive->toggleGyro(xbox->GetRawButton(GYRO_TOGGLE));
 
-		drive->setTriggerSpeed(xbox->GetRawAxis(3), xbox->GetRawAxis(2));
+		//drive->setTriggerSpeed(xbox->GetRawAxis(3), xbox->GetRawAxis(2));
 
-		// print information
+		// print informatioedfzsw n
 		PrintToDashboard();
 
 		if(xbox->GetRawButton(7) == 1)

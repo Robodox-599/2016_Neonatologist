@@ -9,7 +9,6 @@
 
 #include "Drive/Drive.h"
 #include "Intake/Intake.h"
-#include "Lift/Lift.h"
 #include "Shooter/Shooter.h"
 
 #include "iostream"

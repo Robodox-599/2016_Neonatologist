@@ -56,8 +56,8 @@ Drive::~Drive()
  */
 void Drive::updateLeftMotors(float speed)
 {
-	frontLeftDrive->Set(-speed /* * 0.7*/);
-	backLeftDrive->Set(-speed /* * 0.7*/);
+	frontLeftDrive->Set(-speed);
+	backLeftDrive->Set(-speed);
 }
 
 /**
@@ -66,8 +66,8 @@ void Drive::updateLeftMotors(float speed)
  */
 void Drive::updateRightMotors(float speed)
 {
-	frontRightDrive->Set(speed /* * 0.7*/);
-	backRightDrive->Set(speed /* * 0.7*/);
+	frontRightDrive->Set(speed);
+	backRightDrive->Set(speed);
 }
 
 void Drive::setTriggerSpeed(float triggerR, float triggerL)
