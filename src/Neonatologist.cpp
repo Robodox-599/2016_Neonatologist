@@ -1,6 +1,10 @@
 #include "Macros.h"
 #include "Drive/Drive.h"
 #include "Intake/Intake.h"
+<<<<<<< HEAD
+=======
+#include "Lift/Lift.h"
+>>>>>>> origin
 #include "Shooter/Shooter.h"
 
 class Neonatologist: public IterativeRobot
